@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import {Rubik} from "next/font/google";
+import { Rubik } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/Header/Header";
+import { Footer } from "@/components/Footer/Footer";
 
 const rubik = Rubik({
   variable: "--font-Rubik",
-  subsets: ["latin","cyrillic"],
+  subsets: ["latin", "cyrillic"],
 });
-
-
 
 export const metadata: Metadata = {
   title: "Галя Балувана",
@@ -21,10 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${rubik.variable} font-sans`}
-      >
-        {children}
+      <body className={`${rubik.variable} font-sans`}>
+        <div className="wrapper">
+          <Header />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
