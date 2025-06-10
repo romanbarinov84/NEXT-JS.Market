@@ -8,8 +8,11 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary:#70c05b
   --font-sans: var(--font-rubik-sans);
-  
+  --shadow-default:2px 4px 12px 0px rgba(0,0,0, 0.3);
+  --shadow-button-default:4px 8px 16px 0px rgba(112,192,91,0.2);
+  --shadow-button-active:inset 0px 2px 0px 0px rgba(0,0,0,0.2);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,17 +32,17 @@ body {
   width: 100%;
   min-height: 100vh;
   justify-content:center;
-  background: var(--background);
+  background: #fbfbec;
   color: var(--foreground);
-  font-family: var( --font-sans);
+  font-family: var( --font-rubik), sans-serif;
 }
 
 .wrapper{
   display: flex;
   width: 100%;
-  padding: 20px;
+  padding: 5px;
   margin: 0 auto;
   align-items: center;  
   flex-direction: column;
-  background-color: antiquewhite;
+  background-color: whitesmoke;
 }
