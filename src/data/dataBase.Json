@@ -6,7 +6,7 @@
             "title":"Бендерики",
             "description":"Г/Б Бендерики,Україна",
             "basePrice": 180.00,
-            "discountPercent":20,
+            "discountPercent":5,
             "rating": 5.2 ,
             "categories":["actions","food"],
             "weight":"1000 г"
@@ -17,7 +17,7 @@
             "title":"Борщ червоний",
             "description":"Г/Б Борщ червоний",
             "basePrice": 160.00,
-            "discountPercent":20,
+            "discountPercent":10,
             "rating": 5.2 ,
             "categories":["actions","food"],
             "weight":"800 г"
@@ -28,7 +28,7 @@
             "title":"Відбивна “Цезар",
             "description":"Г/Б Відбивна “Цезар” з шинкою та сиром",
             "basePrice": 250.00,
-            "discountPercent":20,
+            "discountPercent":25,
             "rating": 5.2 ,
             "categories":["actions","food"],
             "weight":"1000 г"
@@ -50,7 +50,7 @@
             "title":"Кіш з лососем, шпинатом та помідорами",
             "description":"Г/Б Кіш з лососем, шпинатом та помідорами",
             "basePrice": 230.00,
-            "discountPercent":20,
+            "discountPercent":10,
             "rating": 5.5 ,
             "categories":["actions","food"],
             "weight":"1 шт"
@@ -72,7 +72,7 @@
             "title":"Нагетси курячі",
             "description":"Г/Б Нагетси курячі",
             "basePrice": 280.00,
-            "discountPercent":0,
+            "discountPercent":5,
             "rating": 4.2 ,
             "categories":["actions","food"],
             "weight":"1000 г"
@@ -82,7 +82,7 @@
             "img":"/products/Галя ШЕФ/Скумбрія фарширована/dsc_0504-2-600x400.jpg",
             "title":"Скумбрія фарширована",
             "description":"Г/Б Скумбрія фарширована",
-            "basePrice": 2650.00,
+            "basePrice": 265.00,
             "discountPercent":15,
             "rating": 8.2 ,
             "categories":["actions","diary"],

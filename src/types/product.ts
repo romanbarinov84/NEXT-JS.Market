@@ -5,7 +5,7 @@ export interface ProductCardProps {
     description:string;
     basePrice:number;
     discountPercent:number;
-    reiting:number;
+    rating:number;
     weight?:string;
     value?:string;
 }
