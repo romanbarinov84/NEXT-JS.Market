@@ -18,7 +18,7 @@ export function TopMenu() {
           <span>Замовлення</span>
         </li>
 
-        <li className="flex flex-col items-center gap-2.5  w-11 cursor-pointer ">
+        <li className="flex flex-col items-center gap-2.5  w-11 cursor-pointer hidden md:block ">
           <Image src={IconCart} width={34} height={34} alt="LogoCart" />
           <span>Кошик</span>
         </li>

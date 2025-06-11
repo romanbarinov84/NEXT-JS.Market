@@ -1,9 +1,11 @@
+import { Slider } from "@/components/slider/Slider";
 
 
 export default function Home() {
   return (
-    <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-    <main style={{fontSize:"50px"}}>Head Page</main>
-    </div>
+    <main className="w-full mx-auto mb-20">
+    
+    <Slider/>
+    </main>
   );
 }
