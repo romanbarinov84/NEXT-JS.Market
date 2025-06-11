@@ -1,0 +1,115 @@
+{
+    "products":[
+        {
+            "id":1,
+            "img":"/products/бендерики/benderyky-3-600x400.jpg",
+            "title":"Бендерики",
+            "description":"Г/Б Бендерики,Україна",
+            "basePrice": 180.00,
+            "discountPercent":20,
+            "rating": 5.2 ,
+            "categories":["actions","food"],
+            "weight":"1000 г"
+        },
+        {
+              "id":2,
+            "img":"/products/Галя ШЕФ/Борщ червоний/dsc_0688-600x400.jpg",
+            "title":"Борщ червоний",
+            "description":"Г/Б Борщ червоний",
+            "basePrice": 160.00,
+            "discountPercent":20,
+            "rating": 5.2 ,
+            "categories":["actions","food"],
+            "weight":"800 г"
+        },
+        {
+               "id":3,
+            "img":"/products/Галя ШЕФ/Відбивна “Цезар” з шинкою та сиром/yzobrazhenye_viber_2023-11-09_09-46-05-872.jpg",
+            "title":"Відбивна “Цезар",
+            "description":"Г/Б Відбивна “Цезар” з шинкою та сиром",
+            "basePrice": 250.00,
+            "discountPercent":20,
+            "rating": 5.2 ,
+            "categories":["actions","food"],
+            "weight":"1000 г"
+        },
+        {
+                "id":4,
+            "img":"/products/Галя ШЕФ/Кіш з куркою та овочами/dsc_0062-600x400.jpg",
+            "title":"Кіш з куркою та овочами",
+            "description":"Г/Б Кіш з куркою та овочами",
+            "basePrice": 250.00,
+            "discountPercent":20,
+            "rating": 5.2 ,
+            "categories":["actions","food"],
+            "weight":"1 шт"
+        },
+        {
+                "id":5,
+            "img":"/products/Галя ШЕФ/Кіш з лососем, шпинатом та помідорами/yzobrazhenye_viber_2021-09-11_09-22-50-564-600x559.jpg",
+            "title":"Кіш з лососем, шпинатом та помідорами",
+            "description":"Г/Б Кіш з лососем, шпинатом та помідорами",
+            "basePrice": 230.00,
+            "discountPercent":20,
+            "rating": 5.5 ,
+            "categories":["actions","food"],
+            "weight":"1 шт"
+        },
+        {
+               "id":6,
+            "img":"/products/Галя ШЕФ/М’ясо курятини по-французьки/m_yaso-po-franczuzky-z-kuryatynoyu_1-1-600x400.jpg",
+            "title":"М’ясо курятини по-французьки",
+            "description":"Г/Б М’ясо курятини по-французьки",
+            "basePrice": 280.00,
+            "discountPercent":30,
+            "rating": 6.5 ,
+            "categories":["actions","diary"],
+            "weight":"5 шт"
+        },
+        {
+               "id":7,
+            "img":"/products/Галя ШЕФ/Нагетси курячі/dsc_6149-2-600x400.jpg",
+            "title":"Нагетси курячі",
+            "description":"Г/Б Нагетси курячі",
+            "basePrice": 280.00,
+            "discountPercent":0,
+            "rating": 4.2 ,
+            "categories":["actions","food"],
+            "weight":"1000 г"
+        },
+        {
+                "id":8,
+            "img":"/products/Галя ШЕФ/Скумбрія фарширована/dsc_0504-2-600x400.jpg",
+            "title":"Скумбрія фарширована",
+            "description":"Г/Б Скумбрія фарширована",
+            "basePrice": 2650.00,
+            "discountPercent":15,
+            "rating": 8.2 ,
+            "categories":["actions","diary"],
+            "weight":"1000 г"
+        },
+        {
+                "id":9,
+            "img":"/products/Галя ШЕФ/Суп з фрикадельками/dsc_0776-600x400.jpg",
+            "title":"Суп з фрикадельками",
+            "description":"Г/Б Суп з фрикадельками",
+            "basePrice": 250.00,
+            "discountPercent":10,
+            "rating": 8.2 ,
+            "categories":["actions","food"],
+            "weight":"1000 г"
+        },
+        {
+                "id":10,
+            "img":"/products/Галя ШЕФ/Хачапурі з сиром по-аджарськи/khachapuri-g8e3df0f8e_1920-600x400.jpg",
+            "title":"Хачапурі з сиром по-аджарськи",
+            "description":"Г/Б Хачапурі з сиром по-аджарськи",
+            "basePrice": 260.00,
+            "discountPercent":10,
+            "rating": 9.2 ,
+            "categories":["actions","food"],
+            "weight":"1000 г"
+        }
+        
+    ]
+}
