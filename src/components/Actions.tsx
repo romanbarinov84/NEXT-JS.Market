@@ -23,7 +23,7 @@ export function Actions(){
                 </button>
             </div>
             <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ">
-                {actionProducts.map((item,index) => (
+                {actionProducts.slice(0,4).map((item,index) => (
                     <li key={item.id} 
                     className= {`${index >= 4 ? "hidden" : ""}
                      ${index >= 3 ? "md:hidden xl:block" : ""}
