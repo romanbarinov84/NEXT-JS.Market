@@ -10,6 +10,7 @@ export function ProductCard({
   basePrice,
   discountPercent,
   rating,
+  categories,
 }: ProductCardProps) {
   const calculateFinalPrice = (price: number, discount: number): number => {
     return discount > 0 ? price * (1 - discount / 100) : price;
@@ -18,9 +19,11 @@ export function ProductCard({
     return calculateFinalPrice(price, discount);
   };
 
-  const finalPrice = calculateFinalPrice(basePrice, discountPercent);
+  const isNewProduct = categories.includes("new")
 
-  const priceByCard = calculatePriceByCard(finalPrice, cardDiscountPercent);
+  const finalPrice = isNewProduct ? basePrice : calculateFinalPrice(basePrice, discountPercent);
+
+  const priceByCard = isNewProduct ? basePrice : calculatePriceByCard(finalPrice, cardDiscountPercent);
 
   return (
     <div className="flex flex-col justify-between w-40 rounded overflow-hidden bg-white md:w-[224px] xl:w-[272px] align-top p-0 hover:shadow-(--shadow-article) duration-300">
@@ -30,7 +33,7 @@ export function ProductCard({
           alt="ProductCardImg"
           fill
           className="object-contain"
-          sizes="(max-width:768px) 160px, (max-width:1200px) 224px, 272px"
+          sizes="(max-width:768px) 160px, (max-width:1200px) 224px,272px"
         />
         <button className="w-8 h-8 p-2 bg-[#f3f2f1] hover:bg-[#fcd5ba] absolute top-5 right-2 opacity-50 rounded cursor-pointer duration-300">
           <Image
@@ -56,7 +59,7 @@ export function ProductCard({
             </div>
             {cardDiscountPercent > 0 && (
               <p className="text-[#bfbfbf] text-[8px] md:text-xs">
-                {"З акційною карткою"}
+                
               </p>
             )}
           </div>
@@ -69,7 +72,7 @@ export function ProductCard({
                 <span>грн</span>
               </div>
 
-              <p className="text-[#bfbfbf] text-[8px] md:text-xs">Звичайна</p>
+              <p className="text-[#bfbfbf] text-[8px] md:text-xs text-right">Звичайна</p>
             </div>
           )}
         </div>

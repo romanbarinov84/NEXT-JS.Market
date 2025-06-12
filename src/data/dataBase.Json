@@ -109,6 +109,116 @@
             "rating": 9.2 ,
             "categories":["actions","food"],
             "weight":"1000 г"
+        },
+        {
+                 "id":11,
+            "img":"/products/Голубці/Голубці з грибами/stuffed-cabbage-mushrooms-2-600x400.jpg",
+            "title":"Голубці з грибами",
+            "description":" Голубці з грибами",
+            "basePrice": 265.00,
+            "discountPercent":0,
+            "rating": 3.2 ,
+            "categories":["new","food"],
+            "weight":"1000 г"
+        },
+        {
+                 "id":12,
+            "img":"/products/Голубці/Голубці з телятиною/stuffed-cabbage-veal-2.jpg",
+            "title":"Голубці з телятиною",
+            "description":" Голубці з телятиною",
+            "basePrice": 305.00,
+            "discountPercent":0,
+            "rating": 5.2 ,
+            "categories":["new","food"],
+            "weight":"1000 г"
+        },
+        {
+                  "id":13,
+            "img":"/products/Голубці/Голубці зі свининою/stuffed-cabbage-pork-3-600x400.jpg",
+            "title":"Голубці зі свининою",
+            "description":" Голубці зі свининою",
+            "basePrice": 280.00,
+            "discountPercent":0,
+            "rating": 5.2 ,
+            "categories":["new","food"],
+            "weight":"1000 г"
+        },
+        {
+                  "id":14,
+            "img":"/products/Галя ШЕФ/Лазанья зі свининою/dsc_0069-600x400.jpg",
+            "title":"Лазанья зі свининою",
+            "description":"Лазанья зі свининою",
+            "basePrice": 285.00,
+            "discountPercent":0,
+            "rating": 5.2 ,
+            "categories":["new","food"],
+            "weight":"1000 г"
+        },
+        {
+                   "id":15,
+            "img":"/products/Галя ШЕФ/Лазанья з куркою/dsc_0092-600x400.jpg",
+            "title":"Лазанья з куркою",
+            "description":"Лазанья з куркою",
+            "basePrice": 275.00,
+            "discountPercent":0,
+            "rating": 5.2 ,
+            "categories":["new","food"],
+            "weight":"1000 г"
+        },
+        {
+                   "id":16,
+            "img":"/products/Галя ШЕФ/Ліниві вареники/lienivyie-varieniki-iz-tvorogha-osnovnoe-foto-reczepta-600x425.jpeg",
+            "title":"Ліниві вареники",
+            "description":"Ліниві вареники",
+            "basePrice": 235.00,
+            "discountPercent":0,
+            "rating": 5.2 ,
+            "categories":["new","food"],
+            "weight":"1000 г"
+        },
+        {
+                   "id":17,
+            "img":"/products/Сирники/Сирники/cheesecakes-2-600x400.jpg",
+            "title":"Сирники",
+            "description":"Сирники",
+            "basePrice": 235.00,
+            "discountPercent":0,
+            "rating": 5.2 ,
+            "categories":["new","food"],
+            "weight":"1000 г"
+        },
+        {
+                    "id":18,
+            "img":"/products/Сирники/Сирники з родзинками/cheesecakes-raisins-600x400.jpg",
+            "title":"Сирники з родзинками",
+            "description":"Сирники з родзинками",
+            "basePrice": 255.00,
+            "discountPercent":0,
+            "rating": 4.2 ,
+            "categories":["new","food"],
+            "weight":"1000 г"
+        },
+        {
+                     "id":19,
+            "img":"/products/Сирники/Сирники з в’яленою вишнею/izobrazhenie_viber_2023-08-31_15-24-09-462-1-e1694017973793-600x601.jpg",
+            "title":"Сирники з в’яленою вишнею",
+            "description":"Сирники з в’яленою вишнею",
+            "basePrice": 275.00,
+            "discountPercent":0,
+            "rating": 4.2 ,
+            "categories":["new","food"],
+            "weight":"1000 г"
+        },
+        {
+                      "id":20,
+            "img":"/products/Сирники/Сирники з бананом/cheesecakes-banana-600x400.jpg",
+            "title":"Сирники з бананом",
+            "description":"Сирники з бананом",
+            "basePrice": 275.00,
+            "discountPercent":0,
+            "rating": 3.2 ,
+            "categories":["new","food"],
+            "weight":"1000 г"
         }
         
     ]
