@@ -11,7 +11,7 @@ export function SlideOne(){
                 <div className="relative hidden md:block md:w-60 md:h-33 xl:w-75 xl:h-50 xl:w-100 top-7">
                  <Image src="/slider/img.png" alt="Logo-slide" fill sizes="(max-width: 768px) 50px, (max-width: 1200px) 75px, 100px"/>
                 </div>
-                <h2 className="text-lg md:text-2xl xl:text-4xl font-black text-[#333]">
+                <h2 className="text-lg md:text-2xl text-shadow-lg/20  xl:text-4xl font-black text-[#333]">
                     Доставка по місту Бровари безкоштовна
                 </h2>
             </div>

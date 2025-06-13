@@ -15,7 +15,7 @@ export function NewProducts(){
         <section>
           <div className="flex flex-col justify-center xl:max-w-[1208px] ">
             <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
-                <h2 className="text-2xl xl:text-4xl text-left font-bold text-[#535353]">Новинки</h2>
+                <h2 className="text-2xl xl:text-4xl text-left font-bold text-[#535353] text-shadow-lg/10 ">Новинки</h2>
                 <button className="flex flex-row items-center gap-x-2 cursor-pointer">
                     <p className="text-base text-center text-[#606060] hover:text-[#bfbfbf]">
                        Усі новинки
