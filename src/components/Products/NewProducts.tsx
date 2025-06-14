@@ -20,7 +20,7 @@ export function NewProducts(){
                     <p className="text-base text-center text-[#606060] hover:text-[#bfbfbf]">
                        Усі новинки
                     </p>
-                    <Image src="/Shape (Stroke).svg" alt="ActionsImg" width={25} height={25} sizes="25px"/>
+                    <Image src="/feather-icon/Shape (Stroke).svg" alt="ActionsImg" width={25} height={25} sizes="25px"/>
                 </button>
             </div>
             <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ">
