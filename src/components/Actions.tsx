@@ -1,15 +1,25 @@
 import Image from "next/image";
 import { ProductCard } from "./ProductCard/ProductCard";
-import dataBase from "@/data/dataBase.json"
+import { ProductCardProps } from "@/types/product";
+import { getProductsByCategory } from "@/app/api/products/route";
 
-export function Actions(){
+
+export default async function Actions(){
+    let products:ProductCardProps[] = [];
+    let error = null;
+
+    try{
+   products = (await getProductsByCategory("actions"))as unknown as ProductCardProps[];
+    }
+    catch(err){
+       error = err instanceof Error ? err.message : "неизвестная ошибка";
+       console.error("Ошибка в компоненте Actions", err)
+    }
+
+    if(error){
+        return <div className="text-red-500 py-8"> error : {error}</div>
+    }
    
-    const actionProducts = dataBase.products.filter((p) => p.categories.includes("actions"))
-
-
-
-
-
     return(
         <section>
           <div className="flex flex-col justify-center xl:max-w-[1208px] ">
@@ -23,7 +33,7 @@ export function Actions(){
                 </button>
             </div>
             <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ">
-                {actionProducts/*.slice(0,8)*/.map((item,index) => (
+                {products/*.slice(0,8)*/.map((item,index) => (
                     <li key={item.id} 
                     className= {`${index >= 4 ? "hidden" : ""}
                      ${index >= 3 ? "md:hidden xl:block" : ""}

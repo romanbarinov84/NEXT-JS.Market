@@ -1,4 +1,4 @@
-import { Actions } from "@/components/Actions";
+import  Actions  from "@/components/Actions";
 import { Articles } from "@/components/Articles";
 import { Maps } from "@/components/Maps/Maps";
 import { SpecialOffers } from "@/components/offers/SpecialOffers";
