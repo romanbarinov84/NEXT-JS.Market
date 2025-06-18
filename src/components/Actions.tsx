@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ProductCard } from "./ProductCard/ProductCard";
 import { ProductCardProps } from "@/types/product";
 import { getProductsByCategory } from "@/app/api/products/route";
+import { shuffleArray } from "../../utils/shaffleArray";
 
 
 export default async function Actions(){
@@ -10,7 +11,9 @@ export default async function Actions(){
 
     try{
    products = (await getProductsByCategory("actions"))as unknown as ProductCardProps[];
+   products = shuffleArray(products)
     }
+    
     catch(err){
        error = err instanceof Error ? err.message : "неизвестная ошибка";
        console.error("Ошибка в компоненте Actions", err)

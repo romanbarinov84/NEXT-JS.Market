@@ -1,20 +1,30 @@
 
 import Image from "next/image";
 import { ProductCard } from "../ProductCard/ProductCard";
-import dataBase from "@/data/dataBase.json"
+import { ProductCardProps } from "@/types/product";
+import { shuffleArray } from "../../../utils/shaffleArray";
+import { getPurchases } from "@/app/api/users/purchases/route";
 
 
 
-export function Purchases(){
-    const userPurchases = dataBase.users[0].purchases.map((purchase) => {
-        const product = dataBase.products.find(
-            (product) => product.id === purchase.id
-        );
-        if(!product) return undefined;
-        const {discountPercent, ...rest} = product;
-        void discountPercent
-        return rest
-    }).filter((item) => item !== undefined)
+
+export async function Purchases(){
+      let purchases:ProductCardProps[] = [];
+        let error = null;
+    
+        try{
+       purchases = (await getPurchases())as unknown as ProductCardProps[];
+       purchases = shuffleArray(purchases)
+        }
+        
+        catch(err){
+           error = err instanceof Error ? err.message : "неизвестная ошибка";
+           console.error("Ошибка в компоненте Actions", err)
+        }
+    
+        if(error){
+            return <div className="text-red-500 py-8"> error : {error}</div>
+        }
     return(
         <div>
             <section>
@@ -29,7 +39,7 @@ export function Purchases(){
                             </button>
                         </div>
                         <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ">
-                            {userPurchases/*.slice(0,8)*/.map((item,index) => (
+                            {purchases/*.slice(0,8)*/.map((item,index) => (
                                 <li key={item.id} 
                                 className= {`${index >= 4 ? "hidden" : ""}
                                  ${index >= 3 ? "md:hidden xl:block" : ""}

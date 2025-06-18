@@ -1,15 +1,29 @@
-
+import { ProductCardProps } from "@/types/product";
 import Image from "next/image";
 import { ProductCard } from "../ProductCard/ProductCard";
-import dataBase from "@/data/dataBase.json"
+import { getProductsByCategory } from "@/app/api/products/route";
+import { shuffleArray } from "../../../utils/shaffleArray";
 
-export function NewProducts(){
+
+export async function NewProducts(){
    
-    const newProducts = dataBase.products.filter((p) => p.categories.includes("new"))
-
-
-
-
+      let products:ProductCardProps[] = [];
+        let error = null;
+    
+        try{
+       products = (await getProductsByCategory("new"))as unknown as ProductCardProps[];
+       products = shuffleArray(products)
+        }
+        
+        catch(err){
+           error = err instanceof Error ? err.message : "неизвестная ошибка";
+           console.error("Ошибка в компоненте Actions", err)
+        }
+    
+        if(error){
+            return <div className="text-red-500 py-8"> error : {error}</div>
+        }
+       
 
     return(
         <section>
@@ -24,7 +38,7 @@ export function NewProducts(){
                 </button>
             </div>
             <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ">
-                {newProducts/*.slice(0,8)*/.map((item,index) => (
+                {products/*.slice(0,8)*/.map((item,index) => (
                     <li key={item.id} 
                     className= {`${index >= 4 ? "hidden" : ""}
                      ${index >= 3 ? "md:hidden xl:block" : ""}
