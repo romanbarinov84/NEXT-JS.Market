@@ -1,10 +1,35 @@
+
+import { getArticles } from "@/app/api/articles/route";
 import Image from "next/image"
-import ArticleDataBase from "../data/articlesDataBase.json";
 import Link from "next/link";
 
-export function Articles(){
-    const articles = ArticleDataBase;
-    void articles
+export async function Articles(){
+  interface Article {
+    _id:string;
+    img:string;
+    title:string;
+    text:string;
+    createdAt:string;
+
+  }
+
+   let articles:Article[] = [];
+      let error = null;
+
+    try{
+     articles = (await getArticles())as unknown as Article[];
+    
+      }
+      
+      catch(err){
+         error = err instanceof Error ? err.message : "неизвестная ошибка";
+         console.error("Ошибка в компоненте Articles", err)
+      }
+  
+      if(error){
+          return <div className="text-red-500 py-8"> error : {error}</div>
+      }
+     
 
     return(
         <section>
@@ -21,8 +46,8 @@ export function Articles(){
             </div>
 
             <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
-                {articles.map((article) => (
-                    <li key={article.id} className="h-75 md:h-105">
+                {articles.slice(0,3).map((article) => (
+                    <li key={article._id} className="h-75 md:h-105">
                         <article className="bg-white h-full flex flex-col rounded overflow-hidden shadow-lg hover:shadow-xl duration-500">
                             <div className="relative h-48 w-full">
                               <Image src={article.img} alt={article.title}

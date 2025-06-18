@@ -1,5 +1,5 @@
 
-import Image from "next/image";
+
 import { ProductCard } from "../ProductCard/ProductCard";
 import { ProductCardProps } from "@/types/product";
 import { shuffleArray } from "../../../utils/shaffleArray";
