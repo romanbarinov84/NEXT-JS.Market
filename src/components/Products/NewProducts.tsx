@@ -1,8 +1,8 @@
 import { ProductCardProps } from "@/types/product";
-import Image from "next/image";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { getProductsByCategory } from "@/app/api/products/route";
 import { shuffleArray } from "../../../utils/shaffleArray";
+import ViewAllButton from "../ViewAllButton";
 
 
 export async function NewProducts(){
@@ -30,12 +30,7 @@ export async function NewProducts(){
           <div className="flex flex-col justify-center xl:max-w-[1208px] ">
             <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
                 <h2 className="text-2xl xl:text-4xl text-left font-bold text-[#535353] text-shadow-lg/10 ">Новинки</h2>
-                <button className="flex flex-row items-center gap-x-2 cursor-pointer">
-                    <p className="text-base text-center text-[#606060] hover:text-[#bfbfbf]">
-                       Усі новинки
-                    </p>
-                    <Image src="/feather-icon/Shape (Stroke).svg" alt="ActionsImg" width={25} height={25} sizes="25px"/>
-                </button>
+                <ViewAllButton btnText=" Усі новинки"/>
             </div>
             <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ">
                 {products/*.slice(0,8)*/.map((item,index) => (

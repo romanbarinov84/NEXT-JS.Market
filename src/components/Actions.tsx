@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ViewAllButton from "./ViewAllButton";
 import { ProductCard } from "./ProductCard/ProductCard";
 import { ProductCardProps } from "@/types/product";
 import { getProductsByCategory } from "@/app/api/products/route";
@@ -28,12 +28,7 @@ export default async function Actions(){
           <div className="flex flex-col justify-center xl:max-w-[1208px] ">
             <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
                 <h2 className="text-2xl xl:text-4xl text-left font-bold text-shadow-lg/10  text-[#535353]">Акції</h2>
-                <button className="flex flex-row items-center gap-x-2 cursor-pointer">
-                    <p className="text-base text-center text-shadow-lg/10  text-[#606060] hover:text-[#bfbfbf]">
-                        Акційні товари
-                    </p>
-                    <Image src="/feather-icon/Shape (Stroke).svg" alt="ActionsImg" width={25} height={25} sizes="25px"/>
-                </button>
+                <ViewAllButton btnText="Усі акції"/>
             </div>
             <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ">
                 {products/*.slice(0,8)*/.map((item,index) => (
