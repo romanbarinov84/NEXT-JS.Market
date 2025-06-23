@@ -1,9 +1,9 @@
 
 
 import { ProductCard } from "../ProductCard/ProductCard";
+import { getPurchases } from "../../../utils/api-routes";
 import { ProductCardProps } from "@/types/product";
 import { shuffleArray } from "../../../utils/shaffleArray";
-import { getPurchases } from "@/app/api/users/purchases/route";
 import ViewAllButton from "../ViewAllButton";
 
 

@@ -1,26 +1,17 @@
-import { getDBAndRequestBody } from "../../../../utils/api-routes";
+//import { MongoClient } from "mongodb";
+//import { getDBAndRequestBody } from "../../../../utils/api-routes";
 import { NextResponse } from "next/server";
-import { MongoClient } from "mongodb";
+import { getArticles } from "../../../../utils/api-routes";
+//import { MongoClient } from "mongodb";
 
-const clientPromise = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!).connect();
-
-export async function getArticles(){
-    const {db} = await getDBAndRequestBody(clientPromise,null);
-    return await db.collection("articles").find({}).toArray();
-}
+//const clientPromise = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!).connect(); Для MongoDB ATLAS
 
 export async function GET() {
-    
-    try{
-      
-        const articles = await getArticles();
-        return NextResponse.json(articles);
-    }
-    catch(error){
-      console.error("error server",error);
-      return NextResponse.json(
-         {message: "Server error"},
-         {status:500}
-      )
-    }
+  try {
+    const articles = await getArticles();
+    return NextResponse.json(articles);
+  } catch (error) {
+    console.error("error server", error);
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
+  }
 }

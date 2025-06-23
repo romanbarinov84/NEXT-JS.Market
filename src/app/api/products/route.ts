@@ -1,13 +1,14 @@
-import { getDBAndRequestBody } from "../../../../utils/api-routes";
+
+
+//import { getDBAndRequestBody } from "../../../../utils/api-routes";
 import { NextResponse } from "next/server";
-import { MongoClient } from "mongodb";
+//import { MongoClient } from "mongodb";
+import {getProductsByCategory} from "../../../../utils/api-routes"
+//const clientPromise = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!).connect(); Для Mongo ATLAS
 
-const clientPromise = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!).connect();
 
-export async function getProductsByCategory(category:string){
-    const {db} = await getDBAndRequestBody(clientPromise,null);
-    return await db.collection("products").find({categories:category}).toArray();
-}
+
+
 
 export async function GET(request:Request) {
     

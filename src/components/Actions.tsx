@@ -1,8 +1,8 @@
 import ViewAllButton from "./ViewAllButton";
 import { ProductCard } from "./ProductCard/ProductCard";
 import { ProductCardProps } from "@/types/product";
-import { getProductsByCategory } from "@/app/api/products/route";
 import { shuffleArray } from "../../utils/shaffleArray";
+import { getProductsByCategory } from "../../utils/api-routes";
 
 
 export default async function Actions(){

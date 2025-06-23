@@ -1,5 +1,5 @@
 
-import { getArticles } from "@/app/api/articles/route";
+import { getArticles } from "../../utils/api-routes";
 import Image from "next/image"
 import Link from "next/link";
 
