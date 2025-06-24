@@ -80,7 +80,7 @@ export function ProductCard({
           {description}
         </div>
         {rating > 0 && <StarRating rating={rating} />}
-        <button className="border border-(--color-primary) hover:text-white hover:[#ff6633] hover:border-transparent active:shadow-(--shadow-button-active) w-full h-10 rounded p-2 justify-center items-center text-(--color-primary) transition-all duration-300 cursor-pointer select-none">
+        <button className="border border-(--color-primary) hover:text-green-700 hover:[#ff6633] hover:border-green-400 hover:shadow-sm active:shadow-(--shadow-button-active) w-full h-10 rounded p-2 justify-center items-center text-(--color-primary) transition-all duration-300 cursor-pointer select-none">
           {" "}
           Додати до кошика
         </button>
