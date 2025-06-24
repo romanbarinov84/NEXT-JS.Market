@@ -1,35 +1,26 @@
-
-
+//import { MongoClient } from "mongodb";
 //import { getDBAndRequestBody } from "../../../../utils/api-routes";
 import { NextResponse } from "next/server";
+import { getDb } from "../../../../utils/api-routes";
 //import { MongoClient } from "mongodb";
-import {getProductsByCategory} from "../../../../utils/api-routes"
-//const clientPromise = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!).connect(); Для Mongo ATLAS
-import { getDB } from "../../../../utils/api-routes";
 
-
-
+//const clientPromise = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!).connect(); Для MongoDB ATLAS
 
 export async function GET(request:Request) {
+  try {
+    const category = new URL(request.url).searchParams.get("category")
+    if(!category){
+        return NextResponse.json(
+            {message: "Параметр категории обязателен"},
+            {status:400}
+        );
+    }
+    const products = await(await getDb()).collection("products").find({categories: category}).toArray();
+    return NextResponse.json(products);
     
-    try{
-       const category  = new URL(request.url).searchParams.get("category");
-        
+  } catch (error) {
+    console.error("error server", error);
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
 
-        if(!category){
-            return NextResponse.json(
-                {message: "Need to parametr of category"},
-                {status:400}
-            );
-        }
-        const products = (await getDB()).(category);
-        return NextResponse.json(products);
-    }
-    catch(error){
-      console.error("error server",error);
-      return NextResponse.json(
-         {message: "Server error"},
-         {status:500}
-      )
-    }
+      }
 }

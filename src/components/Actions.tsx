@@ -1,27 +1,27 @@
 import ViewAllButton from "./ViewAllButton";
 import { ProductCard } from "./ProductCard/ProductCard";
 import { ProductCardProps } from "@/types/product";
-import { shuffleArray } from "../../utils/shaffleArray";
-import { getProductsByCategory } from "../../utils/api-routes";
+
 
 
 export default async function Actions(){
     let products:ProductCardProps[] = [];
     let error = null;
 
-    try{
-   products = (await getProductsByCategory("actions"))as unknown as ProductCardProps[];
-   products = shuffleArray(products)
-    }
+    try {
+    const res = await fetch(
+      `${process.env.DELIVERY_SHOP_DB_URL!}/api/products?category=actions`);
     
-    catch(err){
-       error = err instanceof Error ? err.message : "неизвестная ошибка";
-       console.error("Ошибка в компоненте Actions", err)
-    }
+    products = await res.json();
+  } catch (err) {
+    error = err instanceof Error ? err.message : "неизвестная ошибка";
+    console.error("Ошибка в компоненте Articles", err);
+  }
 
-    if(error){
-        return <div className="text-red-500 py-8"> error : {error}</div>
-    }
+  if (error) {
+    return <div className="text-red-500 py-8"> error : {error}</div>;
+  }
+
    
     return(
         <section>
@@ -32,7 +32,7 @@ export default async function Actions(){
             </div>
             <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ">
                 {products/*.slice(0,8)*/.map((item,index) => (
-                    <li key={item.id} 
+                    <li key={item._id} 
                     className= {`${index >= 4 ? "hidden" : ""}
                      ${index >= 3 ? "md:hidden xl:block" : ""}
                      ${index >= 4 ? "xl:block" : ""}
