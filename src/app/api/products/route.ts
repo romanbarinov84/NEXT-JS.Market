@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 //import { MongoClient } from "mongodb";
 import {getProductsByCategory} from "../../../../utils/api-routes"
 //const clientPromise = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!).connect(); Для Mongo ATLAS
-
+import { getDB } from "../../../../utils/api-routes";
 
 
 
@@ -13,8 +13,8 @@ import {getProductsByCategory} from "../../../../utils/api-routes"
 export async function GET(request:Request) {
     
     try{
-        const {searchParams} = new URL(request.url);
-        const category = searchParams.get("category");
+       const category  = new URL(request.url).searchParams.get("category");
+        
 
         if(!category){
             return NextResponse.json(
@@ -22,7 +22,7 @@ export async function GET(request:Request) {
                 {status:400}
             );
         }
-        const products = await getProductsByCategory(category);
+        const products = (await getDB()).(category);
         return NextResponse.json(products);
     }
     catch(error){

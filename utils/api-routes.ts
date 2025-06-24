@@ -1,8 +1,14 @@
 import { MongoClient } from "mongodb";
 
-const clientPromise = new MongoClient(process.env.MongoURL!);
+const client= new MongoClient(process.env.DELIVERY_SHOP_DB_URL!);
+const clientPromise = client.connect();
 
-export const getDBAndRequestBody = async (
+export const getDb = async () => {
+  return (await clientPromise).db(process.env.DELIVERY_SHOP_DB_NAME)
+}
+
+
+/*export const getDB = async (
   clientPromise: Promise<MongoClient>,
   request: Request | null
 ) => {
@@ -55,4 +61,4 @@ export async function getPurchases() {
       ...rest,
     };
   });
-}
+}*/
