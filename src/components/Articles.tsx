@@ -9,9 +9,7 @@ const Articles = async () => {
   let error = null;
 
   try {
-    const res = await fetch(
-      `${process.env.DELIVERY_SHOP_DB_URL!}/api/articles`
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`);
     articles = await res.json();
   } catch (err) {
     error = err instanceof Error ? err.message : "неизвестная ошибка";
@@ -83,4 +81,4 @@ const Articles = async () => {
   );
 };
 
-export default Articles();
+export default Articles;

@@ -10,7 +10,8 @@ export default async function Actions(){
 
     try {
     const res = await fetch(
-      `${process.env.DELIVERY_SHOP_DB_URL!}/api/products?category=actions`);
+  `${process.env.NEXT_PUBLIC_BASE_URL}/api/products?category=actions`
+);
     
     products = await res.json();
   } catch (err) {

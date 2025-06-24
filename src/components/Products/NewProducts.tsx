@@ -1,5 +1,6 @@
 import { ProductCardProps } from "@/types/product";
 import { ProductCard } from "../ProductCard/ProductCard";
+import { shuffleArray } from "../../../utils/shaffleArray";
 
 
 
@@ -9,19 +10,20 @@ export async function NewProducts(){
     let error = null;
 
     try {
-    const res = await fetch(
-      `${process.env.DELIVERY_SHOP_DB_URL!}/api/products?category=new`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products?category=new`);
+
     
     products = await res.json();
+    products = shuffleArray(products)
   } catch (err) {
     error = err instanceof Error ? err.message : "неизвестная ошибка";
     console.error("Ошибка в компоненте Articles", err);
   }
-
   if (error) {
     return <div className="text-red-500 py-8"> error : {error}</div>;
   }
 
+ 
     return(
         <section>
           <div className="flex flex-col justify-center xl:max-w-[1208px] ">

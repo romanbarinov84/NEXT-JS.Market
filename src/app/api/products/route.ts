@@ -1,10 +1,6 @@
-//import { MongoClient } from "mongodb";
-//import { getDBAndRequestBody } from "../../../../utils/api-routes";
 import { NextResponse } from "next/server";
 import { getDb } from "../../../../utils/api-routes";
-//import { MongoClient } from "mongodb";
-
-//const clientPromise = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!).connect(); Для MongoDB ATLAS
+export const revalidate = 3600;
 
 export async function GET(request:Request) {
   try {
