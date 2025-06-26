@@ -10,5 +10,6 @@ export interface ProductCardProps {
     weight?:string;
     categories:string[];
     value?:string;
+    quantity?:number;
 }
 

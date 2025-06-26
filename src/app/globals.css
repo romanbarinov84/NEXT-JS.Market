@@ -10,7 +10,7 @@
   --color-foreground: var(--foreground);
   --color-primary: #70c05b;
   --font-sans: var(--font-rubik-sans);
-  --shadow-article: 2px 4px 8px 0px rgba(123, 250, 80, 0.2);
+  /*--shadow-article: 2px 4px 8px 0px rgba(123, 250, 80, 0.2);*/
   --shadow-default: 2px 4px 12px 0px rgba(0, 0, 0, 0.3);
   --shadow-button-default: 4px 8px 16px 0px rgba(112, 192, 91, 0.2);
   --shadow-button-active: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.2);

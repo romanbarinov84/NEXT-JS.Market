@@ -1,9 +1,10 @@
+import ViewAllButton from "@/components/ViewAllButton";
 import { Article } from "@/types/articles";
 
 import Image from "next/image";
 
-import ViewAllButton from "./ViewAllButton";
-const Articles = async () => {
+
+const AllArticles = async () => {
   let articles: Article[] = [];
   let error = null;
 
@@ -21,17 +22,17 @@ const Articles = async () => {
 
   return (
     <section>
-      <div className="flex flex-col justify-center xl:max-w-[1208px]">
+      <div className="flex flex-col justify-center xl:max-w-[1208px] mt-20">
         <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
-          <h2 className="text-2xl xl:text-4xl text-left font-bold  text-[#606060] text-shadow-lg/10">
+          <h2 className="text-2xl xl:text-4xl text-left font-bold  text-[#ed4747] text-shadow-lg/10">
             Пости
           </h2>
-          <ViewAllButton btnText="Усі пости" href="articles" />
+          <ViewAllButton btnText="На головну" href="/"/>
         </div>
       </div>
 
       <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
-        {articles.slice(0, 3).map((article) => (
+        {articles/*.slice(0, 3)*/.map((article) => (
           <li key={article._id} className="h-75 md:h-105">
             <article className="bg-white h-full flex flex-col rounded overflow-hidden shadow-lg hover:shadow-xl duration-500">
               <div className="relative h-48 w-full">
@@ -66,4 +67,4 @@ const Articles = async () => {
   );
 };
 
-export default Articles;
+export default AllArticles;
