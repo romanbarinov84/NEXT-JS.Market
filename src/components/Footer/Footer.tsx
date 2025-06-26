@@ -7,7 +7,7 @@ import Link from "next/link"
 export function Footer(){
 
     return(
-        <footer className="bg-[#fff] mb-14 md:mb-0 bg-cover bg-center bg-no-repeat ring ring-amber-200 rounded-b-lg">
+        <footer className="bg-[#fff] mb-14 mt-20 md:mb-0 bg-cover bg-center bg-no-repeat ring ring-amber-200 rounded-b-lg">
             <div className="px-7 flex flex-row gap-6 text-[#414141] md:gap-x-10 items-center justify-between ">
                 <div className="flex flex-row justify-center mt-10">
                     <Link href="/" className="relative w-23 h-16 md:w-16 md:h-11 block xl:w-40 xl:h-30">

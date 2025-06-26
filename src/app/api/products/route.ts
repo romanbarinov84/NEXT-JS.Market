@@ -11,7 +11,8 @@ export async function GET(request:Request) {
             {status:400}
         );
     }
-    const products = await(await getDb()).collection("products").find({categories: category}).toArray();
+    const products = await(await getDb()).collection("products").find({ categories: { $in: [category] } }).toArray();
+    
     return NextResponse.json(products);
     
   } catch (error) {
