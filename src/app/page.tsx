@@ -1,6 +1,6 @@
 
 import Articles from "@/components/Articles";
-import Actions from "./actions/page";
+import Actions from "../components/Actions";
 import { Maps } from "@/components/Maps/Maps";
 import { SpecialOffers } from "@/components/offers/SpecialOffers";
 import { NewProducts } from "@/components/Products/NewProducts";

@@ -29,7 +29,7 @@ export async function Purchases(){
                       <div className="flex flex-col justify-center xl:max-w-[1208px] ">
                         <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
                             <h2 className="text-2xl xl:text-4xl text-shadow-lg/10  text-left font-bold text-[#535353]">Мої покупки</h2>
-                         {purchases.length > 0 && <ViewAllButton btnText = "Усі мої покупки" href="/purchases"/> }
+                         {purchases.length > 0 && <ViewAllButton btnText = "Усі мої покупки" href="purchases"/> }
                         </div>
                         <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ">
                             {purchases/*.slice(0,8)*/.map((item,index) => (
