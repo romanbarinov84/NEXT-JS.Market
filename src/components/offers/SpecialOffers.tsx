@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export function SpecialOffers() {
   return (
@@ -17,7 +18,9 @@ export function SpecialOffers() {
             <div className="text-[30px] text-gray-700 mt-2 lg:text-[50px] xl:text-[90px]">discount</div>
           </div>
           <div className="w-[250px] h-[100px] ml-5 bg-green-300  rounded-xl shadow-(--shadow-article) flex flex-col items-center justify-center transition-transform duration-300 hover:-translate-y-2 hover:rotate-1 relative overflow-hidden cursor-pointer lg:w-[350px] lg:h-[220px] xl:w-[500px] xl:h-[250px]">
-            <div className=" relative w-[80px] h-[80px] lg:w-[120px] lg:h-[120px] ">
+            <Link href="/actions">
+            <div className=" relative  w-[80px] h-[80px] lg:w-[120px] lg:h-[120px] ">
+              
               <Image 
               src="/discountCardImg.png" 
               alt="discount-images" 
@@ -26,7 +29,11 @@ export function SpecialOffers() {
               sizes="(max-width: 768px) 120px, (max-width: 1024px) 200px, 250px"/> 
               
             </div>
-              <p className=" justify-center text-[20px] text-red-600 leading-none font-bold xl:text-[40px]"> Акційні товари!!!</p>
+            
+               <p className="justify-center text-[20px] text-red-600 leading-none font-bold xl:text-[40px]">
+                     Акційні товари!!!
+               </p>
+            </Link>
           </div>
         </div>
       </div>
