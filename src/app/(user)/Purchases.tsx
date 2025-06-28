@@ -9,7 +9,7 @@ export async function Purchases() {
   try {
     const purchases = await fetchPurchases();
     return (<ProductsSection
-      title="Усі мої покупки"
+      title=" Mої покупки"
      viewAllButton={{text:"Усі покупки", href:"purchases"}}
      products={purchases}
      compact
