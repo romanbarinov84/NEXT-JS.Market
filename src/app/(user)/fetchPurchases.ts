@@ -1,18 +1,18 @@
 import { ProductCardProps } from "@/types/product";
-import { shuffleArray } from "../../../utils/shaffleArray";
 
 
-export const fetchProductsByCategory = async(category:string) => {
+
+export const fetchPurchases = async() => {
 
  try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products?category=${category}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products?category=purchases`,
       {next: {revalidate:3600}}
     );
-    if(!res.ok) throw new Error(`Ошибка получения продуктов ${category}`)
+    if(!res.ok) throw new Error(`Ошибка получения покупок `)
 
-    const products:ProductCardProps[] = await res.json();
-    return shuffleArray(products);
+    const purchases:ProductCardProps[] = await res.json();
+    return purchases;
 
   } catch (err) {
     console.error("Ошибка в компоненте Actions", err);

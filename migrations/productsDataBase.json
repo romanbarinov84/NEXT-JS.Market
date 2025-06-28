@@ -161,7 +161,7 @@
             "basePrice": 275.00,
             "discountPercent":0,
             "rating": 5.2 ,
-            "categories":["new","food"],
+            "categories":["new","food","purchases"],
             "weight":"1000 г"
         },
         {
@@ -194,7 +194,7 @@
             "basePrice": 255.00,
             "discountPercent":0,
             "rating": 4.2 ,
-            "categories":["new","food"],
+            "categories":["new","food","purchases"],
             "weight":"1000 г"
         },
         {
@@ -249,7 +249,7 @@
             "basePrice": 245.00,
             "discountPercent":0,
             "rating": 4.2 ,
-            "categories":["new","food","restofood"],
+            "categories":["new","food","restofood","purchases"],
             "weight":"700 г"
         },
          {
@@ -276,7 +276,7 @@
         },
          {
                       "id":26,
-            "img":"/products/Ресторанні страви/public/products/Ресторанні страви/Крем-суп кукурудзяний з креветками/krem-sup-kukurudzyanyj-iz-krevetkamy--600x331.jpg/krem-sup-kukurudzyanyj-iz-krevetkamy--600x331.jpg",
+            "img":"/products/Ресторанні страви/Крем-суп кукурудзяний з креветками/krem-sup-kukurudzyanyj-iz-krevetkamy--600x331.jpg",
             "title":"Крем-суп кукурудзяний з креветками",
             "description":"Ресторанні страви.Крем-суп кукурудзяний з креветками",
             "basePrice": 215.00,
@@ -304,7 +304,7 @@
             "basePrice": 225.00,
             "discountPercent":0,
             "rating": 4.8 ,
-            "categories":["new","food","restofood"],
+            "categories":["new","food","restofood","purchases"],
             "weight":"800 г"
         },
          {
@@ -359,7 +359,7 @@
             "basePrice": 245.00,
             "discountPercent":0,
             "rating": 4.9 ,
-            "categories":["new","food","restofood"],
+            "categories":["new","food","restofood","purchases"],
             "weight":"800 г"
         },
         {
@@ -392,7 +392,7 @@
             "basePrice": 215.00,
             "discountPercent":0,
             "rating": 4.3 ,
-            "categories":["new","food","restofood"],
+            "categories":["new","food","restofood","purchases"],
             "weight":"700 г"
         },
         {
@@ -458,7 +458,7 @@
             "basePrice": 185.00,
             "discountPercent":0,
             "rating": 4.9 ,
-            "categories":["new","food","sweet"],
+            "categories":["new","food","sweet","purchases"],
             "weight":"500 гр"
         },
         {
