@@ -1,32 +1,22 @@
 
-
-
-import { ArticlesSection } from "../ArticlesSection";
-
+import { GenericProductsListPage } from "@/app/(products)/genericProductListPage/genericProductListPage";
 import { fetchArticles } from "../fetchArticles";
 
-
-const AllArticles = async () => {
- 
-
-  try {
-     const articles = await fetchArticles();
-    return (
-     
-   <ArticlesSection 
-    title="Усі пости"
-     viewAllButton={{text:"На головну", href:"/"}}
-     articles={articles}
-     compact
-   />
+export default async function AllActions({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
+}) {
+  return (
+    <GenericProductsListPage
+      searchParams={searchParams}
+      props={{
+        fetchData: () => fetchArticles(),
+        pageTitle: "Усі пости",
+        basePath: "/articles",
+        errorMessage: "Помилка , невдалося завантажити пости",
+        contentType: "articles"
+      }}
+    />
   );
-    
-  } catch  {
-    return <div className="text-red-500 py-8"> error : невдалося загрузити пости</div>;
-  }
-
- 
-  
-};
-
-export default AllArticles;
+}

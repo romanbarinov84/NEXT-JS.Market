@@ -1,20 +1,20 @@
 
-import { fetchProductsByCategory } from "../fetchProducts";
-import { ProductsSection } from "../ProductsSection";
 
-export default async function AllActions() {
-  try {
-    const products = await fetchProductsByCategory("actions");
-    return (<ProductsSection 
-     title="Усі акції"
-     viewAllButton={{text:"На головну", href:"/"}}
-     products={products}
-     />)
-  } catch {
-    return (
-      <div className="text-red-500 py-8">Ошибка:не удалось загрузить акции</div>
-    );
-  }
+import { fetchProductsByCategory } from "../fetchProducts";
+import { GenericProductsListPage } from "../genericProductListPage/genericProductListPage";
+
+export default async function AllActions({searchParams}: {searchParams:Promise<{page? : string; itemsPerPage?:string}>;
+  }) {
+
+   return (<GenericProductsListPage 
+   searchParams={searchParams}
+   props={{
+    fetchData:() => fetchProductsByCategory("actions"),
+    pageTitle:"Усі акції",
+    basePath:"/actions",
+    errorMessage:"Помилка , невдалося завантажити акції",
+   }}
+   />)
 
   
 }

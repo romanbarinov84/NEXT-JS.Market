@@ -21,11 +21,10 @@ export const ArticlesSection = ({title,viewAllButton,articles,compact=false}:Art
         </div>
       </div>
 
-      <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
+      <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {articles/*.slice(0, 3)*/.map((article,index) => (
-          <li key={article._id} className={`h-75 md:h-105 ${compact ? `${index >= 3 ? "hidden" : ""}
-                      ${index >=3 ? "md:hidden xl:block" : ""}
-                      ${index >=4 ? "xl:hidden" : ""}` : ""  } }`}>
+          <li key={article._id} className={`h-75 md:h-105 ${index >=3 ? "hidden" : ""}`   }>
+                   
             <ArticleCard {...article} />
           </li>
         ))}
