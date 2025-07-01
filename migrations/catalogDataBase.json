@@ -57,7 +57,7 @@
         "id":7,
         "order":7,
         "title":"Ресторанні страви",
-        "img":"public/products/Ресторанні страви/Морепродукти з чорним рисом та шпинатним соусом/mg_8633-600x400.jpg",
+        "img":"/products/Ресторанні страви/Морепродукти з чорним рисом та шпинатним соусом/mg_8633-600x400.jpg",
         "colSpan":"col-span-2",
         "tabletColSpan":"md:col-span-2",
         "mobileColSpan":"col-span-2"
