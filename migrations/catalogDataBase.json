@@ -1,0 +1,83 @@
+[
+    {
+        "id":1,
+        "order":1,
+        "title":"Вареники",
+        "img":"/products/вареники/вареники з вишнею/vareniki-cherries-4-600x400.jpg",
+        "colSpan":"col-span-2",
+        "tabletColSpan":"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+    },
+    {
+        "id":2,
+        "order":2,
+        "title":"Млинці",
+        "img":"/products/блины/Блины с клубникой и сыром/pancakes-strawberries-cheese-4-600x400.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id":3,
+        "order":3,
+        "title":"Бендерики",
+        "img":"/products/блины/Бендерики с курицей и сыром/1721822390290277-600x399.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id":4,
+        "order":4,
+        "title":"шеф-меню",
+        "img":"/products/Галя ШЕФ/Лазанья з куркою/dsc_0092-600x400.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id":5,
+        "order":5,
+        "title":"голубці",
+        "img":"/products/Голубці/Голубці з телятиною/stuffed-cabbage-veal-2.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id":6,
+        "order":6,
+        "title":"Десерти",
+        "img":"/products/Десерти/Сирок з Полуницею/syrok-z-polunyczeyu_1-1-600x400.jpg",
+        "colSpan":"col-span-2",
+        "tabletColSpan":"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+    },
+    {
+        "id":7,
+        "order":7,
+        "title":"Ресторанні страви",
+        "img":"public/products/Ресторанні страви/Морепродукти з чорним рисом та шпинатним соусом/mg_8633-600x400.jpg",
+        "colSpan":"col-span-2",
+        "tabletColSpan":"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+    },
+    {
+        "id":8,
+        "order":8,
+        "title":"Мотті",
+        "img":"/products/Десерти/Моті Банан з Шоколадом/img_20231123_123119_525-600x600.png",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id":9,
+        "order":9,
+        "title":"Сирники",
+        "img":"/products/Сирники/Сирники з родзинками/cheesecakes-raisins-600x400.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+    }
+]
