@@ -2,7 +2,7 @@ import { Article} from "./articles";
 
 export interface ArticlesSectionProps{
     title: string;
-    viewAllButton: {
+    viewAllButton?: {
         text:string;
         href:string;
     };

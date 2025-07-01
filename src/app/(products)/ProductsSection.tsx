@@ -13,7 +13,8 @@ export const ProductsSection = ({title,viewAllButton,products,compact = false}: 
                   <h2 className="text-2xl xl:text-4xl text-left font-bold text-shadow-lg/10  text-[#535353]">
                     {title}
                   </h2>
-                  <ViewAllButton btnText={viewAllButton.text} href={viewAllButton.href} />
+                  {viewAllButton && ( <ViewAllButton btnText={viewAllButton.text} href={viewAllButton.href} />)}
+                 
                 </div>
                 <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ">
                   {products /*.slice(0,8)*/

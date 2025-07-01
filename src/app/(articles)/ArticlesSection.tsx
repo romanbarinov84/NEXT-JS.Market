@@ -15,9 +15,10 @@ export const ArticlesSection = ({title,viewAllButton,articles,compact=false}:Art
           <h2 className="text-2xl xl:text-4xl text-left font-bold  text-[#ed4747] text-shadow-lg/10">
             {title}
           </h2>
-          <ViewAllButton 
+          {viewAllButton && (<ViewAllButton 
           btnText={viewAllButton.text} 
-          href={viewAllButton.href}/>
+          href={viewAllButton.href}/>)}
+          
         </div>
       </div>
 

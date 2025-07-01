@@ -12,6 +12,7 @@ import { Article } from "@/types/articles";
 
 
 
+
 export const GenericProductsListPage = async({searchParams,props}: {searchParams:Promise<{page? : string; itemsPerPage?:string}>
     props:GenericListPageProps;
 }) => {
@@ -35,12 +36,10 @@ export const GenericProductsListPage = async({searchParams,props}: {searchParams
         {!props.contentType ? (
              <ProductsSection 
         title={props.pageTitle} 
-        viewAllButton={{text:"На головну", href:"/"}}
         products={paginatedItems as ProductCardProps[]}
         />
-        ) : ( <ArticlesSection 
+        ) : ( <ArticlesSection
         title={props.pageTitle} 
-        viewAllButton={{text:"На головну", href:"/"}}
         articles={paginatedItems as Article[]}
         />)}
        

@@ -14,7 +14,7 @@ export default async function Actions() {
      />)
   } catch {
     return (
-      <div className="text-red-500 py-8">Ошибка:не удалось загрузить акции</div>
+      <div className="text-red-500 py-8 ">Ошибка:не удалось загрузить акции</div>
     );
   }
 
