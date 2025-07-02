@@ -5,13 +5,15 @@ import { useEffect, useState } from "react";
 import GridCategoryBlock from "../GridCategoryBlock";
 
 
+
 export default function CatalogPage() {
   const [categories, setCategories] = useState<CatalogProps[]>([]);
   const [isEditing,setIsEditing] = useState(false);
-  const [draggetCategory,setDraggetCategory] = useState<CatalogProps | null>(null);
+  const [draggedCategory,setDraggedCategory] = useState<CatalogProps | null>(null);
   const [error,setError] = useState<string | null >(null);
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading,setIsLoading] = useState(true);
   const isAdmin = true;
+  const [hoveredCategoryId,setHoveredCategoryId] = useState<string | null>(null)
 
   const fetchCategories = async () => {
     try {
@@ -33,14 +35,97 @@ export default function CatalogPage() {
     fetchCategories();
   }, []);
 
+  const updateOrderInDB = async() =>{
+    try{
+       const response = await fetch("api/catalog",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(
+          categories.map((category,index) => ({
+            _id:category._id,
+            order:index + 1,
+            title:category.title,
+            img: category.img,
+            colSpan:category.colSpan,
+            tabletColSpan:category.tabletColSpan,
+            mobileColSpan:category.mobileColSpan,
+          }))
+        ),
+       });
+       if(!response.ok) throw new Error("Помилка при відновленню порядку каталогу");
+
+       const result = await response.json();
+       if(result.success){
+        console.log("порядок успішно відновленний");
+       }
+    }catch(error){
+        console.error("Помилка при сбереженні єлементів каталогу в базі данних", error);
+        setError("Помилка збереження порядку в базі данних");
+    }
+  }
+
   const handleToggleEditing = async() => {
+    if(isEditing){
+      await updateOrderInDB() //Функция сохранения изменений в базе
+    }
      setIsEditing(!isEditing);
   }
 
   const handleDragStart = (category:CatalogProps) =>{
     if(isEditing) {
-         setDraggetCategory(category)
+         setDraggedCategory(category)
     }
+  }
+
+  const handleDragOver = (e: React.DragEvent,categoryId:string) => {
+    e.preventDefault();
+    if(draggedCategory && draggedCategory._id !== categoryId){
+        setHoveredCategoryId(categoryId)
+    }
+  }
+
+  const handleDragLeave = ()=>{
+    setHoveredCategoryId(null)
+  };
+
+  const handleDrop = (e:React.DragEvent,targetCategoryId:string) => {
+   e.preventDefault();
+   if(!isEditing || !draggedCategory) return ;
+
+   setCategories((prevCategories) => {
+    const draggedIndex = prevCategories.findIndex(
+      (c) => c._id === draggedCategory._id);//индекс перетаскиваемого элемента
+
+    const targetIndex = prevCategories.findIndex(
+      (c) => c._id === targetCategoryId);//индекс куда перетаскиваем
+
+      if(draggedIndex === -1 || targetIndex === -1) return prevCategories;
+
+      const newCategories = [...prevCategories];
+
+      const draggedItem = newCategories[draggedIndex];
+      const targetItem = newCategories[targetIndex];
+
+      const draggedSizes = {
+        mobileColSpan: draggedItem.mobileColSpan,
+        tabletColSpan: draggedItem.tabletColSpan,
+        colSpan:draggedItem.colSpan,
+      }
+      const targetSizes = {
+        mobileColSpan: targetItem.mobileColSpan,
+        tabletColSpan: targetItem.tabletColSpan,
+        colSpan:targetItem.colSpan,
+      };
+
+      newCategories[draggedIndex] = {...targetItem,...draggedSizes};
+      newCategories[targetIndex] = {...draggedItem,...targetSizes};
+
+      return newCategories;
+   });
+   setDraggedCategory(null);
+   setHoveredCategoryId(null);
   }
 
   const resetLayout = () => {
@@ -79,9 +164,18 @@ export default function CatalogPage() {
        </div>
        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
         {categories.map((category) => (
-            <div key={category._id} className={`p-2 bg-[#fefefe] shadow rounded-xl text-center font-semibold hover:shadow-xl hover:shadow-[#e7dfe4] ${category.mobileColSpan} ${category.tabletColSpan} ${category.colSpan}`}>
-                <div className=" relative h-48 w-full" 
-                draggable={isEditing} onDragStart={() => handleDragStart(category)}>
+            <div key={category._id} className={`p-2 bg-[#fefefe] shadow rounded-xl text-center font-semibold hover:shadow-xl hover:shadow-[#e7dfe4] ${category.mobileColSpan} ${category.tabletColSpan} ${category.colSpan} ${isEditing ? "border-2 border-dashed border-gray-400" : " "}
+            ${hoveredCategoryId === category._id ? " border-4 border-red-400" : " "} 
+            `}
+              onDragOver = {(e) => handleDragOver(e,category._id)}
+              onDrop = {(e) => handleDrop(e,category._id)}
+              onDragLeave={(handleDragLeave)}> 
+
+                <div className= {`relative h-48 w-full ${draggedCategory?._id === category._id ? "opacity-50" : " "}` }
+                draggable={isEditing} 
+         
+                onDragStart={() => handleDragStart(category)}>
+
            <GridCategoryBlock 
            id={category.id} 
            title={category.title} 
