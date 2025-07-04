@@ -1,5 +1,4 @@
-import { ProductCardProps } from "@/types/product";
-import { shuffleArray } from "../../../utils/shaffleArray";
+
 
 
 export const fetchProductsByCategory = async(category:string, options?:{randomLimit?:number}) => {
