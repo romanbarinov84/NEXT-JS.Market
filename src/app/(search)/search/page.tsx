@@ -1,3 +1,5 @@
+"use client"
+
 import { ProductsSection } from "@/app/(products)/ProductsSection";
 import { Loader } from "@/components/Loader";
 import { ProductCardProps } from "@/types/product";
@@ -5,7 +7,7 @@ import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react";
 
 
-export  const SearchResult = () => {
+ const SearchResult = () => {
      const searchParams = useSearchParams();
      const query = searchParams.get("q") || "";
      const [products,setProducts] = useState<ProductCardProps[]>([])
@@ -42,3 +44,5 @@ export  const SearchResult = () => {
         
     )
 }
+
+export default SearchResult;

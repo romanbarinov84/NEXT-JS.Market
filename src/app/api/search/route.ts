@@ -15,7 +15,11 @@ export async function GET(request: Request) {
     const products = (await db
       .collection("products")
       .find({
-        title: { $regex: query, $options: "i" },
+        $or:[
+           {title: { $regex: query, $options: "i" }},
+            {description:{$regex:query,$options:"i"}},
+        ]
+       
       })
 
       .project({

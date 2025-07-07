@@ -19,7 +19,7 @@ export function ProductCard({
     return calculateFinalPrice(price, discount);
   };
 
-  const isNewProduct = categories.includes("new")
+ const isNewProduct = Array.isArray(categories) && categories.includes("new");
 
   const finalPrice = isNewProduct ? basePrice : calculateFinalPrice(basePrice, discountPercent);
 

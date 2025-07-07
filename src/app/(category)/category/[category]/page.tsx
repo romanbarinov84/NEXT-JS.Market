@@ -1,9 +1,18 @@
 
 
-const categoryPage = async ({ params }: { params: { category: string } }) => {
-  const decodedCategory = decodeURIComponent(params.category);
+const categoryPage = async ({params}: {params: Promise<{category:string}>}) => {
+  let category: string = "";
 
-  return <div>Сторінка категорії: {decodedCategory}</div>;
-};
+  try{
+    category = (await params).category
+  }catch(error){
+    console.error("Помилка завантаження категорії",error)
+  }
+  return(
+    <div>
+      Сторінка категорії:{category}
+    </div>
+  )
+}
 
 export default categoryPage;

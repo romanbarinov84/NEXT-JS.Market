@@ -14,14 +14,14 @@ export default function BreadCrumbs(){
     const pathSegments = pathName.split("/").filter((segment) => segment !== "");
 
     const breadcrumbs = pathSegments.map((segment,index) => {
+         const decodedSegment = decodeURIComponent(segment); 
         const href = "/" + pathSegments.slice(0, index +1).join("/");
-        return {
-            label: PATH_TRANSLATIONS[segment] || segment,
-            href,
-            isLast:index === pathSegments.length - 1,
-        };
-    });
-
+         return {
+    label: PATH_TRANSLATIONS[decodedSegment] || decodedSegment,
+    href,
+    isLast: index === pathSegments.length - 1,
+  };
+});
     breadcrumbs.unshift({
         label:"Головна",
         href:"/",
