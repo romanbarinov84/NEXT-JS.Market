@@ -37,7 +37,7 @@ export function InputBlock() {
       if (query.length > 1) {
         try {
           setIsLoading(true);
-          const response = await fetch(`api/search?query=${query}`);
+          const response = await fetch(`/api/search?query=${query}`);
           const data = await response.json();
           console.log(data);
           setGroupedProducts(data);

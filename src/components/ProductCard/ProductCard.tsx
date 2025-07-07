@@ -3,8 +3,10 @@ import { ProductCardProps } from "@/types/product";
 import { formatPrice } from "../../../utils/formatPrice";
 import { StarRating } from "../StarRating";
 const cardDiscountPercent = 6; //процент по карте если расчитаются картой
+import Link from "next/link";
 
 export function ProductCard({
+  _id,
   img,
   description,
   basePrice,
@@ -19,25 +21,21 @@ export function ProductCard({
     return calculateFinalPrice(price, discount);
   };
 
- const isNewProduct = Array.isArray(categories) && categories.includes("new");
+  const isNewProduct = Array.isArray(categories) && categories.includes("new");
 
-  const finalPrice = isNewProduct ? basePrice : calculateFinalPrice(basePrice, discountPercent);
+  const finalPrice = isNewProduct
+    ? basePrice
+    : calculateFinalPrice(basePrice, discountPercent);
 
-  const priceByCard = isNewProduct ? basePrice : calculatePriceByCard(finalPrice, cardDiscountPercent);
+  const priceByCard = isNewProduct
+    ? basePrice
+    : calculatePriceByCard(finalPrice, cardDiscountPercent);
 
   const ratingValue = rating || 0;
 
   return (
-    <div className="flex flex-col justify-between w-40 rounded overflow-hidden bg-white md:w-[224px] xl:w-[272px] align-top p-0 hover:shadow-(--shadow-article) duration-300">
-      <div className="relative w-40 h-40 md:w-[224px] xl:w-[272px]">
-        <Image
-          src={img}
-          alt="ProductCardImg"
-          fill
-          className="object-contain"
-          sizes="(max-width:768px) 160px, (max-width:1200px) 224px,272px"
-        />
-        <button className="w-8 h-8 p-2 bg-[#f3f2f1] hover:bg-[#fcd5ba] absolute top-5 right-2 opacity-50 rounded cursor-pointer duration-300">
+    <div className="relative flex flex-col justify-between w-40 rounded overflow-hidden bg-white md:w-[224px] xl:w-[272px] align-top p-0 hover:shadow-(--shadow-article) duration-300">
+      <button className="w-8 h-8 p-2 bg-[#f3f2f1] hover:bg-[#fcd5ba] absolute top-5 right-2 opacity-50 rounded cursor-pointer duration-300 z-10">
           <Image
             src="/icons/heart.svg"
             alt="IconHeart"
@@ -45,24 +43,38 @@ export function ProductCard({
             height={24}
             sizes="24px"
           />
-        </button>
-        {discountPercent > 0 && (
+        </button> 
+       
+      <div className="relative w-40 h-40 md:w-[224px] xl:w-[272px] ">
+        <div className="relative w-[272px] h-[160px]">
+           <Image
+            src={img}
+            alt="ProductCardImg"
+            fill
+            className="object-contain object-center"
+            sizes="(max-width:768px) 160px, (max-width:1000px) 224px,272px"
+          />
+            {discountPercent > 0 && (
           <div className="absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2 left-2.5">
             -{discountPercent}%
           </div>
         )}
+         
+         
+        </div>
+        
+      
       </div>
-      <div className="flex flex-col justify-between p-2 gap-y-4">
-        <div className="flex flex-row justify-between items-end">
+      <div className="flex flex-col justify-between p-2 gap-y-4 h-[189px]">
+        <Link href={`/product/${_id}`}> 
+        <div className="flex flex-row justify-between items-end h-[45px]">
           <div className="flex flex-col gap-x-2">
             <div className="flex flex-row gap-x-2 text-sm md:text-lg font-bold">
               <span className="text-[#4356fe]">{formatPrice(priceByCard)}</span>
               <span className="text-[#fe546d]">грн</span>
             </div>
             {cardDiscountPercent > 0 && (
-              <p className="text-[#bfbfbf] text-[8px] md:text-xs">
-                
-              </p>
+              <p className="text-[#bfbfbf] text-[8px] md:text-xs"></p>
             )}
           </div>
           {finalPrice !== basePrice && (
@@ -74,7 +86,9 @@ export function ProductCard({
                 <span>грн</span>
               </div>
 
-              <p className="text-[#bfbfbf] text-[8px] md:text-xs text-right">Звичайна</p>
+              <p className="text-[#bfbfbf] text-[8px] md:text-xs text-right">
+                Звичайна
+              </p>
             </div>
           )}
         </div>
@@ -82,11 +96,15 @@ export function ProductCard({
           {description}
         </div>
         {ratingValue !== undefined && <StarRating rating={ratingValue} />}
-        <button className="border border-(--color-primary) hover:text-green-700 hover:[#ff6633] hover:border-green-400 hover:shadow-sm active:shadow-(--shadow-button-active) w-full h-10 rounded p-2 justify-center items-center text-(--color-primary) transition-all duration-300 cursor-pointer select-none">
+       
+       
+        </Link>
+     
+       <button className=" bottom-2 left-2 right-2 border border-(--color-primary) hover:text-green-700 hover:[#ff6633] hover:border-green-400 hover:shadow-sm active:shadow-(--shadow-button-active)  h-10 rounded p-2 justify-center items-center text-(--color-primary) transition-all duration-300 cursor-pointer select-none hover:bg-[rgb(255,139,51)]">
           {" "}
           Додати до кошика
-        </button>
-      </div>
+        </button> 
+        </div>
     </div>
   );
 }

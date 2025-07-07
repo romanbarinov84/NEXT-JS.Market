@@ -35,16 +35,10 @@ export const ProductsSection = ({
           )}
         </div>
         <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-          {products.map((item, index) => (
+          {products.map((item) => (
             <li
               key={item._id}
-              className={
-                compact
-                  ? `${index >= 3 ? "hidden" : ""}
-                     ${index >= 3 ? "md:hidden xl:block" : ""}
-                     ${index >= 4 ? "xl:hidden" : ""}`
-                  : ""
-              }
+              
             >
               <ProductCard {...item} />
             </li>
