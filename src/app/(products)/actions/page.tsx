@@ -1,12 +1,17 @@
 
 
+import { Suspense } from "react";
 import { fetchProductsByCategory } from "../fetchProducts";
 import { GenericProductsListPage } from "../genericProductListPage/genericProductListPage";
+import { Loader } from "@/components/Loader";
 
 export default async function AllActions({searchParams}: {searchParams:Promise<{page? : string; itemsPerPage?:string}>;
   }) {
 
-   return (<GenericProductsListPage 
+   return (
+     <Suspense fallback={<Loader/>}>
+
+      <GenericProductsListPage 
    searchParams={searchParams}
    props={{
     fetchData:() => fetchProductsByCategory("actions"),
@@ -14,7 +19,9 @@ export default async function AllActions({searchParams}: {searchParams:Promise<{
     basePath:"/actions",
     errorMessage:"Помилка , невдалося завантажити акції",
    }}
-   />)
+   />
+     </Suspense>
+   )
 
   
 }

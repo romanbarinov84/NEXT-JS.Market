@@ -4,7 +4,15 @@ import { ProductsSection } from "@/app/(products)/ProductsSection";
 import { Loader } from "@/components/Loader";
 import { ProductCardProps } from "@/types/product";
 import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+
+const SearchPage = () => {
+    return (
+        <Suspense fallback={<Loader/>}>
+            <SearchResult/>
+        </Suspense>
+    )
+}
 
 
  const SearchResult = () => {
@@ -45,4 +53,4 @@ import { useEffect, useState } from "react";
     )
 }
 
-export default SearchResult;
+export default SearchPage;

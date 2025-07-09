@@ -6,12 +6,18 @@ import { SearchBlock } from "./SearchBlock";
 import { UserBlock } from "./UserBlock";
 import Link from "next/link";
 import { Category } from "@/types/categories";
+import ErrorComponent from "../ErrorComponents";
+
 
 export function Header() {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [isSearchFocused,setIsSearchFocused] = useState(false);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [error,setError] = useState<{
+    error:Error;
+    userMessage:string;
+  } | null>(null);
 
   const fetchCategories = async () => {
     if (categories.length > 0) return;
@@ -21,44 +27,41 @@ export function Header() {
       console.log(data);
 
       setCategories(data);
-    } catch (error) {
-      console.error("Помилка завантаження категоріїЖ", error);
-    } finally {
+    } catch(error){
+         setError({
+             error:error instanceof Error ? error : new Error(String(error)),
+             userMessage:"Невдалося завантажити категорії"})    
+           
+            
+        }
+     finally {
       setIsLoading(false);
     }
   };
 
   const openMenu = () => {
-    if(!isSearchFocused){
-         setIsCatalogOpen(true);
-    fetchCategories();
+    if (!isSearchFocused) {
+      setIsCatalogOpen(true);
+      fetchCategories();
     }
-   
   };
 
-
-  const handleSearchFocusAction = (focused:boolean) => {
-   setIsSearchFocused(focused);
-   if(focused){
-    setIsCatalogOpen(false);
-   }
-  }
-  
-
-  
-   
-
+  const handleSearchFocusAction = (focused: boolean) => {
+    setIsSearchFocused(focused);
+    if (focused) {
+      setIsCatalogOpen(false);
+    }
+  };
 
   return (
     <header
       className="bg-[#ee6dd] w-full relative z-50 text-2xl rounded-2xl flex flex-col md:flex-row md:gap-y-5 xl:gap-y-7 md:gap:10 justify-between p-3 mb-3 md:shadow-(--shadow-default)"
-      onMouseLeave={() => setIsCatalogOpen(false)} >
-      
-   
+      onMouseLeave={() => setIsCatalogOpen(false)}
+    >
       <div className="flex flex-row gap-4 xl:gap-10 py-2 px-4 items-center shadow-(--shadow-default) md:shadow-none">
         <LogoBlock />
-        <div className="flex items-center w-full" onMouseEnter={openMenu} >
-          <SearchBlock onFocusChangeAction={handleSearchFocusAction}/>
+        <div className="flex items-center w-full" onMouseEnter={openMenu}>
+          <SearchBlock onFocusChangeAction={handleSearchFocusAction} />
         </div>
       </div>
 
@@ -72,6 +75,7 @@ export function Header() {
       {isCatalogOpen && (
         <div className="hidden md:block absolute top-full left-0 w-full bg-[#82b638] shadow-blue-300 z-50 rounded-2xl">
           <div className="mx-auto px-4 py-3">
+            {error && <ErrorComponent error={error.error} userMessage={error.userMessage}/>}
             {isLoading ? (
               <div className="py-2 text-center ">Завантаження...</div>
             ) : categories.length > 0 ? (
@@ -86,10 +90,13 @@ export function Header() {
                     {category.title}
                   </Link>
                 ))}
-                
-                    <button className="absolute top-2 right-2 w-8 h-8 border border-white text-white flex items-center justify-center rounded text-sm leading-none p-0 m-0 hover:bg-white hover:text-black transition" 
-                      onClick={() => setIsCatalogOpen(false)}>X</button>
-               
+
+                <button
+                  className="absolute top-2 right-2 w-8 h-8 border border-white text-white flex items-center justify-center rounded text-sm leading-none p-0 m-0 hover:bg-white hover:text-black transition"
+                  onClick={() => setIsCatalogOpen(false)}
+                >
+                  X
+                </button>
               </div>
             ) : (
               <div className="py-2 text-center">

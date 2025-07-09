@@ -4,10 +4,12 @@ import { SearchProduct } from "@/types/searchProduct";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-import { PATH_TRANSLATIONS } from "../../../utils/pathTranslations";
-import HighLineText from "./HighLightText";
+import { PATH_TRANSLATIONS } from "../../../../utils/pathTranslations";
+import HighLineText from "../HighLightText";
 
 import { useRouter } from "next/navigation";
+import MiniLoader from "../../MiniLoader";
+import SearchInput from "./SearchInput";
 
 export function InputBlock({onFocusChangeAction}: {onFocusChangeAction:(focused:boolean) => void}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,40 +80,12 @@ export function InputBlock({onFocusChangeAction}: {onFocusChangeAction:(focused:
   return (
     <div className="relative flex  min-w-[261px] flex-grow" ref={searchRef}>
       <div className="relative rounded border-1 border-(--color-primary) shadow-(--shadow-button-default)leading-[150%]">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSearch();
-          }}
-        >
-          <input
-            type="text"
-            value={query}
-            placeholder="пошук товару"
-            className="w-full h-10 p-2 py-4 px-14   outline-none text-[#8f8f8f] text-base "
-            onFocus={handleInputFocus}
-            onChange={(e) => setQuery(e.target.value)}
-            name="search"
-            onBlur={handleInputBlur}
-          />
-          <button
-            className="absolute top-2 right-2 w-6 h-6 cursor-pointer "
-            type="submit"
-          >
-            <Image
-              src="/icons/free-icon-loupe-9970873.png"
-              alt="Search-button"
-              width={40}
-              height={40}
-              className="absolute  top-0 right-2 "
-            />
-          </button>
-        </form>
+        <SearchInput handleSearch={handleSearch} query={query} handleInputFocus={handleInputFocus}  handleInputBlur ={handleInputBlur } setQuery={setQuery}/>
 
         {isOpen && (
           <div className="absolute -mt-0.5 left-0 right-0 z-100 max-h-[300px] overflow-y-auto bg-white rounded-b border-1  border-(--color-primary) border-t-0 shadow-inherit text-gray-500">
             {isLoading ? (
-              <div className=" p-4 text-center text-orange-400">Пошук...</div>
+              <MiniLoader/>
             ) : groupedProducts.length > 0 ? (
               <div className="p-2 flex flex-col gap-2">
                 {groupedProducts.map((group) => (

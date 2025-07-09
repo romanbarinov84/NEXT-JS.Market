@@ -1,6 +1,8 @@
 
 import { GenericProductsListPage } from "@/app/(products)/genericProductListPage/genericProductListPage";
 import { fetchArticles } from "../fetchArticles";
+import { Suspense } from "react";
+import { Loader } from "@/components/Loader";
 
 export default async function AllActions({
   searchParams,
@@ -8,7 +10,8 @@ export default async function AllActions({
   searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
 }) {
   return (
-    <GenericProductsListPage
+    <Suspense fallback={<Loader/>}>
+      <GenericProductsListPage
       searchParams={searchParams}
       props={{
         fetchData: () => fetchArticles(),
@@ -18,5 +21,7 @@ export default async function AllActions({
         contentType: "articles"
       }}
     />
+    </Suspense>
+    
   );
 }

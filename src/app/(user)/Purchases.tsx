@@ -1,6 +1,7 @@
 
 
 
+import ErrorComponent from "@/components/ErrorComponents";
 import { fetchProductsByCategory } from "../(products)/fetchProducts";
 import { ProductsSection } from "../(products)/ProductsSection";
 import { CONFIG } from "../../../config/config";
@@ -21,12 +22,13 @@ export async function Purchases() {
 
        
     
-  } catch  {
-   return (
-      <div className="text-red-500 py-8">Ошибка:не удалось загрузить ваши покупки</div>
-      
-    );
-  }
+  } catch(error){
+            return (
+            <ErrorComponent
+             error={error instanceof Error ? error : new Error(String(error))}
+             userMessage="Невдалося завантажити покупки"/>
+            )
+        }
 
 
   
