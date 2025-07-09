@@ -2,8 +2,9 @@ import Image from "next/image";
 import { ProductCardProps } from "@/types/product";
 import { formatPrice } from "../../../utils/formatPrice";
 import { StarRating } from "../StarRating";
-const cardDiscountPercent = 6; //процент по карте если расчитаются картой
 import Link from "next/link";
+import { CONFIG } from "../../../config/config";
+const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT;
 
 export function ProductCard({
   _id,

@@ -9,7 +9,7 @@ import HighLineText from "./HighLightText";
 
 import { useRouter } from "next/navigation";
 
-export function InputBlock() {
+export function InputBlock({onFocusChangeAction}: {onFocusChangeAction:(focused:boolean) => void}) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -55,11 +55,13 @@ export function InputBlock() {
 
   const handleInputFocus = () => {
     setIsOpen(true);
+    onFocusChangeAction(true);
   };
 
   const resetSearch = () => {
     setIsOpen(false);
     setQuery("");
+   
   };
 
   const handleSearch = () => {
@@ -68,6 +70,10 @@ export function InputBlock() {
       resetSearch();
     }
   };
+
+  const handleInputBlur = () => {
+    onFocusChangeAction(false);
+  }
 
   return (
     <div className="relative flex  min-w-[261px] flex-grow" ref={searchRef}>
@@ -86,6 +92,7 @@ export function InputBlock() {
             onFocus={handleInputFocus}
             onChange={(e) => setQuery(e.target.value)}
             name="search"
+            onBlur={handleInputBlur}
           />
           <button
             className="absolute top-2 right-2 w-6 h-6 cursor-pointer "

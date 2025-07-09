@@ -1,5 +1,6 @@
 
 
+import ErrorComponent from "@/components/ErrorComponents";
 import { ProductsSection } from "../(products)/ProductsSection";
 import { CONFIG } from "../../../config/config";
 import { fetchProductsByCategory } from "./fetchProducts";
@@ -14,11 +15,13 @@ export default async function Actions() {
      products={products}
      compact
      />)
-  } catch {
-    return (
-      <div className="text-red-500 py-8 ">Ошибка:не удалось загрузить акции</div>
-    );
-  }
+  } catch(error){
+            return (
+            <ErrorComponent
+             error={error instanceof Error ? error : new Error(String(error))}
+             userMessage="Невдалося завантажити акції"/>
+            )
+        }
 
   
 }

@@ -7,6 +7,7 @@ import { ArticlesSection } from "@/app/(articles)/ArticlesSection";
 import { GenericListPageProps } from "@/types/GenericProductListPageProps";
 import { ProductCardProps } from "@/types/product";
 import { Article } from "@/types/articles";
+import ErrorComponent from "@/components/ErrorComponents";
 
 
 
@@ -52,8 +53,12 @@ export const GenericProductsListPage = async({searchParams,props}: {searchParams
          />)}
         </>
     )
-     }catch{
-            return <div className="text-red-600">{props.errorMessage}</div>
+     }catch(error){
+            return (
+            <ErrorComponent
+             error={error instanceof Error ? error : new Error(String(error))}
+             userMessage="Невдалося завантажити акції"/>
+            )
         }
      
 

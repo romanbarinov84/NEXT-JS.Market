@@ -3,4 +3,5 @@
 export const CONFIG = {
     ITEMS_PER_PAGE: 3,
     ITEMS_PER_PAGE_MAIN_PRODUCTS: 4,
+    CARD_DISCOUNT_PERCENT:6,
 }

@@ -1,4 +1,5 @@
 
+import ErrorComponent from "@/components/ErrorComponents";
 import { ArticlesSection } from "./ArticlesSection";
 import { fetchArticles } from "./fetchArticles";
 
@@ -17,8 +18,8 @@ const Articles = async () => {
      compact
      />
     );
-    } catch {
-     return <div className="text-red-500 py-8"> error : не вдалося загрузити пости</div>;
+    } catch(error) {
+     return (<ErrorComponent error={error instanceof Error ? error : new Error(String(error))} userMessage="Не вдалося загрузити пости"/>)
   }
  
  

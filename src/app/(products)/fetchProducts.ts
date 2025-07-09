@@ -19,11 +19,11 @@ export const fetchProductsByCategory = async(category:string, options?:{randomLi
     if(!res.ok) throw new Error(`Ошибка получения продуктов ${category}`)
 
     const data = await res.json();
-    console.log("Ответ API:", data);
+  
     return data;
 
   } catch (err) {
-    console.error("Ошибка в компоненте Actions", err);
+    
     throw err;
   }
 
