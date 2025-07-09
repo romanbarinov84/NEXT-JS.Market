@@ -7,7 +7,8 @@ export const ProductsSection = ({
   viewAllButton,
   products,
   compact = false,
-}: ProductsSectionProps) => {
+  applyIndexStyles = true,
+}: ProductsSectionProps & {applyIndexStyles?:boolean}) => {
   if (!Array.isArray(products)) {
     return (
       <div className="text-red-600 py-10 text-center">
@@ -35,9 +36,9 @@ export const ProductsSection = ({
           )}
         </div>
         <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-          {products.map((item) => (
+          {products.map((item,index) => (
             <li
-              key={item._id}
+              key={item._id} className={applyIndexStyles ?`${index >=3 ? "md:hidden xl:block" : ""}` : ""}
               
             >
               <ProductCard {...item} />
