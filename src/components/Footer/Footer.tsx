@@ -11,9 +11,9 @@ export function Footer(){
             <div className="px-7 flex flex-row gap-6 text-[#414141] md:gap-x-10 items-center justify-between ">
                 <div className="flex flex-row justify-center mt-10">
                     <Link href="/" className="relative w-23 h-16 md:w-16 md:h-11 block xl:w-40 xl:h-30">
-                    <Image src="/icons/logo-1.png" alt="Logo" fill/>
+                    <Image src="/icons/logo-1.png" alt="Logo" priority fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
                     </Link>
-                    <nav className="flex flex-row gap-x-15 ml-10">
+                    <nav className="flex flex-row gap-x-15 ml-10 " >
 
                   <ul className="flex flex-row gap-x-20  md:flex-col xl:flex-row gap-y-3 ">
                      <li className="text-shadow-lg/10 cursor-pointer  hover:text-shadow-lg/20"><Link href="#">... Контакти</Link></li>  

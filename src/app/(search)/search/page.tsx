@@ -1,6 +1,7 @@
 "use client"
 
-import { ProductsSection } from "@/app/(products)/ProductsSection";
+
+import ProductsSection from "@/app/(products)/ProductsSection";
 import { Loader } from "@/components/Loader";
 import { ProductCardProps } from "@/types/product";
 import { useSearchParams } from "next/navigation"

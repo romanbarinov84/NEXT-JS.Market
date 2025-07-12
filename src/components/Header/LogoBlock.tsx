@@ -10,6 +10,7 @@ export function LogoBlock(){
                 <Image src="/icons/logo-1.png" alt="logo-logo" 
                 className="object-contain"
                 fill 
+                priority
                 sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw, 33vw"/>
             </div>
             <div>

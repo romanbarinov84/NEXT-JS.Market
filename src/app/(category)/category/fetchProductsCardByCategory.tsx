@@ -18,9 +18,10 @@ const fetchProductsCardByCategory = async(category:string,
             throw  Error ("Помилка сервера при отриманні категорії товарів");
 
            
-        } 
+        }  
+        
         const data = await res.json()
-
+       console.log("📦 fetchProductsCardByCategory result:", data);
 
         return {
         items:data.products || data,

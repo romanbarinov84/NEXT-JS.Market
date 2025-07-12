@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer/Footer";
 import BreadCrumbs from "@/components/BreadCrumbs";
 
 const rubik = Rubik({
-  variable: "--font-Rubik",
+  variable: "--font-rubik",
   subsets: ["latin", "cyrillic"],
 });
 
