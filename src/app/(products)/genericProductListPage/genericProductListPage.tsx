@@ -45,8 +45,8 @@ export const GenericProductsListPage = async({searchParams,props}: {searchParams
         />)}
        
          
-        {items.length > perPage && (<PaginationWrapper 
-         totalItems={items.length}
+        {paginatedItems > 1 && (<PaginationWrapper 
+         totalItems={paginatedItems}
          currentPage={currentPage}
          basePath={props.basePath}
          contentType={props.contentType}
