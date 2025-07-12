@@ -23,12 +23,15 @@ export const ArticlesSection = ({title,viewAllButton,articles,compact=false}:Art
       </div>
 
       <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {articles/*.slice(0, 3)*/.map((article,index) => (
-          <li key={article._id} className={`h-75 md:h-105 ${index >=3 ? "hidden" : ""}`   }>
-                   
-            <ArticleCard {...article} />
-          </li>
-        ))}
+       {articles && articles.length > 0 ? (
+  articles.map((article, index) => (
+    <li key={article._id} className={`h-75 md:h-105 ${index >= 3 ? "hidden" : ""}`}>
+      <ArticleCard {...article} />
+    </li>
+  ))
+) : (
+  <p>Статей не найдено</p>
+)}
       </ul>
     </section>
     )

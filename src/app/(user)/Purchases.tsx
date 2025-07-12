@@ -3,8 +3,9 @@
 
 import ErrorComponent from "@/components/ErrorComponents";
 import { fetchProductsByCategory } from "../(products)/fetchProducts";
-import { ProductsSection } from "../(products)/ProductsSection";
+
 import { CONFIG } from "../../../config/config";
+import ProductsSection from "../(products)/ProductsSection";
 
 
 export async function Purchases() {

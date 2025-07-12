@@ -6,10 +6,10 @@ import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { PATH_TRANSLATIONS } from "../../../../utils/pathTranslations";
 import HighLineText from "../HighLightText";
-
 import { useRouter } from "next/navigation";
 import MiniLoader from "../../MiniLoader";
 import SearchInput from "./SearchInput";
+
 
 export function InputBlock({onFocusChangeAction}: {onFocusChangeAction:(focused:boolean) => void}) {
   const [isOpen, setIsOpen] = useState(false);

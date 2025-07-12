@@ -8,6 +8,7 @@ import { PATH_TRANSLATIONS } from "../../utils/pathTranslations";
 
 export default function BreadCrumbs(){
     const pathName = usePathname();
+     if (!pathName) return null;
     
     if(pathName === "/" || pathName === "/search") return null;
      
