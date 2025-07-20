@@ -5,9 +5,9 @@ import StarRating from "./starReiting/StarRating";
 
     const cardDiscountPercent = 6;
 
-export default function ProductCard({img,description,basePrice,discountPercent,rating}:ProductCardProps){
+export default function ProductCard({img,description,basePrice,discountPercent,rating,categories,}:ProductCardProps){
 
-
+ 
     
     const calculateFinalPrice = (price:number,discount:number): number => {
         return discount > 0 ? price * (1 - discount / 100) : price;
@@ -16,10 +16,12 @@ export default function ProductCard({img,description,basePrice,discountPercent,r
     const calculatePriceByCard = (price:number,discount:number): number => {
         return calculateFinalPrice(price,discount);
     };
+    
+    const isNewProduct = categories?.includes("new");
 
-    const finalPrice = calculateFinalPrice(basePrice,discountPercent);
+    const finalPrice = isNewProduct ? basePrice : calculateFinalPrice(basePrice,discountPercent);
 
-    const priceByCard = calculatePriceByCard(finalPrice,cardDiscountPercent);
+    const priceByCard = isNewProduct ? basePrice : calculatePriceByCard(finalPrice,cardDiscountPercent);
 
    
 
@@ -59,7 +61,7 @@ export default function ProductCard({img,description,basePrice,discountPercent,r
                            
                         </div>
 
-                        {cardDiscountPercent > 0 && (<p className="text-[#bfbfbf] text-[8px] md:text-xs">{"Зі скидкою"}</p>)}
+                        {discountPercent > 0 && (<p className="text-[#bfbfbf] text-[8px] md:text-xs">{"Зі скидкою"}</p>)}
                         </div>
                         
                     

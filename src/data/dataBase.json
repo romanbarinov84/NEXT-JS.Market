@@ -41,7 +41,7 @@
             "basePrice": 160.00 ,
             "discountPercent": 0 ,
             "rating" : 4.8 ,
-            "categories": ["vareniky"] ,
+            "categories": ["vareniky","new"] ,
             "weight": 1000
         },
          {
@@ -73,8 +73,8 @@
             "description": "Вареники з полуницею",
             "basePrice": 170.00,
             "discountPercent": 0,
-            "rating" : 5.0 ,
-            "categories": ["vareniky"] ,
+            "rating" : 4.6 ,
+            "categories": ["vareniky","new"] ,
             "weight": 1000
         },
          {
@@ -107,7 +107,7 @@
             "basePrice": 176.00,
             "discountPercent": 0 ,
             "rating" : 4.8,
-            "categories": ["vareniky"] ,
+            "categories": ["vareniky","new"] ,
             "weight": 1000
         },
          {
@@ -118,7 +118,7 @@
             "basePrice": 184.00,
             "discountPercent": 0,
             "rating" : 4.8,
-            "categories": ["actions","golubzi"] ,
+            "categories": ["actions","golubzi","new"] ,
             "weight": 1000
         },
          {
@@ -140,7 +140,7 @@
             "basePrice": 198,
             "discountPercent":0 ,
             "rating" : 5.0,
-            "categories": ["golubzi"] ,
+            "categories": ["golubzi","new"] ,
             "weight": 1000
         },
          {
@@ -151,7 +151,7 @@
             "basePrice": 230.00,
             "discountPercent": 0 ,
             "rating" : 5.0,
-            "categories": ["golubzi"] ,
+            "categories": ["golubzi","new"] ,
             "weight": 1000
         },
          {
@@ -175,7 +175,7 @@
             "basePrice": 230.00,
             "discountPercent": 0,
             "rating" : 4.0,
-            "categories": ["perez"] ,
+            "categories": ["perez","new"] ,
             "weight": 1000
         },
          {
@@ -197,7 +197,7 @@
             "basePrice": 180.00,
             "discountPercent": 0,
             "rating" : 4.4,
-            "categories": ["restoFood"] ,
+            "categories": ["restoFood","new"] ,
             "weight": 500
         },
          {
@@ -230,7 +230,7 @@
             "basePrice": 150.00,
             "discountPercent": 0,
             "rating" : 4.2,
-            "categories": ["restoFood"] ,
+            "categories": ["restoFood","new"] ,
             "weight": 500
         },
          {
@@ -252,7 +252,7 @@
             "basePrice": 160,
             "discountPercent": 0,
             "rating" : 4.9,
-            "categories": ["restoFood"] ,
+            "categories": ["restoFood","new"] ,
             "weight": 500
         },
          {
@@ -274,7 +274,7 @@
             "basePrice": 160.00,
             "discountPercent": 0,
             "rating" : 5.0,
-            "categories": ["restoFood"] ,
+            "categories": ["restoFood","new"] ,
             "weight": 500
         },
          {
@@ -285,7 +285,7 @@
             "basePrice": 190.00,
             "discountPercent": 0,
             "rating" : 5.0,
-            "categories": ["restoFood"] ,
+            "categories": ["restoFood","new"] ,
             "weight": 500
         }
     ]

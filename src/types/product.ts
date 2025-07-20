@@ -8,6 +8,7 @@ export interface ProductCardProps {
     discountPercent:number;
     rating:number;
     weight?:number;
+    categories?:string[];
     volume?:string;
 
 }
