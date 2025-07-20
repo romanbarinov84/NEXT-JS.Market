@@ -1,0 +1,292 @@
+{
+    "products":[
+        {
+            "id": 1,
+            "img": "/Галя картинки/Вареники/Linyvi-varenyky-142.webp",
+            "title":"Ліниві вареники" ,
+            "description": "Ліниві вареники" ,
+            "basePrice": 142.00 ,
+            "discountPercent": 10 ,
+            "rating" : 4.2,
+            "categories": ["actions","vareniky"] ,
+            "weight": 1000
+        },
+         {
+            "id": 2,
+            "img": "/Галя картинки/Вареники/vareniky_z_chokolate.webp",
+            "title": "Вареники з шоколадом" ,
+            "description":"Вареники з шоколадом" ,
+            "basePrice": 155.00  ,
+            "discountPercent": 15,
+            "rating" : 3.0,
+            "categories": ["actions","vareniky"] ,
+            "weight": 1000
+        },
+         {
+            "id": 3,
+            "img": "/Галя картинки/Вареники/Varenyky-z-kartopleyu-113.jpg",
+            "title": "Вареники з картоплею",
+            "description": "вареники з картоплею",
+            "basePrice": 140.00 ,
+            "discountPercent":10,
+            "rating" : 5.0 ,
+            "categories": ["actions","vareniky"] ,
+            "weight": 1000
+        },
+         {
+            "id": 4,
+            "img":"/Галя картинки/Вареники/Varenyky-z-kartopleyu-ta-grybamy-150.jpg" ,
+            "title": "Вареники з картоплею та грибами",
+            "description": "Вареники з картоплею та грибами",
+            "basePrice": 160.00 ,
+            "discountPercent": 0 ,
+            "rating" : 4.8 ,
+            "categories": ["vareniky"] ,
+            "weight": 1000
+        },
+         {
+            "id": 5,
+            "img": "/Галя картинки/Вареники/Varenyky-z-liverom-166.jpg",
+            "title":"Вареники з лівером" ,
+            "description":"Вареники з лівером" ,
+            "basePrice": 166.00,
+            "discountPercent":20,
+            "rating" : 3.6,
+            "categories": ["actions","vareniky"] ,
+            "weight": 1000
+        },
+         {
+            "id":6 ,
+            "img":"/Галя картинки/Вареники/Varenyky-z-myasom-200.jpg" ,
+            "title": "Вареники з мясом",
+            "description": "Вареники з мясом",
+            "basePrice": 200.00 ,
+            "discountPercent": 10,
+            "rating" :5,
+            "categories": ["actions","vareniky"] ,
+            "weight": 1000
+        },
+         {
+            "id":7 ,
+            "img": "/Галя картинки/Вареники/Varenyky-z-polunytseyu-161.jpg",
+            "title": "Вареники з полуницею",
+            "description": "Вареники з полуницею",
+            "basePrice": 170.00,
+            "discountPercent": 0,
+            "rating" : 5.0 ,
+            "categories": ["vareniky"] ,
+            "weight": 1000
+        },
+         {
+            "id": 8,
+            "img":"/Галя картинки/Вареники/Varenyky-z-solodkym-syrom-144.jpg" ,
+            "title": "Вареники з солодким сиром",
+            "description": "Вареники з солодким сиром",
+            "basePrice": 144.00,
+            "discountPercent": 10,
+            "rating" :4.2,
+            "categories": ["actions","vareniky"] ,
+            "weight": 0
+        },
+         {
+            "id":9 ,
+            "img": "/Галя картинки/Вареники/varenyky-z-vyshneyu-159.jpg",
+            "title": "Вареники з вишнею",
+            "description": "Вареники з вишнею",
+            "basePrice": 160.00,
+            "discountPercent": 5,
+            "rating" : 3.9,
+            "categories": ["actions","vareniky"] ,
+            "weight": 1000
+        },
+         {
+            "id":10 ,
+            "img": "/Галя картинки/Вареники/Varenyky-zi-shpynatom-ta-solonym-syrom-166.jpg",
+            "title": "Вареники з шпинатом",
+            "description": "Вареники з шпинатом",
+            "basePrice": 176.00,
+            "discountPercent": 0 ,
+            "rating" : 4.8,
+            "categories": ["vareniky"] ,
+            "weight": 1000
+        },
+         {
+            "id": 11,
+            "img": "/Галя картинки/Вегетаріанські страви/Golubtsi-z-grybamy-184.webp" ,
+            "title": "Голубці з грибами",
+            "description": "Голубці з грибами",
+            "basePrice": 184.00,
+            "discountPercent": 0,
+            "rating" : 4.8,
+            "categories": ["actions","golubzi"] ,
+            "weight": 1000
+        },
+         {
+            "id":12 ,
+            "img": "/Галя картинки/Голубці/Golubtsi-z-myasom-190.webp",
+            "title": "Голубці з мясом",
+            "description":"Голубці з мясом" ,
+            "basePrice":190.00 ,
+            "discountPercent": 10,
+            "rating" : 4.9,
+            "categories": ["actions","golubzi"] ,
+            "weight": 1000
+        },
+         {
+            "id": 13,
+            "img":"/Галя картинки/Голубці/golubzi-indyk-198.jpg" ,
+            "title": "Голубці з індичкою",
+            "description":"Голубці з індичкою" ,
+            "basePrice": 198,
+            "discountPercent":0 ,
+            "rating" : 5.0,
+            "categories": ["golubzi"] ,
+            "weight": 1000
+        },
+         {
+            "id": 14,
+            "img": "/Галя картинки/Голубці/golubzi-jalovichinna-200.jpg",
+            "title": "Голубці з яловичиною",
+            "description": "Голубці з яловичиною",
+            "basePrice": 230.00,
+            "discountPercent": 0 ,
+            "rating" : 5.0,
+            "categories": ["golubzi"] ,
+            "weight": 1000
+        },
+         {
+            "id": 15,
+            "img": "/Галя картинки/Голубці/Perets-farshyrovanyj-z-grybamy-190.webp",
+            "title": "Перць з грибами",
+            "description": "Перць з грибами",
+            "basePrice": 190.00,
+            "discountPercent": 20,
+            "rating" : 4.6,
+            "categories": ["actions","perez"] ,
+            "weight": 1000
+        },
+
+
+         {
+            "id":16,
+            "img": "/Галя картинки/Голубці/Perets-farshyrovanyj-z-myasom-204.webp",
+            "title": "Перець з мясом",
+            "description": "Перець з мясом",
+            "basePrice": 230.00,
+            "discountPercent": 0,
+            "rating" : 4.0,
+            "categories": ["perez"] ,
+            "weight": 1000
+        },
+         {
+            "id":17 ,
+            "img":"/Галя картинки/Готові страви/bonosh-brynza-160.jpg" ,
+            "title":"Банош з бринзою" ,
+            "description": "Банош з бринзою",
+            "basePrice": 160,
+            "discountPercent": 0,
+            "rating" : 4.7,
+            "categories": ["restoFood"] ,
+            "weight": 0.430
+        },
+         {
+            "id":18 ,
+            "img": "Галя картинки/Готові страви/crem-soupWithMushrooms-180.jpg",
+            "title": "Крем суп з грибами",
+            "description": "Крем суп з грибами",
+            "basePrice": 180.00,
+            "discountPercent": 0,
+            "rating" : 4.4,
+            "categories": ["restoFood"] ,
+            "weight": 500
+        },
+         {
+            "id":19 ,
+            "img": "/Галя картинки/Готові страви/krem-sup-syrnyj-190.jpg",
+            "title": "Крем-суп сирний",
+            "description": "Крем-суп сирний",
+            "basePrice": 175.00,
+            "discountPercent": 10,
+            "rating" : 4.8,
+            "categories": ["restoFood","actions"] ,
+            "weight": 500
+        },
+         {
+            "id": 20,
+            "img": "/Галя картинки/Готові страви/krem-sup-tomatn-250.jpg",
+            "title": "Крем-суп томатний",
+            "description": "Крем-суп томатний",
+            "basePrice": 250.00,
+            "discountPercent": 0,
+            "rating" : 4.8,
+            "categories": ["restoFood"] ,
+            "weight": 500
+        },
+         {
+            "id":21 ,
+            "img":"/Галя картинки/Готові страви/kulish-kozaczkyj-150.png" ,
+            "title": "Куліш козацький",
+            "description": "Куліш козацький",
+            "basePrice": 150.00,
+            "discountPercent": 0,
+            "rating" : 4.2,
+            "categories": ["restoFood"] ,
+            "weight": 500
+        },
+         {
+            "id": 22,
+            "img": "/Галя картинки/Готові страви/lavash-z-kurkoyu-ta-syrom_-130.jpg",
+            "title": "Лаваш з куркою",
+            "description": "Лаваш з куркою",
+            "basePrice": 160,
+            "discountPercent": 0,
+            "rating" : 4.0,
+            "categories": ["restoFood"] ,
+            "weight": 500
+        },
+         {
+            "id": 23,
+            "img": "/Галя картинки/Готові страви/lavash-z-syrom-160.jpg",
+            "title": "Лаваш з сиром" ,
+            "description":"Лаваш з сиром" ,
+            "basePrice": 160,
+            "discountPercent": 0,
+            "rating" : 4.9,
+            "categories": ["restoFood"] ,
+            "weight": 500
+        },
+         {
+            "id": 24,
+            "img": "/Галя картинки/Готові страви/Pisni-stravi-kopiya-148.jpg",
+            "title": "крем-суп овочевий",
+            "description": "крем-суп овочевий",
+            "basePrice": 150.00 ,
+            "discountPercent": 0,
+            "rating" : 3.8,
+            "categories": ["restoFood"] ,
+            "weight": 500
+        },
+         {
+            "id": 25,
+            "img": "/Галя картинки/Готові страви/plov-s-myasom-ready0160.jpg",
+            "title": "Плов з мясом",
+            "description": "Плов з мясом",
+            "basePrice": 160.00,
+            "discountPercent": 0,
+            "rating" : 5.0,
+            "categories": ["restoFood"] ,
+            "weight": 500
+        },
+         {
+            "id":26 ,
+            "img":"/Галя картинки/Готові страви/solyanka-190.jpg" ,
+            "title": "Солянка",
+            "description": "Солянка",
+            "basePrice": 190.00,
+            "discountPercent": 0,
+            "rating" : 5.0,
+            "categories": ["restoFood"] ,
+            "weight": 500
+        }
+    ]
+}

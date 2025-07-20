@@ -27,3 +27,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-rubik),sans-serif;
 }
+
+li:hover{
+  color: #70c05b;
+}

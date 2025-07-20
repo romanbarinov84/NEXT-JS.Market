@@ -3,11 +3,12 @@ import Image from "next/image"
 export default function SliderOne(){
 
     return(
-        <div className="relative  bg-no-repeat bg-center bg-cover flex items-center justify-center overflow-hidden h-20 md:h-40 xl:h-92" >
+        <div className="relative  bg-no-repeat bg-center bg-cover flex items-center justify-center overflow-hidden h-20 md:h-40 xl:h-82" >
              <Image 
              src="/slider/slide-1.jpg" 
              alt="Слайд" 
              fill
+             priority
              className=" object-cover" />
                
             <div className="absolute inset-0 justify-between">
