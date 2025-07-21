@@ -5,7 +5,7 @@ import StarRating from "./starReiting/StarRating";
 
     const cardDiscountPercent = 6;
 
-export default function ProductCard({img,description,basePrice,discountPercent,rating,categories,}:ProductCardProps){
+export default function ProductCard({img,description,basePrice,discountPercent=0,rating,categories,}:ProductCardProps){
 
  
     

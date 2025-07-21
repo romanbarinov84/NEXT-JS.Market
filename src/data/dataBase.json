@@ -1,4 +1,25 @@
+
+
 {
+    "users":[
+        {
+            "id": 1,
+            "name":"Andrey",
+            "lastName":"Ivanov",
+            "email":"andreIvanov@ukr.net",
+            "phone": "+380568743523",
+            "purchases": [
+                {"id":11, "data":"2023-05-15"},
+                {"id":10, "data":"2024-03-10"},
+                {"id":22, "data":"2024-05-02"},
+                {"id":16, "data":"2025-05-24"}
+            ]
+        }
+    ],
+
+
+
+
     "products":[
         {
             "id": 1,
