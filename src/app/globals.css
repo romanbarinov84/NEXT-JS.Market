@@ -22,6 +22,11 @@
   }*/
 }
 
+html, body {
+  height: 100%;
+}
+
+
 body {
   background: #fbf8ec;
   color: var(--foreground);
