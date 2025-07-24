@@ -1,5 +1,6 @@
 
 export interface ProductCardProps {
+    _id:number;
     id:number;
     img:string;
     title:string;

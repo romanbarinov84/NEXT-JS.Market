@@ -1,10 +1,25 @@
 import Image from "next/image";
-import articlesDataBase from "@/data/articlesDataBase.json";
-import Link from "next/link";
+import { Article } from "@/types/articles";
+
+import { ViewAllButton } from "../viewAllButton/ViewAllButton";
 
 
-export default function Articles(){
-    const articles = articlesDataBase;
+export default async function Articles(){
+   let articles:Article[] = [];
+   let error = null;
+
+   try{
+         //фетч запрос к роуту articles
+         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/articles`);
+         articles = await res.json();
+   }catch(err){
+    console.error("Ошибка в компоненте Article",err)
+    error = "Ошибка получения статей";
+   }
+
+   if(error){
+    return <div className="text-red-500 text-lg">Ошибка: {error}</div>
+   }
 
     return(
 
@@ -12,22 +27,12 @@ export default function Articles(){
              <div className="flex flex-col justify-center xl:max-w-[1208px] mx-auto">
          <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
             <h2 className="text-2xl xl:text-4xl text-left font-bold text-shadow-lg">Пости</h2>
-            <Link href="#" className="flex flex-row items-center gap-x-2 cursor-pointer">
-            <p className="text-base text-center text-[#333] hover:text-[#bfbfbf] duration-300">
-                До статей
-            </p>
-            <Image 
-            src="/ActionsShevronRight.svg" 
-            alt="ShevronRight"
-            width={24}
-            height={24}
-            sizes="24px"/>
-            </Link>
+            <ViewAllButton btnText="Усі пости" href="articles"/>
          </div>
            
            <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
             {articles.slice(0,3).map((article) => (
-                <li key={article.id} className="h-75 md:h-105">
+                <li key={article._id} className="h-75 md:h-105">
                     <article className="bg-white h-full flex flex-col rounded overflow-hidden
                      shado-(--shadow-card) hover:shadow-(--shadow-article) duration-300">
                         <div className="relative h-48 w-full">
