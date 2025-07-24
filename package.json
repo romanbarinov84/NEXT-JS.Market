@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "dotenv": "^17.2.0",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.4",
     "motion": "^12.23.6",
     "next": "15.3.5",
     "react": "^19.0.0",
