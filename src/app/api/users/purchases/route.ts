@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getDB } from "../../../../../utils/APIRotes";
-export const revalidate = 3600;
+
 
 export async function GET() {
   try {
