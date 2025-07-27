@@ -11,6 +11,6 @@ export async function GET() {
        return NextResponse.json(articles)
     }catch(error){
         console.error("Ошибка сервера", error);
-        return  NextResponse.json({messaage:"Ошибка сервера"}),{status:500};
+       return NextResponse.json({ message: "Ошибка сервера" }, { status: 500 });
     }
 }
