@@ -1,5 +1,6 @@
 import fetchProductsByCategory from "../fetchProducts";
-import ProductSection from "../ProductsSection";
+import GenericProductListPage from "../genericProductListPage";
+
 
 
 export const metadata = {
@@ -8,20 +9,18 @@ export const metadata = {
 }
 
 export default async function AllActions({searchParams,}:{searchParams:Promise<{page?:string,itemsPerPage?:string}>}) {
-   try {
-    const products = await fetchProductsByCategory("actions");
 
-    return (
-      <ProductSection
-        title="Усі акції"
-        viewAllButton={{ text: "На головну", href: "/" }}
-        products={products}
-      />
-    );
-  } catch {
-    return (
-      <div className="text-red-500">Ошибка: не удалось загрузить акции</div>
-    );
-  }
+  return(
+    <GenericProductListPage 
+    searchParams={searchParams}
+    props={{
+      fetchData:() => fetchProductsByCategory("actions"),
+      pageTitle:"Усі акції",
+      basePath:"/actions",
+      errorMessage:"Помилка невдалося завантажити акції",
+    }}
+    />
+  )
+ 
 };
 
