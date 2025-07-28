@@ -1,5 +1,5 @@
 import { ProductCardProps } from "@/types/product";
-import { shuffleArray } from "../../../utils/shuffleArray";
+
 
 const fetchProductsByCategory = async (category: string) => {
   try {
@@ -13,7 +13,7 @@ const fetchProductsByCategory = async (category: string) => {
     }
 
    const products: ProductCardProps[] = await res.json();
-   return shuffleArray(products)
+   return (products)
 
   } catch (err) {
   console.error('Ошибка в компоненте: ${category}', err);

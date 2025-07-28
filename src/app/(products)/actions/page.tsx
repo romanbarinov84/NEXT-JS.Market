@@ -1,5 +1,6 @@
 import fetchProductsByCategory from "../fetchProducts";
-import GenericProductListPage from "../genericProductListPage";
+import GenericProductListPage from "../GenericProductListPage";
+
 
 
 

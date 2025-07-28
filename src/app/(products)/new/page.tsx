@@ -1,3 +1,4 @@
+import { shuffleArray } from "../../../../utils/shuffleArray";
 import fetchProductsByCategory from "../fetchProducts";
 import ProductSection from "../ProductsSection";
 
@@ -8,8 +9,8 @@ export const metadata = {
 
 export default async function AllNew() {
    try {
-    const products = await fetchProductsByCategory("new");
-
+    let products = await fetchProductsByCategory("new");
+      products = shuffleArray(products)
     return (
       <ProductSection
         title="Усі новинки"
