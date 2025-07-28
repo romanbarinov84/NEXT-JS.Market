@@ -1,23 +1,20 @@
-
-import ProductSection from "@/app/(products)/ProductsSection";
+import GenericListPage from "@/app/(products)/GenericListPage";
 import fetchPurchases from "../fetchPurchases";
 
-
-export default async function AllNew() {
-   try {
-    const purchases = await fetchPurchases();
-
-    return (
-      <ProductSection
-        title="Усі покупки"
-        viewAllButton={{ text: "На головну", href: "/" }}
-        products={purchases}
-      />
-    );
-  } catch {
-    return (
-      <div className="text-red-500">Ошибка: не удалось загрузить акции</div>
-    );
-  }
-};
-
+export default async function AllNew({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
+}) {
+  return (
+    <GenericListPage
+      searchParams={searchParams}
+      props={{
+        fetchData: () => fetchPurchases(),
+        pageTitle: "Усі покупки",
+        basePath: "/purchases",
+        errorMessage: "Помилка невдалося завантажити покупки",
+      }}
+    />
+  );
+}

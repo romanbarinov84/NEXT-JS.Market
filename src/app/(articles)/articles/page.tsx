@@ -1,27 +1,26 @@
-import ArticlesSection from "../ArticlesSection";
+import GenericListPage from "@/app/(products)/GenericListPage";
 import fetchArticles from "../fetchArticles";
 
-
 export const metadata = {
-  title:"Пости на сайті Галя балувана Бровари",
-  description:"Домашні напівфабрикати Галя балувана Бровари",
-}
+  title: "Пости на сайті Галя балувана Бровари",
+  description: "Домашні напівфабрикати Галя балувана Бровари",
+};
 
-
-export default async function AllArticles() {
-  try {
-    const articles = await fetchArticles();
-    return (
-      <ArticlesSection
-        title="Пости"
-        viewAllButton={{ text: "На головну", href: "/" }}
-        articles={articles}
-      
-      />
-    );
-  } catch {
-    return (
-      <div className="text-red-500">Ошибка: не удалось загрузить пости</div>
-    );
-  }
+export default async function AllArticles({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
+}) {
+  return (
+    <GenericListPage
+      searchParams={searchParams}
+      props={{
+        fetchData: () => fetchArticles(),
+        pageTitle: "Усі пости",
+        basePath: "/articles",
+        errorMessage: "Помилка невдалося завантажити пости",
+        contentType:"articles",
+      }}
+    />
+  );
 }

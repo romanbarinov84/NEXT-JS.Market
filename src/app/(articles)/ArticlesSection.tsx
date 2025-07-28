@@ -31,7 +31,7 @@ export default function ArticlesSection({
               key={article._id}
               className={`h-75 md:h-105 ${
                 compact && index >= 3
-                  ? "hidden md:hidden xl:block xl:hidden"
+                  ? "hidden md:hidden  xl:hidden"
                   : ""
               }`}
             >

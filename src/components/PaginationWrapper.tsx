@@ -6,8 +6,15 @@ import debounce from "../../utils/debounce";
 import Pagination from "./Pagination";
 
 
-function getItemsPerPageByWidth() {
+function getItemsPerPageByWidth(contentType?:string) {
+  
   const width = window.innerWidth;
+
+  if(contentType){
+    return width < 640 ? 1 : 3;
+  }
+
+
   if (width < 768) return 2;
   if (width < 1280) return 3;
   return CONFIG.ITEMS_PER_PAGE;
@@ -17,18 +24,20 @@ export default function PaginationWrapper({
   totalItems,
   currentPage,
   basePath,
+  contentType,
 }:{
     totalItems:number;
     currentPage:number;
     basePath:string;
+    contentType?:string;
 }) {
-    const [itemsPerPage,setItemsPerPage] = useState(CONFIG.ITEMS_PER_PAGE);
+    const [itemsPerPage,setItemsPerPage] = useState(contentType === "article" ? 1 : CONFIG.ITEMS_PER_PAGE);
     const searchParams = useSearchParams();
     const router = useRouter();
 
     useEffect(() => {
         const updateItemsPerPage = () => {
-            const newItemsPerPage = getItemsPerPageByWidth();
+            const newItemsPerPage = getItemsPerPageByWidth(contentType);
             if(newItemsPerPage === itemsPerPage) return;
 
             setItemsPerPage(newItemsPerPage);
@@ -45,7 +54,7 @@ export default function PaginationWrapper({
         window.addEventListener("resize",handleResize);
 
         return () => window.removeEventListener("resize",handleResize);
-    },[itemsPerPage,searchParams,basePath,router])
+    },[itemsPerPage,searchParams,basePath,router,contentType])
   return <div>
     <Pagination 
      totalItems={totalItems}

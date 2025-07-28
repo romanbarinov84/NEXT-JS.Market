@@ -7,7 +7,7 @@ export default async function Articles() {
     return (
       <ArticlesSection
         title="Пости"
-        viewAllButton={{ text: "Усі пости", href: "articles" }}
+        viewAllButton={{ text: "Усі пости", href: "/articles" }}
         articles={articles}
         compact
       />

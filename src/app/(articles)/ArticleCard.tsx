@@ -1,14 +1,13 @@
-import { Article } from "@/types/articles";
+
+import { ArticleCardProps } from "@/types/articlesListPageProps";
 import Image from "next/image";
 
-
-
-export default function ArticleCard({ img ,title,createdAt,text}:Article) {
+export default function ArticleCard({ img, title, createdAt, text }: ArticleCardProps) {
   return (
     <div>
       <article
         className="bg-white h-full flex flex-col rounded overflow-hidden
-                     shado-(--shadow-card) hover:shadow-(--shadow-article) duration-300"
+                     shadow-(--shadow-card) hover:shadow-(--shadow-article) duration-300"
       >
         <div className="relative h-48 w-full">
           <Image
