@@ -7,7 +7,7 @@ export const metadata = {
   description:"Домашні напівфабрикати Галя балувана Бровари",
 }
 
-export default async function AllActions() {
+export default async function AllActions({searchParams,}:{searchParams:Promise<{page?:string,itemsPerPage?:string}>}) {
    try {
     const products = await fetchProductsByCategory("actions");
 
