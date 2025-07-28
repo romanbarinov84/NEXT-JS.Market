@@ -1,6 +1,7 @@
 import { GenericProductListPageProps } from "@/types/GenericProductListPageProps"
 import ProductSection from "./ProductsSection"
 import { CONFIG } from "../../../config/config"
+import PaginationWrapper from "@/components/PaginationWrapper"
 
 
 
@@ -26,6 +27,8 @@ export default async function GenericProductListPage({searchParams,props}:{
            <ProductSection title={props.pageTitle} viewAllButton={{text:"На головну", href:"/"}}
             products={paginatedProducts}
             />
+
+            {products.length > perPage && (<PaginationWrapper totalItems={products.length} currentPage={currentPage} basePath={props.basePath}/>)}
         </div>
     )
         }catch{
