@@ -1,8 +1,12 @@
-
-import { ArticleCardProps } from "@/types/articlesListPageProps";
+import { ArticleCardProps } from "@/types/articles";
 import Image from "next/image";
 
-export default function ArticleCard({ img, title, createdAt, text }: ArticleCardProps) {
+export default function ArticleCard({
+  img,
+  title,
+  createdAt,
+  text,
+}: ArticleCardProps) {
   return (
     <div>
       <article

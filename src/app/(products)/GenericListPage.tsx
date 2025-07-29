@@ -4,7 +4,7 @@ import { CONFIG } from "../../../config/config";
 import PaginationWrapper from "@/components/PaginationWrapper";
 import ArticlesSection from "../(articles)/ArticlesSection";
 import { ProductCardProps } from "@/types/product";
-import { ArticleCardProps } from "@/types/articlesListPageProps";
+import { ArticleCardProps } from "@/types/articles";
 
 export default async function GenericListPage({
   searchParams,
@@ -27,19 +27,15 @@ export default async function GenericListPage({
       <div>
         {!props.contentType ? (
           <ProductSection
-          title={props.pageTitle}
-          viewAllButton={{ text: "На головну", href: "/" }}
-          products={paginatedItems as ProductCardProps[]}
-        />
+            title={props.pageTitle}
+            products={paginatedItems as ProductCardProps[]}
+          />
         ) : (
-            <ArticlesSection
-          title={props.pageTitle}
-          viewAllButton={{ text: "На головну", href: "/" }}
-          articles={paginatedItems as ArticleCardProps[]}
-        />
+          <ArticlesSection
+            title={props.pageTitle}
+            articles={paginatedItems as ArticleCardProps[]}
+          />
         )}
-        
-      
 
         {items.length > perPage && (
           <PaginationWrapper
