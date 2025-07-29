@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ButtonSearch(){
 
     return(
         <div>
-             <button
+             <Link href="/catalog"
                       className="bg-(--color-primary) hover:shadow-(--shadow-button-default)
                           active:shadow-(--shadow-button-active) hidden md:flex w-10 p-2 rounded gap-4 lg:w-35 cursor-pointer duration-300"
                     >
@@ -18,7 +19,7 @@ export default function ButtonSearch(){
                         />
                       </div>
                       <span className="text-base text-white hidden lg:block">Каталог</span>
-                    </button>
+                    </Link>
         </div>
     )
 }

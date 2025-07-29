@@ -90,6 +90,16 @@
 
     },
     {
+        "id":14,
+        "order":14,
+        "title":"Чеьуреки",
+        "img":"/Галя картинки/Чебуреки/CHeburek-Krymskyj-132.webp",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    },
+    {
         "id":11,
         "order":11,
         "title":"Піцца",
@@ -118,15 +128,6 @@
         "tabletColSpan":"md:col-span-1",
         "mobileColSpan":""
 
-    },
-      {
-        "id":14,
-        "order":14,
-        "title":"Чеьуреки",
-        "img":"/Галя картинки/Чебуреки/CHeburek-Krymskyj-132.webp",
-        "colSpan":"",
-        "tabletColSpan":"md:col-span-1",
-        "mobileColSpan":""
-
     }
+      
 ]
