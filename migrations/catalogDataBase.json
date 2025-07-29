@@ -1,0 +1,132 @@
+[
+    {
+        "id":1,
+        "order":1,
+        "title":"Вареники",
+        "img":"/Галя картинки/Вареники/Varenyky-z-kartopleyu-ta-grybamy-150.jpg",
+        "colSpan":"col-span-2",
+        "tabletColSpan":"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+
+    },
+     {
+        "id":2,
+        "order":2,
+        "title":"Голубці",
+        "img":"/Галя картинки/Голубці/Golubtsi-z-telyatynoyu-ta-yalovychynoyu-208.webp",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    },
+     {
+        "id":3,
+        "order":3,
+        "title":"Готові страви",
+        "img":"/Галя картинки/Готові страви/krem-sup-syrnyj-190.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    },
+     {
+        "id":4,
+        "order":4,
+        "title":"Десерти",
+        "img":"/Галя картинки/Десерти/Сирок Ванільний/syrok-vanilnyj_-1-600x900.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    },
+     {
+        "id":5,
+        "order":5,
+        "title":"Зрази",
+        "img":"/Галя картинки/Картопляні зрази/potato-zrazy-liver-600x400.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    },
+    {
+        "id":6,
+        "order":6,
+        "title":"Котлети",
+        "img":"/Галя картинки/Котлети та тефтелі/Kotleta-po-kyyivsky-280.jpg",
+        "colSpan":"col-span-2",
+        "tabletColSpan":"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+
+    },
+      {
+        "id":7,
+        "order":7,
+        "title":"Млинці",
+        "img":"/Галя картинки/Млинці/mlynci-zebra-vishnya-244.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    },
+      {
+        "id":8,
+        "order":8,
+        "title":"Молочна продукція",
+        "img":"/Галя картинки/Молочна продукція/Jogurt-Polunytsya-Molokiya-30.png",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    },
+      {
+        "id":10,
+        "order":10,
+        "title":"Пельмені",
+        "img":"/Галя картинки/Пельмені та хінкалі/Pelmeni-dytyachi-Malyatko-188.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    },
+    {
+        "id":11,
+        "order":11,
+        "title":"Піцца",
+        "img":"/Галя картинки/Піца/Pitsa-Gavajska-115.webp",
+        "colSpan":"col-span-2",
+        "tabletColSpan":"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+
+    },
+    {
+        "id":12,
+        "order":12,
+        "title":"Сирники",
+        "img":"/Галя картинки/Сирники/Syrnyky-z-rodzynkamy-196.jpg",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    },
+      {
+        "id":13,
+        "order":13,
+        "title":"Страві з мяса",
+        "img":"/Галя картинки/Страви з м’яса/Farshyrovani-kuryachi-bedra-1-180.webp",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    },
+      {
+        "id":14,
+        "order":14,
+        "title":"Чеьуреки",
+        "img":"/Галя картинки/Чебуреки/CHeburek-Krymskyj-132.webp",
+        "colSpan":"",
+        "tabletColSpan":"md:col-span-1",
+        "mobileColSpan":""
+
+    }
+]
