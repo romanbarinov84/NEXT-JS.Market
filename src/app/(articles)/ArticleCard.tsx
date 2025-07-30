@@ -8,9 +8,9 @@ export default function ArticleCard({
   text,
 }: ArticleCardProps) {
   return (
-    <div>
+ 
       <article
-        className="bg-white h-full flex flex-col rounded overflow-hidden
+        className="bg-white h-full flex flex-col  rounded overflow-hidden
                      shadow-(--shadow-card) hover:shadow-(--shadow-article) duration-300"
       >
         <div className="relative h-48 w-full">
@@ -38,6 +38,6 @@ export default function ArticleCard({
           </button>
         </div>
       </article>
-    </div>
+    
   );
 }
