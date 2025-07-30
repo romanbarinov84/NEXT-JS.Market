@@ -57,9 +57,17 @@ const CatalogPage = () => {
 
           }))
         )
-      })
-    }catch{
-
+      });
+      if(!response.ok){
+        throw new Error("Ошибка при обновлении порядка каталога")
+      }
+      const result = await response.json();
+      if(result.success){
+        console.log("Порядок успешно обновлен в MongoDB");
+      }
+    }catch(error){
+       console.error("Ошибка при сохранении порядка :",error);
+       setError("Ошибка при сохранении порядка")
     }
   }
 
