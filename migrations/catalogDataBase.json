@@ -90,8 +90,8 @@
 
     },
     {
-        "id":14,
-        "order":14,
+        "id":11,
+        "order":11,
         "title":"Чеьуреки",
         "img":"/Галя картинки/Чебуреки/CHeburek-Krymskyj-132.webp",
         "colSpan":"",
@@ -100,8 +100,8 @@
 
     },
     {
-        "id":11,
-        "order":11,
+        "id":12,
+        "order":12,
         "title":"Піцца",
         "img":"/Галя картинки/Піца/Pitsa-Gavajska-115.webp",
         "colSpan":"col-span-2",
@@ -110,8 +110,8 @@
 
     },
     {
-        "id":12,
-        "order":12,
+        "id":13,
+        "order":13,
         "title":"Сирники",
         "img":"/Галя картинки/Сирники/Syrnyky-z-rodzynkamy-196.jpg",
         "colSpan":"",
@@ -120,8 +120,8 @@
 
     },
       {
-        "id":13,
-        "order":13,
+        "id":14,
+        "order":14,
         "title":"Страві з мяса",
         "img":"/Галя картинки/Страви з м’яса/Farshyrovani-kuryachi-bedra-1-180.webp",
         "colSpan":"",
