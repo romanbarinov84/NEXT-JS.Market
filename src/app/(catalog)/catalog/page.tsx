@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { CatalogProps } from "@/types/catalog";
 import GridCategoryBlock from "../GridCategoryBlock";
+import Loading from "./Loading";
 
 
 const CatalogPage = () => {
@@ -15,7 +16,7 @@ const CatalogPage = () => {
   const [hoveredCategoryId, setHoveredCategoryId] = useState<string | null>(
     null
   );
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const isAdmin = true;
 
   const fetchCategories = async () => {
@@ -160,7 +161,7 @@ const CatalogPage = () => {
         Каталог
       </h1>
 
-      {isLoading && <div className="text-center py-8">Загрузка...</div>}
+      {isLoading && <Loading/>}
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
       {!isLoading && !error && categories.length === 0 && (
         <div className="text-red-500 text-center">
