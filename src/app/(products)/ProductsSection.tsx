@@ -3,12 +3,12 @@ import ProductCard from "@/components/ProductCard";
 import { ProductsSectionProps } from "@/types/productsSection";
 
 
-export default function ProductSection({title,viewAllButton,products,compact=false,}:ProductsSectionProps){
-
+export default function ProductSection({title,viewAllButton,products,}:ProductsSectionProps){
+   
     return(
         <div>
             <section>
-      <div className={`flex flex-col  ${compact ? "px-[max(12px,calc((100%-1208px)/2))]" : "mt-20"} justify-center w-full xl:max-w-[1208px] mx-auto mt-5`}>
+      <div className="flex flex-col  px-[max(12px,calc((100%-1208px)/2))]  mt-20 justify-center w-full xl:max-w-[1208px] mx-auto mt-5">
         <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
           <h2 className="text-2xl xl:text-4xl text-left font-bold text-shadow-lg">{title}</h2>
           {viewAllButton && (<ViewAllButton btnText={viewAllButton.text} href={viewAllButton.href}/>)}
@@ -19,9 +19,9 @@ export default function ProductSection({title,viewAllButton,products,compact=fal
             <li
               key={item._id}
               
-              className={ compact ? `${index >= 4 ? "hidden" : ""}
+              className={ `${index >= 4 ? "hidden" : ""}
                          ${index >= 3 ? "md:hidden xl:block" : ""}
-                         ${index >= 4 ? "xl:hidden" : ""}` : ""}
+                         ${index >= 4 ? "xl:hidden" : ""}` }
             >
               <ProductCard {...item} />
             </li>

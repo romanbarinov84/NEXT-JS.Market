@@ -1,24 +1,46 @@
-import { ProductCardProps } from "@/types/product";
-
-
-const fetchProductsByCategory = async (category: string) => {
+const fetchProductsByCategory = async (
+  category: string,
+  options?: {
+    randomLimit?: number;
+    pagination?: { startIdx: number; perPage: number };
+  }
+) => {
   try {
-    //фетч запрос к роуту 
-   const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products?category=${category}`,
-      { next: { revalidate: 3600 } }
-    );
-    if(!res.ok){
-        throw new Error(`Ошибка получения продуктов ${category}`)
+    const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`);
+    url.searchParams.append("category", category);
+
+    if (options?.randomLimit) {
+      url.searchParams.append("randomLimit", options.randomLimit.toString());
+    } else if (options?.pagination) {
+      url.searchParams.append(
+        "startIdx",
+        options.pagination.startIdx.toString()
+      );
+      url.searchParams.append(
+        "perPage",
+        options.pagination.perPage.toString()
+      );
     }
 
-   const products: ProductCardProps[] = await res.json();
-   return (products)
+    const res = await fetch(url.toString(), { next: { revalidate: 3600 } });
 
+    if (!res.ok) {
+      throw new Error(`Ошибка получения продуктов ${category}`);
+    }
+
+    const data = await res.json();
+
+    return {
+      items: data.products || data,
+      totalCount: data.totalCount || data.length,
+    };
   } catch (err) {
-  console.error('Ошибка в компоненте: ${category}', err);
-  return []; 
-}
+    console.error(`Ошибка в компоненте: ${category}`, err);
+    return {
+    items: [],
+    totalCount: 0,
+  };
+  }
 };
 
 export default fetchProductsByCategory;

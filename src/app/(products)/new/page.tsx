@@ -9,13 +9,13 @@ export const metadata = {
 export default async function AllNew({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
-}) {
+  searchParams: { page?: string; itemsPerPage?: string }
+}){
   return (
     <GenericListPage
       searchParams={searchParams}
       props={{
-        fetchData: () => fetchProductsByCategory("new"),
+        fetchData: ({ pagination: { startIdx, perPage } }) => fetchProductsByCategory("new", { pagination: { startIdx, perPage } }),
         pageTitle: "Усі новинки",
         basePath: "/new",
         errorMessage: "Помилка невдалося завантажити новинки",

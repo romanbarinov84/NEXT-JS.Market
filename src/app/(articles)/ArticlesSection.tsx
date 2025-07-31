@@ -6,14 +6,12 @@ export default function ArticlesSection({
   title,
   viewAllButton,
   articles,
-  compact = false,
+
 }: ArticlesSectionProps) {
   return (
     <section>
       <div
-        className={`flex flex-col text-[#414141]  ${
-          compact ? "px-[max(12px,calc((100%-1208px)/2))]" : "mt-20"
-        } justify-center w-full xl:max-w-[1208px] mx-auto mt-5`}
+          className="flex flex-col px-[max(12px,calc((100%-1208px)/2))] mt-20 justify-center w-full xl:max-w-[1208px] mx-auto mt-5 mb-10"
       >
         <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
           <h2 className="text-2xl xl:text-4xl text-left font-bold text-shadow-lg">
@@ -27,7 +25,7 @@ export default function ArticlesSection({
             <li
               key={article._id}
               className={`h-75 md:h-105 ${
-                compact && index >= 3
+                 index >= 3
                   ? "hidden md:hidden  xl:hidden"
                   : ""
               }`}

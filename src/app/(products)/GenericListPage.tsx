@@ -1,53 +1,58 @@
-import { GenericListPageProps } from "@/types/GenericListPageProps";
-import ProductSection from "./ProductsSection";
-import { CONFIG } from "../../../config/config";
 import PaginationWrapper from "@/components/PaginationWrapper";
-import ArticlesSection from "../(articles)/ArticlesSection";
-import { ProductCardProps } from "@/types/product";
 import { ArticleCardProps } from "@/types/articles";
+import { ProductCardProps } from "@/types/product";
+import ProductSection from "./ProductsSection";
+import { GenericListPageProps } from "@/types/GenericListPageProps";
+import ArticlesSection from "../(articles)/ArticlesSection";
+import { CONFIG } from "../../../config/config";
 
-export default async function GenericListPage({
+const GenericListPage = async ({
   searchParams,
   props,
 }: {
-  searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
+  searchParams: { page?: string; itemsPerPage?: string }; // Обычный объект, не Promise
   props: GenericListPageProps;
-}) {
-  const params = await searchParams;
-  const page = params?.page;
-  const itemsPerPage = params?.itemsPerPage || CONFIG.ITEMS_PER_PAGE;
+}) => {
+  // Просто используем searchParams, без await
+  const page = searchParams?.page;
+  const itemsPerPage = searchParams?.itemsPerPage || CONFIG.ITEMS_PER_PAGE;
+
   const currentPage = Number(page) || 1;
   const perPage = Number(itemsPerPage);
   const startIdx = (currentPage - 1) * perPage;
 
   try {
-    const items = await props.fetchData();
-    const paginatedItems = items.slice(startIdx, startIdx + perPage);
+    const {items, totalCount} = await props.fetchData({ pagination: { startIdx, perPage } });
+
+    const totalPages = Math.ceil(totalCount / perPage)
+
     return (
-      <div>
+      <>
         {!props.contentType ? (
           <ProductSection
             title={props.pageTitle}
-            products={paginatedItems as ProductCardProps[]}
+            products={items as ProductCardProps[]}
           />
         ) : (
           <ArticlesSection
             title={props.pageTitle}
-            articles={paginatedItems as ArticleCardProps[]}
+            articles={items as ArticleCardProps[]}
           />
         )}
 
-        {items.length > perPage && (
+        {totalPages > 1 && (
           <PaginationWrapper
-            totalItems={items.length}
+            totalItems={totalCount}
             currentPage={currentPage}
             basePath={props.basePath}
             contentType={props.contentType}
           />
         )}
-      </div>
+      </>
     );
   } catch {
     return <div className="text-red-500">{props.errorMessage}</div>;
   }
-}
+};
+
+export default GenericListPage;

@@ -1,3 +1,4 @@
+
 import fetchProductsByCategory from "../fetchProducts";
 import GenericListPage from "../GenericListPage";
 
@@ -6,16 +7,16 @@ export const metadata = {
   description: "Домашні напівфабрикати Галя балувана Бровари",
 };
 
-export default async function AllActions({
+export default function AllActions({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
-}) {
+  searchParams: { page?: string; itemsPerPage?: string }
+}){
   return (
     <GenericListPage
       searchParams={searchParams}
       props={{
-        fetchData: () => fetchProductsByCategory("actions"),
+        fetchData: ({ pagination: { startIdx, perPage } }) => fetchProductsByCategory("actions", { pagination: { startIdx, perPage } }),
         pageTitle: "Усі акції",
         basePath: "/actions",
         errorMessage: "Помилка невдалося завантажити акції",

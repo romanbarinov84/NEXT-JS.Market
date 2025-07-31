@@ -29,6 +29,7 @@ html, body {
 
 body {
   background: #fbf8ec;
+  padding-bottom: 5rem;
   color: var(--foreground);
   font-family: var(--font-rubik),sans-serif;
 }
