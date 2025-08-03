@@ -19,7 +19,7 @@ export default function InputBlock() {
       if(query.length > 1 ){
         try{
        setIsLoading(true)
-       const response = await fetch(`*api/search?query=${query}`);
+       const response = await fetch(`api/search?query=${query}`);
        const data = await response.json();
         setGroupedProducts(data)
         }catch(err){
@@ -71,7 +71,8 @@ export default function InputBlock() {
           <div className="absolute -mt-1 left-0 right-0 z-10 max-h-[300px] overflow-y-auto bg-white rounded-b border-2 border-(--color-primary) border-t-0 shadow-inherit ">
             {isLoading  ? (<Loader/>) : groupedProducts.length > 0  ? (
                <div className="px-2 flex flex-col gap 3 ">
-            <div className="flex flex-col gap-3">
+                {groupedProducts.map((group) => (
+                   <div key={group.category} className="flex flex-col gap-3">
               <Link
                 href="#"
                 className="flex items-start justify-between gap-x-4 hover:bg-gray-400 rounded p-1 
@@ -146,6 +147,8 @@ export default function InputBlock() {
                 </li>
               </ul>
             </div>
+                ))}
+           
           </div>
             ): query.length > 1 ? (<div className="text-red-500">Ничего не найденно</div>) : (<div className="text-green-400">Введите 2 и более символов для поиска </div>)}
          

@@ -12,7 +12,7 @@ export async function GET(request:Request) {
       const db = await getDB();
       const products = await db.collection("products").find({
         $or:[
-            {title:{$regex:query,$option:"i"}},
+            {title:{$regex:query,$options:"i"}},
             {description:{$regex:query,$options:"i"}},
         ],
       })
