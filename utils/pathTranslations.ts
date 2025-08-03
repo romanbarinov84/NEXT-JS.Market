@@ -6,4 +6,7 @@ export const PATH_TRANSLATIONS:Record<string , string> = {
     purchases:"Покупки",
     articles:"Пости",
     catalog:"Каталог",
+    restoFood:"Готові страви",
+    pankakes:"млинці",
+    icecream:"морозиво",
 }
