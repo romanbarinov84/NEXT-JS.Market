@@ -2,10 +2,12 @@ import Image from "next/image";
 import { ProductCardProps } from "@/types/product";
 import { formatPrice } from "../../utils/formatPrice";
 import StarRating from "./starReiting/StarRating";
+import Link from "next/link";
 
 const cardDiscountPercent = 6;
 
 export default function ProductCard({
+  _id,
   img,
   description,
   basePrice,
@@ -34,10 +36,11 @@ export default function ProductCard({
   return (
     <div
       className="flex flex-col justify-between  w-40 rounded overflow-hidden bg-white 
-         md:w-[224px] xl:w-[272px] align-top p-0 hover:shadow-(--shadow-article)"
+         md:w-[224px] xl:w-[272px] h-[349px] align-top p-0 hover:shadow-(--shadow-article)"
     >
       <div className=" relative w-40 h-40 md:-[224px] xl:w-[272px]">
-        <Image
+        <Link href={`/product/${_id}`}>
+          <Image
           src={img}
           alt="productImg"
           fill
@@ -45,6 +48,13 @@ export default function ProductCard({
           sizes="(max-width:768) 160px, (max-width:1200px) 224px, 272px"
           priority
         />
+         {discountPercent > 0 && (
+          <div className="absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2 left-2.5">
+            -{discountPercent}%
+          </div>
+        )}
+        </Link>
+      
 
         <button
           className="w-8 h-8 bg-[rgb(243,242,241)] hover:bg-[#ff6633] absolute top-2 
@@ -62,14 +72,12 @@ export default function ProductCard({
           </div>
         </button>
 
-        {discountPercent > 0 && (
-          <div className="absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2 left-2.5">
-            -{discountPercent}%
-          </div>
-        )}
+       
       </div>
+      
       <div className="flex flex-col justify-between p-2 gap-y-2">
-        <div className="flex flex-row justify-between items-end">
+          <Link href={`/product/${_id}`}>
+           <div className="flex flex-row justify-between items-end">
           <div className="flex flex-col gap-x-1">
             <div className="flex flex-row  text-sm md:text-lg font-bold">
               <span>{formatPrice(priceByCard)} uah</span>
@@ -95,6 +103,8 @@ export default function ProductCard({
             </div>
           )}
         </div>
+          </Link>
+       
         <div
           className="h-13 text-xs md:text-base text-[#191919] line-clamp-3 
                  md:line-clamp-2 leading-[1.5] text-shadow-lg"

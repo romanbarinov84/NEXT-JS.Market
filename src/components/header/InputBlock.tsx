@@ -5,10 +5,11 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Loader from "../Loader";
 import { SearchProduct } from "@/types/searchProduct";
+import { useRouter } from "next/navigation";
 
 function HighLightText({
   text,
-  highlight
+  highlight,
 }: {
   text: string;
   highlight: string;
@@ -21,7 +22,9 @@ function HighLightText({
     <>
       {parts.map((part, index) =>
         part.toLowerCase() === highlight.toLowerCase() ? (
-          <span key={index} className="font-bold">{part}</span>
+          <span key={index} className="font-bold">
+            {part}
+          </span>
         ) : (
           part
         )
@@ -30,9 +33,8 @@ function HighLightText({
   );
 }
 
-
-
 export default function InputBlock() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -80,28 +82,43 @@ export default function InputBlock() {
     setQuery("");
   };
 
+  const handleSearch = () => {
+
+    if(query.trim()){
+      router.push(`/search?q=${encodeURIComponent(query)}`);
+      setIsOpen(false);
+    }
+  };
+
   return (
     <div>
       <div className="min-w-[261px] relative flex-grow" ref={searchRef}>
-        <div className="relative rounded border-2 border-(--color-primary) shadow-(--shadow-button-default) leading-[150%]">
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full h-10 rounded p-2 py-2 px-4
+        <form onSubmit={(e) => {
+          e.preventDefault()
+          handleSearch();
+        }}>
+          <div className="relative rounded border-2 border-(--color-primary) shadow-(--shadow-button-default) leading-[150%]">
+            <input
+              type="text"
+              placeholder="Search"
+              className="w-full h-10 rounded p-2 py-2 px-4
              outline-none text-[#8f8f8f] text-base "
-            onFocus={handleInputFocus}
+              onFocus={handleInputFocus}
+              onChange={(e) => setQuery(e.target.value)}
+              name="search"
+            />
+          </div>
+         <button type="submit" className="hidden md:block absolute top-2 right-2 cursor-pointer">
+            <Image
+            src="/LoupeHeadInput.svg"
+            alt="LoupeIcon"
+            width={24}
+            height={24}
             
-            onChange={(e) => setQuery(e.target.value)}
           />
-        </div>
-
-        <Image
-          src="/LoupeHeadInput.svg"
-          alt="LoupeIcon"
-          width={24}
-          height={24}
-          className="hidden md:block absolute top-2 right-2 cursor-pointer"
-        />
+         </button>
+        
+        </form>
 
         {isOpen && (
           <div className="absolute -mt-1 left-0 right-0 z-10 max-h-[300px] overflow-y-auto bg-white rounded-b border-2 border-(--color-primary) border-t-0 shadow-inherit ">
@@ -118,8 +135,12 @@ export default function InputBlock() {
                       onClick={resetSearch}
                     >
                       <div>
-                        <HighLightText text={PATH_TRANSLATIONS[group.category] || group.category} highlight={query}/>
-                        
+                        <HighLightText
+                          text={
+                            PATH_TRANSLATIONS[group.category] || group.category
+                          }
+                          highlight={query}
+                        />
                       </div>
                       <Image
                         src="/burger-icon.svg"
@@ -140,7 +161,10 @@ export default function InputBlock() {
                             href={`/product/${product.id}`}
                             className="cursor-pointer"
                           >
-                           <HighLightText text={product.title} highlight={query}/>
+                            <HighLightText
+                              text={product.title}
+                              highlight={query}
+                            />
                           </Link>
                         </li>
                       ))}
