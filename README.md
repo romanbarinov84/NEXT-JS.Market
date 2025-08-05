@@ -1,3 +1,12 @@
+# Market Store 🛒
+
+## 🧰 Технологии
+
+- Next.js 14 (App Router)
+- React 18
+- MongoDB (серверная часть)
+- CSS (или Tailwind/SCSS, если используешь — укажи)
+- REST API / или App Router Actions
 
 
 
