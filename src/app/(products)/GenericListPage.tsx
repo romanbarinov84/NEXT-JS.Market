@@ -10,12 +10,12 @@ const GenericListPage = async ({
   searchParams,
   props,
 }: {
-  searchParams: { page?: string; itemsPerPage?: string }; // Обычный объект, не Promise
+  searchParams: Promise <{ page?: string; itemsPerPage?: string }>; // Обычный объект, не Promise
   props: GenericListPageProps;
 }) => {
-  // Просто используем searchParams, без await
-  const page = searchParams?.page;
-  const itemsPerPage = searchParams?.itemsPerPage || CONFIG.ITEMS_PER_PAGE;
+  const params = await searchParams;
+  const page =  params?.page;
+  const itemsPerPage =  params?.itemsPerPage || CONFIG.ITEMS_PER_PAGE;
 
   const currentPage = Number(page) || 1;
   const perPage = Number(itemsPerPage);

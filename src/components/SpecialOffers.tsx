@@ -6,9 +6,10 @@ export default function SpecialOffers() {
       <Image
         src="/Galya-Baluvana.jpg"
         alt="OffersImage"
-        fill
-        priority
-        className=" object-cover"
+        width="0"
+        height="0"
+        sizes="100vw"
+        className="w-full h-auto"
       />
 
       <div className="absolute inset-0  justify-center items-center">
@@ -19,14 +20,13 @@ export default function SpecialOffers() {
           >
             Показуємо виробництво
           </h2>
-         
         </div>
-     
-       <p className="text-s md:text-xl xl:text-xl font-bold text-wrap text-[#333] "  >
-            Кожен може побачити процес приготування страв на власні очі, адже
-            цехи розташовані безпосередньо у магазинах за склом
-          </p> 
-          </div>
+
+        <p className="text-s md:text-xl xl:text-xl font-bold text-wrap text-[#333] ">
+          Кожен може побачити процес приготування страв на власні очі, адже цехи
+          розташовані безпосередньо у магазинах за склом
+        </p>
+      </div>
     </div>
   );
 }

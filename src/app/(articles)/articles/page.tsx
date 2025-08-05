@@ -1,16 +1,15 @@
 import GenericListPage from "@/app/(products)/GenericListPage";
 import fetchArticles from "../fetchArticles";
 
-
 export const metadata = {
   title: "Пости на сайті Галя балувана Бровари",
   description: "Домашні напівфабрикати Галя балувана Бровари",
 };
 
 const AllArticles = async ({
-   searchParams,
+  searchParams,
 }: {
-  searchParams: { page?: string; itemsPerPage?: string }
+  searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
 }) => {
   return (
     <GenericListPage

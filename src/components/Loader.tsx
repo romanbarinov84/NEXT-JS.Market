@@ -9,7 +9,7 @@ export default function Loader({text="",className=""}:LoaderProps){
     return(
         <>
          <div
-      className={`flex flex-col items-center justify-center gap-3 ${className}`}
+      className={`flex flex-col items-center justify-center gap-3  min-h-20${className}`}
       role="status"
       aria-live="polite"
     >
