@@ -33,7 +33,7 @@ function HighLightText({
   );
 }
 
-export default function InputBlock() {
+export default function InputBlock({onFocusChangeAction}:{onFocusChangeAction:(focused:boolean) => void}) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -75,11 +75,13 @@ export default function InputBlock() {
 
   const handleInputFocus = () => {
     setIsOpen(true);
+    onFocusChangeAction(true)
   };
 
   const resetSearch = () => {
     setIsLoading(false);
     setQuery("");
+    
   };
 
   const handleSearch = () => {
@@ -89,6 +91,10 @@ export default function InputBlock() {
       resetSearch()
     }
   };
+
+  const handleInputBlur = () => {
+     onFocusChangeAction(false)
+  }
 
   return (
     <div>
@@ -107,6 +113,7 @@ export default function InputBlock() {
               onFocus={handleInputFocus}
               onChange={(e) => setQuery(e.target.value)}
               name="search"
+              onBlur={handleInputBlur}
             />
           </div>
          <button type="submit" className="hidden md:block absolute top-2 right-2 cursor-pointer">
