@@ -86,7 +86,7 @@ export default function InputBlock() {
 
     if(query.trim()){
       router.push(`/search?q=${encodeURIComponent(query)}`);
-      setIsOpen(false);
+      resetSearch()
     }
   };
 
@@ -100,6 +100,7 @@ export default function InputBlock() {
           <div className="relative rounded border-2 border-(--color-primary) shadow-(--shadow-button-default) leading-[150%]">
             <input
               type="text"
+              value={query}
               placeholder="Search"
               className="w-full h-10 rounded p-2 py-2 px-4
              outline-none text-[#8f8f8f] text-base "

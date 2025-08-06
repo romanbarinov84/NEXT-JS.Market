@@ -4,7 +4,7 @@ import fetchPurchases from "../fetchPurchases";
 const AllPurchases = async ({
   searchParams,
 }: {
-  searchParams: { page?: string; itemsPerPage?: string }
+  searchParams: Promise<{ page?: string; itemsPerPage?: string }>
 }) => {
   return (
     <GenericListPage
