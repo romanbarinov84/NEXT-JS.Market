@@ -37,6 +37,7 @@ export default function InputBlock({onFocusChangeAction}:{onFocusChangeAction:(f
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [error,setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [groupedProducts, setGroupedProducts] = useState<
     { category: string; products: SearchProduct[] }[]
@@ -62,6 +63,7 @@ export default function InputBlock({onFocusChangeAction}:{onFocusChangeAction:(f
           setGroupedProducts(data);
         } catch (err) {
           console.error("Ошибка не найден продукт или категория", err);
+          setError("Ненайден продукт или категория")
         } finally {
           setIsLoading(false);
         }
@@ -130,6 +132,8 @@ export default function InputBlock({onFocusChangeAction}:{onFocusChangeAction:(f
 
         {isOpen && (
           <div className="absolute -mt-1 left-0 right-0 z-10 max-h-[300px] overflow-y-auto bg-white rounded-b border-2 border-(--color-primary) border-t-0 shadow-inherit ">
+            {error &&  <div className="p-2 text-red-500 text-sm">{error}
+              <button onClick={() => setError(null)} className="rounded p-2 bg-red-400 text-white">Повторить</button></div>}
             {isLoading ? (
               <Loader />
             ) : groupedProducts.length > 0 ? (
@@ -181,7 +185,7 @@ export default function InputBlock({onFocusChangeAction}:{onFocusChangeAction:(f
                 ))}
               </div>
             ) : query.length > 1 ? (
-              <div className="text-red-500">Ничего не найденно</div>
+              <div className="text-blue-300">Ничего не найденно</div>
             ) : (
               <div className="text-green-400">
                 Введите 2 и более символов для поиска{" "}

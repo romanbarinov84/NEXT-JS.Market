@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { Category } from "@/types/categories";
 import Loader from "../Loader";
+import ErrorComponent from "../errorComponent/ErrorComponent";
 
 export default function Header() {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
@@ -16,6 +17,10 @@ export default function Header() {
   const searchBlockRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const [isSearchFocused,setIsSearchFocused] = useState(false);
+    const [error, setError] = useState<{
+    error: Error;
+    userMessage: string;
+  } | null>(null);
 
   const fetchCategories = async () => {
     if (categories.length > 0) return;
@@ -23,10 +28,13 @@ export default function Header() {
     try {
       const response = await fetch("/api/catalog");
       const data = await response.json();
-      console.log(data)
       return setCategories(data);
     } catch (error) {
-      console.error("Ошибка загрузки категории", error);
+      console.error("Ошибка при изменении каталога категорий:", error);
+      setError({
+        error: error instanceof Error ? error : new Error("Неизвестная ошибка"),
+        userMessage: "Не удалось загрузить каталог категорий",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -73,6 +81,8 @@ export default function Header() {
           {isCatalogOpen && (
               <div ref={menuRef} className="hidden md:block absolute top-full left-0 w-full bg-white shadow-( --shadow-article) md:shadow-none z-50">
             <div className="mx-auto px-4 py-6">
+              {error &&  <ErrorComponent error={error instanceof Error ? error : new Error(String(error))}
+                     userMessage="Не удалось загрузить категории"/>}
               {isLoading ? (<Loader/>) : categories.length > 0 ? ( <div className="grid grid-cols-2 xl:grid grid-cols-4 gap-6">
                 {categories.map((category) => (
                     <Link key={category.id}

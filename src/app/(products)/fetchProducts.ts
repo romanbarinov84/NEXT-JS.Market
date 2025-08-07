@@ -35,11 +35,8 @@ const fetchProductsByCategory = async (
       totalCount: data.totalCount || data.length,
     };
   } catch (err) {
-    console.error(`Ошибка в компоненте: ${category}`, err);
-    return {
-    items: [],
-    totalCount: 0,
-  };
+     throw err
+   
   }
 };
 

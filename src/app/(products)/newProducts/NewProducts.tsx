@@ -1,3 +1,4 @@
+import ErrorComponent from "@/components/errorComponent/ErrorComponent";
 import { CONFIG } from "../../../../config/config";
 import fetchProductsByCategory from "../fetchProducts";
 import ProductSection from "../ProductsSection";
@@ -16,9 +17,11 @@ export default async function Actions() {
         
       />
     );
-  } catch {
-    return (
-      <div className="text-red-500">Ошибка: не удалось загрузить новинки</div>
-    );
-  }
+  } catch(error) {
+      return (
+        <ErrorComponent error={error instanceof Error ? error : new Error(String(error))}
+         userMessage="Не удалось загрузить новинки"/>
+        
+      );
+    }
 }

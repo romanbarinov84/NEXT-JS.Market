@@ -5,16 +5,16 @@ import { CatalogProps } from "@/types/catalog";
 import GridCategoryBlock from "../GridCategoryBlock";
 import Loading from "./Loading";
 
-
-
-
 const CatalogPage = () => {
   const [categories, setCategories] = useState<CatalogProps[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [draggedCategory, setDraggedCategory] = useState<CatalogProps | null>(
     null
   );
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<{
+    error: Error;
+    userMessage: string;
+  } | null>(null);
   const [hoveredCategoryId, setHoveredCategoryId] = useState<string | null>(
     null
   );
@@ -30,8 +30,11 @@ const CatalogPage = () => {
       const data: CatalogProps[] = await response.json();
       setCategories(data.sort((a, b) => a.order - b.order));
     } catch (error) {
-      console.error("Не удалось получить категории:", error);
-      setError("Не удалось получить категории");
+      console.error("Ошибка при изменении каталога категорий:", error);
+      setError({
+        error: error instanceof Error ? error : new Error("Неизвестная ошибка"),
+        userMessage: "Не удалось загрузить каталог категорий",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -41,50 +44,50 @@ const CatalogPage = () => {
     fetchCategories();
   }, []);
 
-  const updateOrderInDB = async() => {
-    try{
-      setIsLoading(true)
+  const updateOrderInDB = async () => {
+    try {
+      setIsLoading(true);
       const response = await fetch("api/catalog", {
-        method:"POST",
-        headers:{
-          "Content-type":"application/json"
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
         },
-        body:JSON.stringify(
-          categories.map((category,index) => ({
-            _id:category._id,
-            order:index + 1,
-            title:category.title,
-            img:category.img,
-            colSpan:category.colSpan,
-            tabletColSpan:category.tabletColSpan,
-            mobileColSpan:category.mobileColSpan,
-
+        body: JSON.stringify(
+          categories.map((category, index) => ({
+            _id: category._id,
+            order: index + 1,
+            title: category.title,
+            img: category.img,
+            colSpan: category.colSpan,
+            tabletColSpan: category.tabletColSpan,
+            mobileColSpan: category.mobileColSpan,
           }))
-        )
+        ),
       });
-      if(!response.ok){
-        throw new Error("Ошибка при обновлении порядка каталога")
+      if (!response.ok) {
+        throw new Error("Ошибка при обновлении порядка каталога");
       }
       const result = await response.json();
-      if(result.success){
+      if (result.success) {
         console.log("Порядок успешно обновлен в MongoDB");
       }
-    }catch(error){
-       console.error("Ошибка при сохранении порядка :",error);
-       setError("Ошибка при сохранении порядка")
-    }finally{
-      setIsLoading(false)
+    } catch (error) {
+      console.error("Ошибка при изменении каталога категорий:", error);
+      setError({
+        error: error instanceof Error ? error : new Error("Неизвестная ошибка"),
+        userMessage: "Не удалось изменить каталог категорий",
+      });
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleToggleEditing = async () => {
-    if(isEditing){
+    if (isEditing) {
       await updateOrderInDB();
     }
     setIsEditing(!isEditing);
   };
-
-
 
   const resetLayout = () => {
     fetchCategories();
@@ -104,46 +107,50 @@ const CatalogPage = () => {
   };
 
   const handleDragLeave = () => {
-    setHoveredCategoryId(null)
+    setHoveredCategoryId(null);
   };
 
-  const handleDrop = (e: React.DragEvent, targetCategoryId:string) => {
-   e.preventDefault();
-   if(!isEditing || !draggedCategory) return;
+  const handleDrop = (e: React.DragEvent, targetCategoryId: string) => {
+    e.preventDefault();
+    if (!isEditing || !draggedCategory) return;
 
-   setCategories((prevCategories) => {
-    const draggedIndex = prevCategories.findIndex((c) => c._id === draggedCategory._id);
-    const targetIndex = prevCategories.findIndex((c) => c._id === targetCategoryId); 
-    if(draggedIndex === -1 || targetIndex === -1) return prevCategories;
+    setCategories((prevCategories) => {
+      const draggedIndex = prevCategories.findIndex(
+        (c) => c._id === draggedCategory._id
+      );
+      const targetIndex = prevCategories.findIndex(
+        (c) => c._id === targetCategoryId
+      );
+      if (draggedIndex === -1 || targetIndex === -1) return prevCategories;
 
-    const newCategories = [...prevCategories];
+      const newCategories = [...prevCategories];
 
-    const draggedItem = newCategories[draggedIndex];
-    const targetItem = newCategories[targetIndex];
+      const draggedItem = newCategories[draggedIndex];
+      const targetItem = newCategories[targetIndex];
 
-    const draggedSizes = {
-      mobileColSpan: draggedItem.mobileColSpan,
-      tabletColSpan:draggedItem.tabletColSpan,
-      colSpan:draggedItem.colSpan,
-    };
-     const targetSizes = {
-      mobileColSpan: targetItem.mobileColSpan,
-      tabletColSpan:targetItem.tabletColSpan,
-      colSpan:targetItem.colSpan,
-    };
+      const draggedSizes = {
+        mobileColSpan: draggedItem.mobileColSpan,
+        tabletColSpan: draggedItem.tabletColSpan,
+        colSpan: draggedItem.colSpan,
+      };
+      const targetSizes = {
+        mobileColSpan: targetItem.mobileColSpan,
+        tabletColSpan: targetItem.tabletColSpan,
+        colSpan: targetItem.colSpan,
+      };
 
-    newCategories[draggedIndex] = {...targetItem, ...draggedSizes};
-    newCategories[targetIndex] = {...draggedItem, ...targetSizes};
+      newCategories[draggedIndex] = { ...targetItem, ...draggedSizes };
+      newCategories[targetIndex] = { ...draggedItem, ...targetSizes };
 
-    return newCategories
-   });
+      return newCategories;
+    });
 
-   setDraggedCategory(null);
-   setHoveredCategoryId(null);
-  }
+    setDraggedCategory(null);
+    setHoveredCategoryId(null);
+  };
 
-  if(error){
-    throw error
+  if (error) {
+    throw error;
   }
 
   return (
@@ -170,7 +177,7 @@ const CatalogPage = () => {
         Каталог
       </h1>
 
-      {isLoading && <Loading/>}
+      {isLoading && <Loading />}
       {!isLoading && !error && categories.length === 0 && (
         <div className="text-red-500 text-center">
           Категории каталога не найдены
@@ -184,14 +191,17 @@ const CatalogPage = () => {
             className={`${category.mobileColSpan} ${category.tabletColSpan} ${
               category.colSpan
             } bg-gray-100 rounded overflow-hidden min-h-50 h-full 
-             ${ isEditing ? "border-3 border-dashed border-gray-300" : " " }
-             ${ hoveredCategoryId === category._id  ? "border-3 border-red-800" : " " }
+             ${isEditing ? "border-3 border-dashed border-gray-300" : " "}
+             ${
+               hoveredCategoryId === category._id
+                 ? "border-3 border-red-800"
+                 : " "
+             }
              
              `}
-           
             onDragOver={(e) => handleDragOver(e, category._id)}
             onDragLeave={handleDragLeave}
-            onDrop={(e) => handleDrop(e,category._id)}
+            onDrop={(e) => handleDrop(e, category._id)}
           >
             <div
               className={`h-full w-full  ${
@@ -211,8 +221,6 @@ const CatalogPage = () => {
       </div>
     </section>
   );
-  
- 
 };
 
 export default CatalogPage;

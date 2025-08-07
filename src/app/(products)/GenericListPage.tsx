@@ -5,6 +5,7 @@ import ProductSection from "./ProductsSection";
 import { GenericListPageProps } from "@/types/GenericListPageProps";
 import ArticlesSection from "../(articles)/ArticlesSection";
 import { CONFIG } from "../../../config/config";
+import ErrorComponent from "@/components/errorComponent/ErrorComponent";
 
 const GenericListPage = async ({
   searchParams,
@@ -50,9 +51,13 @@ const GenericListPage = async ({
         )}
       </>
     );
-  } catch {
-    return <div className="text-red-500">{props.errorMessage}</div>;
-  }
+  } catch(error) {
+      return (
+        <ErrorComponent error={error instanceof Error ? error : new Error(String(error))}
+         userMessage="Не удалось загрузить generic"/>
+        
+      );
+    }
 };
 
 export default GenericListPage;

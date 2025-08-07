@@ -1,10 +1,8 @@
 "use client"
 
+import { ErrorProps } from "@/types/errorProps";
 
-interface ErrorProps {
-    error:string;
-    userMessage?:string;
-}
+
 
 
 export default function ErrorComponent({error,userMessage}:ErrorProps){

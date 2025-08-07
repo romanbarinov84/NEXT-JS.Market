@@ -1,3 +1,4 @@
+import ErrorComponent from "@/components/errorComponent/ErrorComponent";
 import { CONFIG } from "../../../config/config";
 import ArticlesSection from "./ArticlesSection";
 import fetchArticles from "./fetchArticles";
@@ -13,9 +14,11 @@ export default async function Articles() {
        
       />
     );
-  } catch {
+  } catch(error) {
     return (
-      <div className="text-red-500">Ошибка: не удалось загрузить пости</div>
+      <ErrorComponent error={error instanceof Error ? error : new Error(String(error))}
+       userMessage="Не удалось загрузить статьи"/>
+      
     );
   }
 }
