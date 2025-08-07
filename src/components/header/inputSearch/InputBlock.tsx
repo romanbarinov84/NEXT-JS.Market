@@ -1,13 +1,16 @@
 "use client";
-import { PATH_TRANSLATIONS } from "../../../utils/pathTranslations";
-import Image from "next/image";
-import Link from "next/link";
+
+
 import { useEffect, useRef, useState } from "react";
-import Loader from "../Loader";
+import Image from "next/image"
+import { PATH_TRANSLATIONS } from "../../../../utils/pathTranslations";
 import { SearchProduct } from "@/types/searchProduct";
 import { useRouter } from "next/navigation";
+import SearchInput from "./SearchInpur";
+import Loader from "@/components/Loader";
+import Link from "next/link";
 
-function HighLightText({
+export function HighLightText({
   text,
   highlight,
 }: {
@@ -33,11 +36,15 @@ function HighLightText({
   );
 }
 
-export default function InputBlock({onFocusChangeAction}:{onFocusChangeAction:(focused:boolean) => void}) {
+export default function InputBlock({
+  onFocusChangeAction,
+}: {
+  onFocusChangeAction: (focused: boolean) => void;
+}) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [error,setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [groupedProducts, setGroupedProducts] = useState<
     { category: string; products: SearchProduct[] }[]
@@ -63,7 +70,7 @@ export default function InputBlock({onFocusChangeAction}:{onFocusChangeAction:(f
           setGroupedProducts(data);
         } catch (err) {
           console.error("Ошибка не найден продукт или категория", err);
-          setError("Ненайден продукт или категория")
+          setError("Ненайден продукт или категория");
         } finally {
           setIsLoading(false);
         }
@@ -77,64 +84,50 @@ export default function InputBlock({onFocusChangeAction}:{onFocusChangeAction:(f
 
   const handleInputFocus = () => {
     setIsOpen(true);
-    onFocusChangeAction(true)
+    onFocusChangeAction(true);
   };
 
   const resetSearch = () => {
     setIsLoading(false);
     setQuery("");
-    
   };
 
   const handleSearch = () => {
-
-    if(query.trim()){
+    if (query.trim()) {
       router.push(`/search?q=${encodeURIComponent(query)}`);
-      resetSearch()
+      resetSearch();
     }
   };
 
   const handleInputBlur = () => {
-     onFocusChangeAction(false)
-  }
+    onFocusChangeAction(false);
+  };
 
   return (
     <div>
       <div className="min-w-[261px] relative flex-grow" ref={searchRef}>
-        <form onSubmit={(e) => {
-          e.preventDefault()
-          handleSearch();
-        }}>
-          <div className="relative rounded border-2 border-(--color-primary) shadow-(--shadow-button-default) leading-[150%]">
-            <input
-              type="text"
-              value={query}
-              placeholder="Search"
-              className="w-full h-10 rounded p-2 py-2 px-4
-             outline-none text-[#8f8f8f] text-base "
-              onFocus={handleInputFocus}
-              onChange={(e) => setQuery(e.target.value)}
-              name="search"
-              onBlur={handleInputBlur}
-            />
-          </div>
-         <button type="submit" className="hidden md:block absolute top-2 right-2 cursor-pointer">
-            <Image
-            src="/LoupeHeadInput.svg"
-            alt="LoupeIcon"
-            width={24}
-            height={24}
-            
-          />
-         </button>
-        
-        </form>
+        <SearchInput
+          query={query}
+          setQuery={setQuery}
+          handleSearch={handleSearch}
+          handleInputBlur={handleInputBlur}
+          handleInputFocus={handleInputFocus}
+        />
 
         {isOpen && (
           <div className="absolute -mt-1 left-0 right-0 z-10 max-h-[300px] overflow-y-auto bg-white rounded-b border-2 border-(--color-primary) border-t-0 shadow-inherit ">
-            {error &&  <div className="p-2 text-red-500 text-sm">{error}
-              <button onClick={() => setError(null)} className="rounded p-2 bg-red-400 text-white">Повторить</button></div>}
-            {isLoading ? (
+            {error && (
+              <div className="p-2 text-red-500 text-sm">
+                {error}
+                <button
+                  onClick={() => setError(null)}
+                  className="rounded p-2 bg-red-400 text-white"
+                >
+                  Повторить
+                </button>
+              </div>
+            )}
+           {isLoading ? (
               <Loader />
             ) : groupedProducts.length > 0 ? (
               <div className="px-2 flex flex-col gap 3 ">
