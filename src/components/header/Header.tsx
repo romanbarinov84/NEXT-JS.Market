@@ -65,7 +65,7 @@ export default function Header() {
         onMouseMove={handleMouseMove}>
         <div className="flex w-full mt-2 flex-row gap-4 xl:gap-10 py-2 px-4 items-center md:shadow-(--shadow-default)">
           <LogoBlock />
-          <div className="flex items-center" onMouseEnter={openMenu} ref={searchBlockRef}
+          <div className="flex items-center w-full" onMouseEnter={openMenu} ref={searchBlockRef}
            >
               <SearchBlock onFocusChangeAction={handleSearchFocusAction}/>
           </div>

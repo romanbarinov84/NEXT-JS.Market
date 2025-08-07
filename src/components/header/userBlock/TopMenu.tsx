@@ -1,10 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
+
 
 export default function TopMenu() {
   return (
     <div>
       <ul className="flex flex-row  justify-between items-end gap-12">
-        <li className="flex flec-col items-center gap-2 w-11 cursor-pointer md:hidden">
+        <Link href="/catalog">
+         <li className="flex flec-col items-center gap-2 w-11 cursor-pointer md:hidden">
           <Image
             src="/userBlock/BurgerBlack.svg"
             alt="burgerBlack"
@@ -14,6 +17,8 @@ export default function TopMenu() {
           />
           <span>Каталог</span>
         </li>
+        </Link>
+       
         <li className="flex flex-col items-center gap-2 w-11 cursor-pointer">
           <div className="relative w-6 h-6">
             <Image
