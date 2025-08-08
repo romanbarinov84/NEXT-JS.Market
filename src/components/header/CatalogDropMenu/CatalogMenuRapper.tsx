@@ -88,8 +88,8 @@ export default function CatalogMenuRapper(){
                      userMessage="Не удалось загрузить категории"/>}
               {isLoading ? (<Loader/>) : categories.length > 0 ? ( <div className="grid grid-cols-2 xl:grid grid-cols-4 gap-6">
                 {categories.map((category) => (
-                    <Link key={category.id}
-                  href={`/category/${category.id}`}
+                    <Link key={category.slug}
+                  href={`/category/${category.slug}`}
                   className="block px-4 py-2 text-[#333] hover:text-[#ff6633] font-bold duration-300"
                   onClick={() => setIsCatalogOpen(false)}
                 >

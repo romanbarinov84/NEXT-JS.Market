@@ -15,7 +15,7 @@ export default function Loading() {
         ))}
       </div>
 
-      {/* Текст с пульсацией */}
+      
       <div className="text-center space-y-2">
         <p className="text-xl font-medium text-gray-700 animate-pulse">
           Загружаем каталог
@@ -25,7 +25,7 @@ export default function Loading() {
         </p>
       </div>
 
-      {/* Прогресс-бар (опционально) */}
+     
       <div className="w-64 h-2 bg-gray-200 rounded-full overflow-hidden mt-4">
         <div
           className="h-full bg-[#ff6633] rounded-full animate-progress"

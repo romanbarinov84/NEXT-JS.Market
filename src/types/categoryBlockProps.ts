@@ -1,6 +1,6 @@
-
 export interface GridCategoryBlockProps {
-  id:number;
-  title:string;
-  img:string;
+  id: number;
+  title: string;
+  slug: string;
+  img: string;
 }

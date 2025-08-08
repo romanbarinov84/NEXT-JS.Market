@@ -4,11 +4,12 @@ import { GridCategoryBlockProps } from "@/types/categoryBlockProps";
 
 
 
-export default function GridCategoryBlock({id,title,img}:GridCategoryBlockProps){
+
+export default function GridCategoryBlock({slug,title,img}:GridCategoryBlockProps){
 
     return(
          <Link
-              href={`category-${id}`}
+              href={`category/${slug}`}
               className="relative block h-full overflow-hidden group min-w-40 md:min-w-[224px] xl:min-w-[274px]"
             >
               <Image
