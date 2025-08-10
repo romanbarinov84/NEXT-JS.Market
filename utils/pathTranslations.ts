@@ -9,4 +9,5 @@ export const PATH_TRANSLATIONS:Record<string , string> = {
     restoFood:"Готові страви",
     pankakes:"млинці",
     icecream:"морозиво",
+    vareniky: "Вареники",
 }
