@@ -6,37 +6,39 @@ import { PATH_TRANSLATIONS } from "../../../../../utils/pathTranslations";
 import fetchCategory from "../fetchCategory";
 
 
-export async function generateMetaData({
+export async function geberateMetaData({params}:{ params: Promise<{ category: string }>}) {
+  const {category} = await params;
+  return{
+   title: PATH_TRANSLATIONS[category] || category,
+   description:`Описание категории продукта ${PATH_TRANSLATIONS[category] || category} `
+  }
+}
+
+export default async function CategoryPage({
+  searchParams,
   params,
 }: {
-  params: Promise<{ category: string }>
+  searchParams:Promise<{page?:string;perPage?:string}>
+  params: Promise<{ category: string }>;
 }) {
-  const category = await params;
-  return {
-    title: PATH_TRANSLATIONS[category.category] || category.category,
-    description:`Описание категории товаров : ${PATH_TRANSLATIONS[category.category] || category.category}`
-  };
-}
-export default async function CategoryPage({searchParams,params}:{
-  searchParams:Promise<{page?:string;itemsPerPage?:string;}>
-  params:Promise<{category:string}>}){
-     
-    const {category} = await params;
+  const {category} = await params;
 
-    return (
+ 
+  return (
+
     <Suspense fallback={<Loader/>}>
 
       <GenericListPage
       searchParams={searchParams}
       props={{
-        fetchData: ({ pagination: { startIdx, perPage } }) => fetchCategory("category", { pagination: { startIdx, perPage } }),
+        fetchData: ({ pagination: { startIdx, perPage } }) => fetchCategory(category, { pagination: { startIdx, perPage } }),
         pageTitle: PATH_TRANSLATIONS[category] || category,
         basePath: `/category/${category}`,
+        errorMessage: "Ошибка: не удалось загрузить категорию продукта",
         contentType:"category",
-        errorMessage: 'Категория не найденна',
       }}
     />
     </Suspense>
-    
-  );
+  )
+   
 }

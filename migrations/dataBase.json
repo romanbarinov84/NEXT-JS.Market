@@ -360,7 +360,7 @@
     "basePrice": 190.0,
     "discountPercent": 10,
     "rating": 5.0,
-    "categories": ["restoFood", "new","mushrooms","actions"],
+    "categories": ["restoFood", "new","mushrooms","actions","zrazy"],
     "weight": 1000
   },
   {
