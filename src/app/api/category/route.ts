@@ -13,7 +13,7 @@ export async function GET(request: Request) {
     const startIdx = parseInt(url.searchParams.get("startIdx") || "0");
     const perPage = parseInt(
       url.searchParams.get("perPage") ||
-        CONFIG.ITEMS_PER_PAGE.toString()
+        CONFIG.ITEMS_PER_PAGE_CATEGORY.toString()
     );
 
     if (!category) {

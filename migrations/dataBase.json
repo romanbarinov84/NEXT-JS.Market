@@ -128,7 +128,7 @@
     "basePrice": 190.0,
     "discountPercent": 10,
     "rating": 4.9,
-    "categories": ["actions", "golubzi"],
+    "categories": ["actions", "golubzy"],
     "weight": 1000
   },
   {
@@ -139,7 +139,7 @@
     "basePrice": 198,
     "discountPercent": 0,
     "rating": 5.0,
-    "categories": ["golubzi", "new"],
+    "categories": ["golubzy", "new"],
     "weight": 1000
   },
   {
@@ -150,7 +150,7 @@
     "basePrice": 230.0,
     "discountPercent": 0,
     "rating": 5.0,
-    "categories": ["golubzi", "new"],
+    "categories": ["golubzy", "new"],
     "weight": 1000
   },
   {
@@ -173,7 +173,7 @@
     "basePrice": 230.0,
     "discountPercent": 0,
     "rating": 4.0,
-    "categories": ["perez", "new"],
+    "categories": ["golubzy", "new"],
     "weight": 1000
   },
   {
@@ -415,7 +415,7 @@
     "basePrice": 250.0,
     "discountPercent": 0,
     "rating": 5.0,
-    "categories": ["restoFood", "new","meat"],
+    "categories": ["restoFood", "new","meat","burgers"],
     "weight": 600
   },
   {
@@ -426,7 +426,7 @@
     "basePrice": 180.0,
     "discountPercent": 10,
     "rating": 4.0,
-    "categories": ["restoFood", "new","meat","actions"],
+    "categories": ["restoFood", "new","meat","actions","burgers"],
     "weight": 1000
   },
   {
@@ -437,7 +437,7 @@
     "basePrice": 260.0,
     "discountPercent": 0,
     "rating": 5.0,
-    "categories": ["restoFood", "new","meat"],
+    "categories": ["restoFood", "new","meat","burgers"],
     "weight": 1000
   },
   {
@@ -448,7 +448,7 @@
     "basePrice": 260.0,
     "discountPercent": 10,
     "rating": 5.0,
-    "categories": ["restoFood","meat","actions"],
+    "categories": ["restoFood","meat","actions","burgers"],
     "weight": 1000
   },
   {
@@ -459,7 +459,7 @@
     "basePrice": 280.0,
     "discountPercent": 0,
     "rating": 4.9,
-    "categories": ["restoFood", "new","meat"],
+    "categories": ["restoFood", "new","meat","burgers"],
     "weight": 1000
   },
   {
@@ -470,7 +470,7 @@
     "basePrice": 150.0,
     "discountPercent": 10,
     "rating": 5.0,
-    "categories": ["restoFood", "actions","meat"],
+    "categories": ["restoFood", "actions","meat","burgers"],
     "weight": 1000
   },
   {
@@ -481,7 +481,7 @@
     "basePrice": 230.0,
     "discountPercent": 10,
     "rating": 4.0,
-    "categories": ["restoFood","meat","actions"],
+    "categories": ["restoFood","meat","actions","burgers"],
     "weight": 1000
   },
   {
@@ -492,7 +492,7 @@
     "basePrice": 280.0,
     "discountPercent": 0,
     "rating": 5.0,
-    "categories": ["restoFood", "new","meat"],
+    "categories": ["restoFood", "new","meat","burgers"],
     "weight": 1000
   },
   {
@@ -503,7 +503,7 @@
     "basePrice": 190.0,
     "discountPercent": 10,
     "rating": 5.0,
-    "categories": ["restoFood","meat","actions"],
+    "categories": ["restoFood","meat","actions","burgers"],
     "weight": 1000
   },
   {
@@ -514,7 +514,7 @@
     "basePrice": 220.0,
     "discountPercent": 10,
     "rating": 5.0,
-    "categories": ["restoFood","meat","actions"],
+    "categories": ["restoFood","meat","actions","burgers"],
     "weight": 1000
   },
   {
@@ -525,7 +525,7 @@
     "basePrice": 240.0,
     "discountPercent": 15,
     "rating": 5.0,
-    "categories": ["restoFood","meat","actions"],
+    "categories": ["restoFood","meat","actions","burgers"],
     "weight": 1000
   },
   {
@@ -536,7 +536,7 @@
     "basePrice": 190.0,
     "discountPercent": 10,
     "rating": 5.0,
-    "categories": ["restoFood","meat","actions"],
+    "categories": ["restoFood","meat","actions","burgers"],
     "weight": 1000
   },
   {
@@ -547,7 +547,7 @@
     "basePrice": 200.0,
     "discountPercent": 0,
     "rating": 4.0,
-    "categories": ["restoFood","meat","new"],
+    "categories": ["restoFood","meat","new","burgers"],
     "weight": 1000
   },
   {
@@ -558,7 +558,7 @@
     "basePrice": 180.0,
     "discountPercent": 0,
     "rating": 5.0,
-    "categories": ["restoFood","meat"],
+    "categories": ["restoFood","meat","burgers"],
     "weight": 1000
   },
   {

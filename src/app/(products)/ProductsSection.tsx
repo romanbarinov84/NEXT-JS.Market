@@ -7,7 +7,15 @@ export default function ProductSection({
   viewAllButton,
   products,
   applyIndexStyles = true,
-}: ProductsSectionProps & {applyIndexStyles?:boolean}) {
+  contentType,
+}: ProductsSectionProps & {
+  applyIndexStyles?: boolean;
+  contentType?: string;
+}) {
+
+
+   const gridClasses = contentType === "category" ? "grid-cols md:grid-cols-3" : "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4"
+
   return (
     <div>
       <section>
@@ -23,11 +31,17 @@ export default function ProductSection({
               />
             )}
           </div>
-          <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
+          <ul className={`${gridClasses} md:gap-6 xl:gap-8`}>
             {products.map((item, index) => (
               <li
                 key={item._id}
-                className={ applyIndexStyles ? (index >= 3 ? "md:hidden xl:block" : "") : ""}
+                className={
+                  applyIndexStyles
+                    ? index >= 3
+                      ? "md:hidden xl:block"
+                      : ""
+                    : ""
+                }
               >
                 <ProductCard {...item} />
               </li>
