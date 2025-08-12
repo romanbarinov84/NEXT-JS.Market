@@ -19,6 +19,7 @@ export default async function AllNew({
         pageTitle: "Усі новинки",
         basePath: "/new",
         errorMessage: "Помилка невдалося завантажити новинки",
+        contentType: "category",
       }}
     />
   );

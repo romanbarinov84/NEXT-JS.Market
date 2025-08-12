@@ -13,4 +13,5 @@ export const PATH_TRANSLATIONS:Record<string , string> = {
     golubzy:"Голубці",
     zrazy:"Зрази",
     meat:"Страви з мяса",
+    category:"Категорія",
 }

@@ -25,7 +25,7 @@ const AllActions = async ({
         pageTitle: " Все акции",
         basePath: "/actions",
         errorMessage: "Ошибка: не удалось загрузить акции",
-        
+        contentType: "category",
       }}
     />
     </Suspense>

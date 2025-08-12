@@ -3,17 +3,17 @@ import { ProductCardProps } from "./product";
 
 type ContentItem = ProductCardProps | ArticleCardProps;
 
-interface PaginatedResponse{
-  items:ContentItem[],
-  totalCount:number
+interface PaginatedResponse {
+  items: ContentItem[];
+  totalCount: number;
 }
 
 export interface GenericListPageProps {
-  fetchData: (options:{
-    pagination:{startIdx:number,perPage:number};
+  fetchData: (options: {
+    pagination: { startIdx: number; perPage: number };
   }) => Promise<PaginatedResponse>;
   pageTitle: string;
   basePath: string;
   errorMessage: string;
- contentType:string;
+  contentType: string;
 }

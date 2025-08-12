@@ -19,7 +19,7 @@ export default function ProductSection({
   return (
     <div>
       <section>
-        <div className="flex flex-col  px-[max(12px,calc((100%-1208px)/2))]  mt-20 justify-center w-full xl:max-w-[1208px] mx-auto mt-5">
+        <div className="flex flex-col  px-[max(12px,calc((100%-1208px)/2))]  mt-5 justify-center w-full xl:max-w-[1208px] mx-auto mt-5">
           <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
             <h2 className="text-2xl xl:text-4xl text-left font-bold text-shadow-lg">
               {title}
