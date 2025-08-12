@@ -57,7 +57,7 @@ export default function Pagination({
   const pageButtonClass = `border border-[#ff6633] ${buttonSize}`;
 
   return (
-    <div className="flex justify-center gap-4 mt-8 mb-12">
+    <div className="flex justify-center md:mb-25 xl:mb-40 gap-4 pb-10 mt-8 mb-12">
       <Link
         href={createPageUrl(basePath, params, 1)}
         aria-disabled={currentPage === 1}

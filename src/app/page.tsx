@@ -1,4 +1,4 @@
-import Footer from "@/components/footer/Footer";
+
 import Maps from "@/components/maps/Maps";
 import NewProducts from "@/app/(products)/newProducts/NewProducts";
 
@@ -26,7 +26,7 @@ export default function Home() {
         {component:<SpecialOffers/>, text:"скидок"},
         {component:<Maps/>, text:"карт"},
         {component:<Articles />,text:"постів"},
-        {component:<Footer />,text:"футера"},
+        
       ].map((item,index) => (
         <Suspense key={index} fallback={<Loader text={item.text}/>}>
           {item.component}
