@@ -14,7 +14,7 @@ export default function ProductSection({
 }) {
 
 
-   const gridClasses = contentType === "category" ? "grid-cols md:grid-cols-3" : "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4"
+   const gridClasses = contentType === "category" ? "grid grid-cols-3 gap-4 md:grid-cols-3" : "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3xl:gap-4 "
 
   return (
     <div>
@@ -31,13 +31,13 @@ export default function ProductSection({
               />
             )}
           </div>
-          <ul className={`${gridClasses} md:gap-6 xl:gap-8`}>
-            {products.map((item, index) => (
+          {products && products.length > 0 ? (<ul className={`${gridClasses} md:gap-6 xl:gap-8`}>
+            {products.slice(0,6).map((item, index) => (
               <li
                 key={item._id}
                 className={
                   applyIndexStyles
-                    ? index >= 3
+                    ? index >= 4
                       ? "md:hidden xl:block"
                       : ""
                     : ""
@@ -46,7 +46,8 @@ export default function ProductSection({
                 <ProductCard {...item} />
               </li>
             ))}
-          </ul>
+          </ul>) : (<div className="text-lg text-red-400">Продукти не знайденні</div>)}
+          
         </div>
       </section>
     </div>
