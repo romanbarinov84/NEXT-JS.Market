@@ -1,12 +1,13 @@
 "use client";
-
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css"
 import { useSearchParams, useRouter } from "next/navigation";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { CONFIG } from "../../../../config/config";
 import { PriceRange, PriceFilterProps } from "@/types/priceTypes";
 
 
-export default function PriceFilter({ basePath, category }: PriceFilterProps) {
+export default function PriceFilter({  category }: PriceFilterProps) {
   const searchParams = useSearchParams();
   const urlPriceFrom = searchParams.get("priceFrom") || "";
   const urlPriceTo = searchParams.get("priceTo") || "";
@@ -91,7 +92,7 @@ export default function PriceFilter({ basePath, category }: PriceFilterProps) {
     params.set("priceTo", toValue.toString());
 
       router.push(`?${params.toString()}`, { scroll: false });
-  }, [inputValues, priceRange, searchParams, router, basePath]);
+  }, [inputValues, priceRange, searchParams, router]);
 
   const resetPriceFilter = useCallback(() => {
     setInputValues({
@@ -105,7 +106,7 @@ export default function PriceFilter({ basePath, category }: PriceFilterProps) {
     params.delete("page");
 
     router.push(`?${params.toString()}`, { scroll: false });
-  }, [basePath, priceRange.max, priceRange.min, router, searchParams]);
+  }, [ priceRange.max, priceRange.min, router, searchParams]);
 
 
 
@@ -149,7 +150,9 @@ export default function PriceFilter({ basePath, category }: PriceFilterProps) {
           className="w-[124px] h-10 border border-[#bfbfbf] rounded bg-[#eee] py-2 px-4"
         />
       </div>
-
+         <div className="w-[320px] xl:w-[272px] px-2 mx-auto">
+          <Slider/>
+         </div>
       <button
         type="submit"
         className="bg-[#ff6633] text-white hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center duration-300 cursor-pointer "
