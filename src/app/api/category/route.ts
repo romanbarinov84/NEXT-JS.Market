@@ -19,11 +19,35 @@ export async function GET(request: Request) {
 
     const filters = searchParams.getAll("filter");
 
+    const priceFrom = searchParams.get("priceForm");
+    const priceTo = searchParams.get("priceTo");
+    const getPriceRangeOnly = searchParams.get("getPriceRangeOnly") === "true";
+
     if (!category) {
       return NextResponse.json(
         { message: "Параметр категории обязателен" },
         { status: 400 }
       );
+    }
+
+    if(getPriceRangeOnly){
+      const categoryOnlyQuery: Filter<ProductCardProps> = {};
+      categoryOnlyQuery.categories = {$in:[category]};
+      const priceRange = await db.collection<ProductCardProps>("products").aggregate([
+        {$match:categoryOnlyQuery},
+        {group:{
+          id:null,
+          min:{$min:"$basePrice"},
+          max:{$max:"basePrice"},
+        }}
+      ]).toArray()
+
+      return NextResponse.json({
+        priceRange:{
+          min:priceRange[0]?.min ?? 0,
+          max:priceRange[0]?.max ?? CONFIG.FALLBACK_PRICE_RANGE,
+        }
+    })
     }
 
     if (category) {
@@ -44,6 +68,12 @@ export async function GET(request: Request) {
       }
     }
 
+    if(priceFrom || priceTo){
+      query.basePrice = {};
+      if(priceFrom) query.basePrice.$gte = parseInt(priceFrom)
+      if(priceTo) query.basePrice.$lte = parseInt(priceTo)
+     }
+
     const [totalCount, products] = await Promise.all([
       db.collection<ProductCardProps>("products").countDocuments(query),
       db
@@ -55,7 +85,7 @@ export async function GET(request: Request) {
         .toArray(),
     ]);
 
-    return NextResponse.json({ products, totalCount });
+    return NextResponse.json({ products, totalCount,priceRange:{min:0,max:0}, });
   } catch (error) {
     console.error("Ошибка сервера:", error);
     return NextResponse.json(

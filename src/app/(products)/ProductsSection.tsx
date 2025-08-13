@@ -14,7 +14,7 @@ export default function ProductSection({
 }) {
 
 
-   const gridClasses = contentType === "category" ? "grid grid-cols-3 gap-4 md:grid-cols-3" : "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3xl:gap-4 "
+   const gridClasses = contentType === "category" ? "grid grid-cols-3 gap-4 md:grid-cols-3" : "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-4 "
 
   return (
     <div>

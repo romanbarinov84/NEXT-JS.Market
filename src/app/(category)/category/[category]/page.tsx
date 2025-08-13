@@ -6,6 +6,7 @@ import fetchCategory from "../fetchCategory";
 import FilterButtons from "../FilterButtons";
 
 import FilterControls from "../FilterControls";
+import PriceFilter from "../PriceFilter";
 
 export async function generateMetaData({
   params,
@@ -29,12 +30,16 @@ export default async function CategoryPage({
     page?: string;
     perPage?: string;
     filter?: string | string[];
+    priceFrom?:string;
+    priceTo?:string;
   }>;
   params: Promise<{ category: string }>;
 }) {
   const { category } = await params;
   const resolvedSearchParams = await searchParams;
   const activeFilter = resolvedSearchParams.filter;
+  const priceFrom = resolvedSearchParams.priceFrom;
+  const priceTo = resolvedSearchParams.priceTo;
 
   return (
     <div className="flex flex-col mx-auto  px-[max(12px,calc((100%-1208px)/2))] flex flex-col gap-y-5 md:mb-25 xl:mb-10  ">
@@ -45,13 +50,18 @@ export default async function CategoryPage({
       <FilterButtons basePath={`/category/${category}`} />
       <div className="flex flex-row gap-x-5 justify-between">
         <div className="hidden xl:flex flex-col w-[272px] gap-y-6 ">
-          aaaa
           <div className="h-11 bg-white rounded text-base font-bold text-[#333] flex items-center p-2.5">
             FILTER
           </div>
+          <div className="bg-white p-2 rounded ">
+            <PriceFilter
+              basePath={`/category/${category}`}
+              category={category}
+            />
+          </div>
         </div>
+
         <div className="flex flex-col">
-          ssssss
           <FilterControls
             activeFilter={resolvedSearchParams.filter}
             basePath={`/category/${category}`}
@@ -60,25 +70,26 @@ export default async function CategoryPage({
               perPage: resolvedSearchParams.perPage,
             }}
           />
-          card
-          <Suspense fallback={<Loader />}>
-            <GenericListPage
-              searchParams={Promise.resolve(resolvedSearchParams)}
-              props={{
-                fetchData: ({ pagination: { startIdx, perPage } }) =>
-                  fetchCategory(category, {
-                    pagination: { startIdx, perPage },
-                    filter: activeFilter,
-                  }),
-
-                basePath: `/category/${category}`,
-                errorMessage: "Ошибка: не удалось загрузить категорию продукта",
-                contentType: "category",
-              }}
-            />
-          </Suspense>
         </div>
       </div>
+      <Suspense fallback={<Loader />}>
+        <GenericListPage
+          searchParams={Promise.resolve(resolvedSearchParams)}
+          props={{
+            fetchData: ({ pagination: { startIdx, perPage } }) =>
+              fetchCategory(category, {
+                pagination: { startIdx, perPage },
+                filter: activeFilter,
+                priceFrom,
+                priceTo,
+              }),
+
+            basePath: `/category/${category}`,
+            errorMessage: "Ошибка: не удалось загрузить категорию продукта",
+            contentType: "category",
+          }}
+        />
+      </Suspense>
     </div>
   );
 }

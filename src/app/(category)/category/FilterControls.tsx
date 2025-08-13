@@ -30,7 +30,7 @@ export default function FilterControls({
 
         
         <>
-        <div className="flex flex-row gap-x-6 mb-6">
+        <div className="hidden  xl:flex flex-row flex-wrap gap-y-3 gap-x-6 mb-6">
         <div
           className={`h-8 p-2 rounded text-xs justify-center items-center duration-300 
          cursor-pointer gap-x-2 ${

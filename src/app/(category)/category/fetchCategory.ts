@@ -5,10 +5,12 @@ const fetchCategory = async (
   options: {
     pagination: { startIdx: number; perPage: number };
     filter?: string | string[];
+    priceFrom?:string;
+    priceTo?:string;
   }
 ) => {
    
-  const {pagination,filter} = options;
+  const {pagination,filter,priceFrom,priceTo} = options;
 
   try {
     const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`);
@@ -22,6 +24,15 @@ const fetchCategory = async (
       }else{
         url.searchParams.append("filter",filter);
       }
+    }
+
+    if(priceFrom){
+      url.searchParams.append("priceFrom",priceFrom)
+
+    }
+
+    if(priceTo){
+      url.searchParams.append("priceTo",priceTo)
     }
 
     const res = await fetch(url.toString(), { next: { revalidate: 3600 } });
