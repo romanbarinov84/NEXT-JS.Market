@@ -1,17 +1,17 @@
 "use client";
 import Slider from "rc-slider";
-import "rc-slider/assets/index.css"
+import "rc-slider/assets/index.css";
 import { useSearchParams, useRouter } from "next/navigation";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { CONFIG } from "../../../../config/config";
 import { PriceRange, PriceFilterProps } from "@/types/priceTypes";
 
-
-export default function PriceFilter({  category }: PriceFilterProps) {
+export default function PriceFilter({ category }: PriceFilterProps) {
   const searchParams = useSearchParams();
   const urlPriceFrom = searchParams.get("priceFrom") || "";
   const urlPriceTo = searchParams.get("priceTo") || "";
   const router = useRouter();
+  const urlInStock = searchParams.get("inStock") === "true";
 
   const [inputValues, setInputValues] = useState({
     from: urlPriceFrom,
@@ -21,6 +21,8 @@ export default function PriceFilter({  category }: PriceFilterProps) {
   const [priceRange, setPriceRange] = useState<PriceRange>(
     CONFIG.FALLBACK_PRICE_RANGE
   );
+
+  const [inStock, setInStock] = useState(urlInStock);
 
   const fetchPriceData = useCallback(async () => {
     try {
@@ -33,26 +35,26 @@ export default function PriceFilter({  category }: PriceFilterProps) {
       const response = await fetch(`/api/category/${params.toString()}`);
       if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
       const data = await response.json();
-      const recievedRange = data.priceRange || CONFIG.FALLBACK_PRICE_RANGE;
+      const receivedRange = data.priceRange || CONFIG.FALLBACK_PRICE_RANGE;
 
       setPriceRange({
-        min: Math.floor(parseInt(recievedRange.min)),
+        min: Math.floor(parseInt(receivedRange.min)),
 
-        max: Math.floor(parseInt(recievedRange.max)),
+        max: Math.floor(parseInt(receivedRange.max)),
       });
 
       setInputValues({
-        from: urlPriceFrom || recievedRange.min.toString(),
-        to: urlPriceTo || recievedRange.max.toString(),
+        from: urlPriceFrom || receivedRange.min.toString(),
+        to: urlPriceTo || receivedRange.max.toString(),
       });
-    } catch{
+    } catch {
       setPriceRange(CONFIG.FALLBACK_PRICE_RANGE);
       setInputValues({
         from: CONFIG.FALLBACK_PRICE_RANGE.min.toString(),
         to: CONFIG.FALLBACK_PRICE_RANGE.max.toString(),
       });
     }
-  }, [category,searchParams,urlPriceFrom,urlPriceTo]);
+  }, [category, searchParams, urlPriceFrom, urlPriceTo]);
 
   useEffect(() => {
     fetchPriceData();
@@ -71,7 +73,7 @@ export default function PriceFilter({  category }: PriceFilterProps) {
     applyPriceFilter();
   };
 
-   const applyPriceFilter = useCallback(() => {
+  const applyPriceFilter = useCallback(() => {
     const params = new URLSearchParams(searchParams.toString());
 
     let fromValue = Math.max(
@@ -90,9 +92,31 @@ export default function PriceFilter({  category }: PriceFilterProps) {
 
     params.set("priceFrom", fromValue.toString());
     params.set("priceTo", toValue.toString());
+    params.set("inStock", inStock.toString());
 
-      router.push(`?${params.toString()}`, { scroll: false });
-  }, [inputValues, priceRange, searchParams, router]);
+    router.push(`?${params.toString()}`, { scroll: false });
+  }, [inputValues, priceRange, searchParams, router, inStock]);
+
+  const sliderValues = [
+    parseInt(inputValues.from) || priceRange.min,
+    parseInt(inputValues.to) || priceRange.max,
+  ];
+
+  const handleInStockChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInStock(e.target.checked);
+    },
+    []
+  );
+
+  const handleSliderChange = useCallback((values: number | number[]) => {
+    if (Array.isArray(values)) {
+      setInputValues({
+        from: values[0].toString(),
+        to: values[1].toString(),
+      });
+    }
+  }, []);
 
   const resetPriceFilter = useCallback(() => {
     setInputValues({
@@ -106,11 +130,12 @@ export default function PriceFilter({  category }: PriceFilterProps) {
     params.delete("page");
 
     router.push(`?${params.toString()}`, { scroll: false });
-  }, [ priceRange.max, priceRange.min, router, searchParams]);
-
-
-
-  
+  }, [
+    priceRange.min,
+  priceRange.max,
+  router,
+  searchParams
+  ]);
 
   return (
     <form
@@ -150,9 +175,58 @@ export default function PriceFilter({  category }: PriceFilterProps) {
           className="w-[124px] h-10 border border-[#bfbfbf] rounded bg-[#eee] py-2 px-4"
         />
       </div>
-         <div className="w-[320px] xl:w-[272px] px-2 mx-auto">
-          <Slider/>
-         </div>
+      <div className="w-[320px] xl:w-[272px] px-2 mx-auto">
+        <Slider
+          range
+          min={priceRange.min}
+          max={priceRange.max}
+          value={sliderValues}
+          onChange={handleSliderChange}
+          styles={{
+            track: {
+              backgroundColor: "#70c05b",
+              height: 4,
+            },
+            handle: {
+              width: 20,
+              height: 20,
+              backgroundColor: "#70c05b",
+              border: "1px solid #ffffff",
+              borderRadius: "50%",
+              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+              marginTop: -8,
+              cursor: "pointer",
+              opacity: 1,
+            },
+            rail: {
+              backgroundColor: "#f0f0f0",
+              height: 4,
+            },
+          }}
+        />
+      </div>
+
+      <div className="flex items-center gap-2">
+        <label className="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            id="inStock"
+            checked={inStock}
+            onChange={handleInStockChange}
+            className="sr-only peer"
+          />
+          <div className="w-[46px] h-6 bg-gray-200 rounded-full peer peer-checked:bg-[#70c05c] transition-colors duration-200">
+            <div
+              className={`absolute top-0.5 left-0 w-5 h-5 border-[0.5px] border-[#333]
+             rounded-full shadow-[0px_1px_1px_rgba(0,0,0,0.08),0px_2px_6px_rgba(0,0,0,0.15)]
+              transition-transform duration-300 ${
+                inStock ? "transform translate-x-6" : "transform translate-x-0"
+              } `}
+            ></div>
+          </div>
+          <p className="text-[#333] pl-2">В наявності</p>
+        </label>
+      </div>
       <button
         type="submit"
         className="bg-[#ff6633] text-white hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center duration-300 cursor-pointer "

@@ -32,6 +32,7 @@ export default async function CategoryPage({
     filter?: string | string[];
     priceFrom?:string;
     priceTo?:string;
+    inStock?:string;
   }>;
   params: Promise<{ category: string }>;
 }) {
@@ -40,6 +41,7 @@ export default async function CategoryPage({
   const activeFilter = resolvedSearchParams.filter;
   const priceFrom = resolvedSearchParams.priceFrom;
   const priceTo = resolvedSearchParams.priceTo;
+  const inStock = resolvedSearchParams.inStock === "true";
 
   return (
     <div className="flex flex-col mx-auto  px-[max(12px,calc((100%-1208px)/2))] flex flex-col gap-y-5 md:mb-25 xl:mb-10  ">
@@ -68,6 +70,9 @@ export default async function CategoryPage({
             searchParams={{
               page: resolvedSearchParams.page,
               perPage: resolvedSearchParams.perPage,
+              priceFrom,
+              priceTo,
+              
             }}
           />
         </div>
@@ -82,6 +87,7 @@ export default async function CategoryPage({
                 filter: activeFilter,
                 priceFrom,
                 priceTo,
+                inStock,
               }),
 
             basePath: `/category/${category}`,

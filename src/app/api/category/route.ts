@@ -22,6 +22,7 @@ export async function GET(request: Request) {
     const priceFrom = searchParams.get("priceForm");
     const priceTo = searchParams.get("priceTo");
     const getPriceRangeOnly = searchParams.get("getPriceRangeOnly") === "true";
+    const inStock = searchParams.get("inStock") === "true";
 
     if (!category) {
       return NextResponse.json(
@@ -30,28 +31,37 @@ export async function GET(request: Request) {
       );
     }
 
-    if(getPriceRangeOnly){
+    if (getPriceRangeOnly) {
       const categoryOnlyQuery: Filter<ProductCardProps> = {};
-      categoryOnlyQuery.categories = {$in:[category]};
-      const priceRange = await db.collection<ProductCardProps>("products").aggregate([
-        {$match:categoryOnlyQuery},
-        {group:{
-          id:null,
-          min:{$min:"$basePrice"},
-          max:{$max:"basePrice"},
-        }}
-      ]).toArray()
+      categoryOnlyQuery.categories = { $in: [category] };
+      const priceRange = await db
+        .collection<ProductCardProps>("products")
+        .aggregate([
+          { $match: categoryOnlyQuery },
+          {
+            group: {
+              id: null,
+              min: { $min: "$basePrice" },
+              max: { $max: "basePrice" },
+            },
+          },
+        ])
+        .toArray();
 
       return NextResponse.json({
-        priceRange:{
-          min:priceRange[0]?.min ?? 0,
-          max:priceRange[0]?.max ?? CONFIG.FALLBACK_PRICE_RANGE,
-        }
-    })
+        priceRange: {
+          min: priceRange[0]?.min ?? 0,
+          max: priceRange[0]?.max ?? CONFIG.FALLBACK_PRICE_RANGE,
+        },
+      });
     }
 
     if (category) {
       query.categories = { $in: [category] };
+    }
+
+    if(inStock){
+      query.quantity = {$gt: 0};
     }
 
     if (filters.length > 0) {
@@ -68,11 +78,11 @@ export async function GET(request: Request) {
       }
     }
 
-    if(priceFrom || priceTo){
+    if (priceFrom || priceTo) {
       query.basePrice = {};
-      if(priceFrom) query.basePrice.$gte = parseInt(priceFrom)
-      if(priceTo) query.basePrice.$lte = parseInt(priceTo)
-     }
+      if (priceFrom) query.basePrice.$gte = parseInt(priceFrom);
+      if (priceTo) query.basePrice.$lte = parseInt(priceTo);
+    }
 
     const [totalCount, products] = await Promise.all([
       db.collection<ProductCardProps>("products").countDocuments(query),
@@ -85,7 +95,11 @@ export async function GET(request: Request) {
         .toArray(),
     ]);
 
-    return NextResponse.json({ products, totalCount,priceRange:{min:0,max:0}, });
+    return NextResponse.json({
+      products,
+      totalCount,
+      priceRange: { min: 0, max: 0 },
+    });
   } catch (error) {
     console.error("Ошибка сервера:", error);
     return NextResponse.json(
