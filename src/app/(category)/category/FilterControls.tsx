@@ -1,25 +1,25 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { FilterControlsProps } from "@/types/filterControlProps";
+import { useSearchParams } from "next/navigation";
 
-
-const FilterControls = ({
-  activeFilter,
-  basePath,
-  searchParams = {},
-}: FilterControlsProps) => {
-  const minPrice = searchParams.priceFrom;
-  const maxPrice = searchParams.priceTo;
+const FilterControls = ({ basePath }: FilterControlsProps) => {
+  const searchParams = useSearchParams();
+  const minPrice = searchParams.get("priceFrom");
+  const maxPrice = searchParams.get("priceTo");
+  const activeFilter = searchParams.getAll("filter");
 
   function buildClearFiltersLink() {
     const params = new URLSearchParams();
 
-    if (searchParams.page) {
-      params.set("page", searchParams.page);
+    if (searchParams.get("page")) {
+      params.set("page", searchParams.get("page") || "");
     }
 
-    if (searchParams.perPage) {
-      params.set("itemsPerPage", searchParams.perPage);
+    if (searchParams.get("perPage")) {
+      params.set("itemsPerPage", searchParams.get("perPage") || "");
     }
 
     params.delete("filter");
@@ -82,31 +82,30 @@ const FilterControls = ({
           </Link>
         </div>
       )}
-      <div
-        className={`h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 ${
-          !activeFilter || activeFilter.length === 0
-            ? "bg-[#f3f2f1] text-[#606060]"
-            : "bg-(--color-primary) text-white"
-        }`}
-      >
-        <Link
-          href={buildClearFiltersLink()}
-          className="flex items-center gap-x-2"
+
+      {activeFilterCount > 0 && (
+        <div
+          className={`h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 ${"bg-(--color-primary) text-white"}`}
         >
-          Очистить фильтры
-          <Image
-            src="/X_SVG.svg"
-            alt="Очистить фильтры"
-            width={24}
-            height={24}
-            style={
-              !activeFilter || activeFilter.length === 0
-                ? {}
-                : { filter: "brightness(0) invert(1)" }
-            }
-          />
-        </Link>
-      </div>
+          <Link
+            href={buildClearFiltersLink()}
+            className="flex items-center gap-x-2"
+          >
+            Очистить фильтры
+            <Image
+              src="/X_SVG.svg"
+              alt="Очистить фильтры"
+              width={24}
+              height={24}
+              style={
+                !activeFilter || activeFilter.length === 0
+                  ? {}
+                  : { filter: "brightness(0) invert(1)" }
+              }
+            />
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

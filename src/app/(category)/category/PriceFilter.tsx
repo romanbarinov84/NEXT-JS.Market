@@ -5,6 +5,8 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { CONFIG } from "../../../../config/config";
 import { PriceRange, PriceFilterProps } from "@/types/priceTypes";
+import PriceEnterHeader from "./PriceEnterHeader";
+import PriceInputs from "./PriceInputs";
 
 export default function PriceFilter({ category,setIsFilterOpenAction }: PriceFilterProps) {
   const searchParams = useSearchParams();
@@ -142,39 +144,8 @@ export default function PriceFilter({ category,setIsFilterOpenAction }: PriceFil
       onSubmit={handleSubmit}
       className="flex flex-col gap-y-10 text-[#333] mt-10 xl:mt-0"
     >
-      <div className="flex flex-row justify-between items-center">
-        <p className="text-[#333] text-base">Price</p>
-        <button
-          type="button"
-          onClick={resetPriceFilter}
-          className="text-xs rounded bg-[#f3f2f1] h-8 p-2 cursor-pointer"
-        >
-          Видалити
-        </button>
-      </div>
-      <div className="flex flex-row items-center justify-between gap-2">
-        <input
-          type="number"
-          name="from"
-          value={inputValues.from}
-          placeholder={`${priceRange.min}`}
-          min={priceRange.min}
-          max={priceRange.max}
-          onChange={handleInputChange}
-          className="w-[124px] h-10 border border-[#bfbfbf] rounded bg-[#eee] py-2 px-4 "
-        />
-
-        <input
-          type="number"
-          name="to"
-          value={inputValues.to}
-          onChange={handleInputChange}
-          min={priceRange.min}
-          max={priceRange.max}
-          placeholder={`${priceRange.max}`}
-          className="w-[124px] h-10 border border-[#bfbfbf] rounded bg-[#eee] py-2 px-4"
-        />
-      </div>
+      <PriceEnterHeader resetPriceFilter={resetPriceFilter}/>
+      <PriceInputs inputValues={inputValues} priceRange={priceRange} handleInputChange={handleInputChange}/>
       <div className="w-[320px] xl:w-[272px] px-2 mx-auto">
         <Slider
           range

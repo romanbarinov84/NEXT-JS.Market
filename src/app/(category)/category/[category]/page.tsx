@@ -73,13 +73,7 @@ export default async function CategoryPage({
             <FilterControls
             activeFilter={resolvedSearchParams.filter}
             basePath={`/category/${category}`}
-            searchParams={{
-              page: resolvedSearchParams.page,
-              perPage: resolvedSearchParams.perPage,
-              priceFrom,
-              priceTo,
-              
-            }}
+            
           />
           </div>
            <Suspense fallback={<Loader />}>
