@@ -14,7 +14,7 @@ export default function ProductSection({
 }) {
 
 
-   const gridClasses = contentType === "category" ? "grid grid-cols-3 gap-4 md:grid-cols-3" : "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-4 "
+   const gridClasses = contentType === "category" ? "grid grid-cols-3 gap-4 md:grid-cols-3" : "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 xl:gap-4 "
 
   return (
     <div>
@@ -31,7 +31,7 @@ export default function ProductSection({
               />
             )}
           </div>
-          {products && products.length > 0 ? (<ul className={`${gridClasses} md:gap-6 xl:gap-8`}>
+          {products && products.length > 0 ? (<ul className={`${gridClasses} md:gap-6 `}>
             {products.slice(0,6).map((item, index) => (
               <li
                 key={item._id}

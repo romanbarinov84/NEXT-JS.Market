@@ -6,7 +6,7 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 import { CONFIG } from "../../../../config/config";
 import { PriceRange, PriceFilterProps } from "@/types/priceTypes";
 
-export default function PriceFilter({ category }: PriceFilterProps) {
+export default function PriceFilter({ category,setIsFilterOpenAction }: PriceFilterProps) {
   const searchParams = useSearchParams();
   const urlPriceFrom = searchParams.get("priceFrom") || "";
   const urlPriceTo = searchParams.get("priceTo") || "";
@@ -37,15 +37,16 @@ export default function PriceFilter({ category }: PriceFilterProps) {
       const data = await response.json();
       const receivedRange = data.priceRange || CONFIG.FALLBACK_PRICE_RANGE;
 
-      setPriceRange({
-        min: Math.floor(parseInt(receivedRange.min)),
+      const roundedRange = {
+        min: Math.floor(Number(receivedRange.min)),
+        max: Math.floor(Number(receivedRange.max)),
+      };
 
-        max: Math.floor(parseInt(receivedRange.max)),
-      });
+      setPriceRange(roundedRange);
 
       setInputValues({
-        from: urlPriceFrom || receivedRange.min.toString(),
-        to: urlPriceTo || receivedRange.max.toString(),
+        from: urlPriceFrom || roundedRange.min.toString(),
+        to: urlPriceTo || roundedRange.max.toString(),
       });
     } catch {
       setPriceRange(CONFIG.FALLBACK_PRICE_RANGE);
@@ -71,6 +72,10 @@ export default function PriceFilter({ category }: PriceFilterProps) {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     applyPriceFilter();
+    if(setIsFilterOpenAction){
+      setIsFilterOpenAction(false);
+    }
+    
   };
 
   const applyPriceFilter = useCallback(() => {
@@ -130,12 +135,7 @@ export default function PriceFilter({ category }: PriceFilterProps) {
     params.delete("page");
 
     router.push(`?${params.toString()}`, { scroll: false });
-  }, [
-    priceRange.min,
-  priceRange.max,
-  router,
-  searchParams
-  ]);
+  }, [priceRange.min, priceRange.max, router, searchParams]);
 
   return (
     <form

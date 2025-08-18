@@ -54,7 +54,7 @@ const FilterControls = ({
       : `Фильтры ${activeFilterCount}`;
 
   return (
-    <div className="hidden xl:flex flex-row flex-wrap gap-x-6 gap-y-3 mb-6">
+    <div className="flex flex-row flex-wrap gap-4 items-center">
       <div
         className={`h-8 p-2 rounded text-xs flex justify-center items-center duration-300 cursor-not-allowed gap-x-2 ${
           (activeFilter && activeFilter.length > 0) || hasPriceFilter
