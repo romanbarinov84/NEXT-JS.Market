@@ -73,7 +73,6 @@ export default async function CategoryPage({
           >">
          
             <FilterControls
-            activeFilter={resolvedSearchParams.filter}
             basePath={`/category/${category}`}
             
           />

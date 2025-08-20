@@ -18,7 +18,7 @@ export default function SearchInput({query,setQuery,handleSearch,handleInputBlur
               value={query}
               placeholder="Search"
               className="w-full h-10 rounded p-2 py-2 px-4
-             outline-none text-[#8f8f8f] text-base "
+             outline-none text-[#8f8f8f] text-base caret-[var(--color-primary]"
               onFocus={handleInputFocus}
               onChange={(e) => setQuery(e.target.value)}
               name="search"
