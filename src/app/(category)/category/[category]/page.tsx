@@ -68,7 +68,9 @@ export default async function CategoryPage({
         </div>
 
         <div className="flex flex-col">
-          <div className="hidden xl:flex flex-row flex-wrap gap-x-6 gap-y-3 mb-6">
+          <div className="hidden xl:flex   <ul
+            className={`grid ${gridClasses} gap-4 md:gap-6 xl:gap-10 justify-items-center`}
+          >">
          
             <FilterControls
             activeFilter={resolvedSearchParams.filter}
@@ -76,7 +78,10 @@ export default async function CategoryPage({
             
           />
           </div>
-           <Suspense fallback={<Loader />}>
+          
+        </div>
+      </div>
+      <Suspense fallback={<Loader />}>
         <GenericListPage
           searchParams={Promise.resolve(resolvedSearchParams)}
           props={{
@@ -95,9 +100,6 @@ export default async function CategoryPage({
           }}
         />
       </Suspense>
-        </div>
-      </div>
-     
     </div>
   );
 }
