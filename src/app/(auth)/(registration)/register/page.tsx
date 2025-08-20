@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import PhoneInput from "../PhoneInput";
+import PersonInput from "../PersonInput";
 
 const initialFormData = {
   phone: "+380",
@@ -35,6 +36,8 @@ const RegisterPage = () => {
   };
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const {id,type} = e.target;
+    setFormData((prev) => ({...prev,[id]:value}))
     const value = e.target.value
   }
 
@@ -73,7 +76,20 @@ const RegisterPage = () => {
         >
           <div className="w-full flex flex-row flex-wrap justify-center gap-x-8 gap-y-4">
             <div className="flex flex-col gap-y-4 items-start">
-              <PhoneInput value={formData.phone} onChangeAction={handleChange}/> Name Surname Password currentPassword
+              <PhoneInput value={formData.phone} onChangeAction={handleChange}/> 
+              <PersonInput 
+              id="surname" 
+              label="Фамилия" 
+              value={formData.surname} 
+              onChange={handleChange}
+              />
+              <PersonInput 
+              id="firstname" 
+              label="Имя" 
+              value={formData.firstName} 
+              onChange={handleChange}
+              />
+              Surname Password currentPassword
             </div>
             <div className="flex flex-col gap-y-4 items-start">
               birthDay local City Gender
