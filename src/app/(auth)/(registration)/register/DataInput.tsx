@@ -4,15 +4,16 @@ import { ChangeEvent, useState } from "react";
 import { formStyles } from "../../styles";
 import Tooltip from "../ToolTip";
 import { validateBirthDate } from "../../../../../utils/validatons/validateBirthDate";
+import Image from "next/image";
 
-interface dateInputProps {
-  id: string;
+interface DateInputProps {
+     id?: string; 
   value: string;
   onChangeAction: (value: string) => void;
 }
 
-const DataInput = ({ id, value, onChangeAction }: dateInputProps) => {
-  const [showToolTip, setShowToolTip] = useState(false);
+const DateInput = ({ value, onChangeAction }: DateInputProps) => {
+  const [showTooltip, setShowTooltip] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const formatDate = (input: string): string => {
@@ -21,44 +22,80 @@ const DataInput = ({ id, value, onChangeAction }: dateInputProps) => {
     if (cleaned.length > 0) formatted = cleaned.slice(0, 2);
     if (cleaned.length > 2) formatted += "." + cleaned.slice(2, 4);
     if (cleaned.length > 4) formatted += "." + cleaned.slice(4, 8);
-
     return formatted;
   };
 
   const handleDateChange = (formattedDate: string) => {
     const validation = validateBirthDate(formattedDate);
     setError(validation.error || null);
-    setShowToolTip(!!validation.error);
+    setShowTooltip(!!validation.error);
     onChangeAction(formattedDate);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const formatted = formatDate(e.target.value);
-
     handleDateChange(formatted);
   };
 
+  const handleCalendarClick = () => {
+    const tempInput = document.createElement("input");
+    tempInput.type = "date";
+    tempInput.max = new Date().toISOString().split("T")[0];
+
+    tempInput.onchange = (e) => {
+      const target = e.target as HTMLInputElement;
+
+      if (target.value) {
+        const [year, month, day] = target.value.split("-");
+
+        const formatted = `${day}.${month}.${year}`;
+
+        handleDateChange(formatted);
+      }
+
+      document.body.removeChild(tempInput);
+    };
+
+    document.body.appendChild(tempInput);
+    tempInput.showPicker();
+  };
+
   return (
-    <div className="relative">
-      <label htmlFor={id} className={formStyles.label}>
+    <div>
+      <label htmlFor="birthdayDate" className={formStyles.label}>
         Дата рождения
       </label>
-      <div>
+      <div className="relative">
         <input
-          id={id}
-          value={value}
+          id="birthdayDate"
           type="text"
+          value={value}
           onChange={handleInputChange}
-          placeholder="__.__.____"
+          placeholder="дд.мм.гггг"
           className={`${formStyles.input} pr-8`}
-          max-length={10}
-          onFocus={() => setShowToolTip(true)}
-          onBlur={() => setShowToolTip(false)}
+          maxLength={10}
+          onFocus={() => setShowTooltip(true)}
+          onBlur={() => setShowTooltip(false)}
         />
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <button
+          type="button"
+          onClick={handleCalendarClick}
+          className="absolute right-2 top-1/2 transform -translate-y-1/2"
+          aria-label="Установить дату рождения"
+        >
+          <Image
+            src="/iconsAuth/icon _ calendar.svg"
+            alt="Календарь"
+            width={24}
+            height={24}
+          />
+        </button>
       </div>
-      {showToolTip && error && <Tooltip text={error} />}
+
+      {showTooltip && error && <Tooltip text={error} />}
     </div>
   );
 };
 
-export default DataInput;
+export default DateInput;
