@@ -6,6 +6,7 @@ import Image from "next/image";
 import PhoneInput from "../PhoneInput";
 import PersonInput from "../PersonInput";
 import PasswordInput from "../PasswordInput";
+import DataInput from "./DataInput";
 
 const initialFormData = {
   phone: "+380",
@@ -116,7 +117,11 @@ const RegisterPage = () => {
               
             </div>
             <div className="flex flex-col gap-y-4 items-start">
-              Дата рождения Регион Населенный пункт Пол
+              <DataInput 
+              id="birthdayDate"
+              value={formData.birthdayDate} 
+              onChangeAction={(value) => setFormData((prev) => ({...prev,birthdayDate:value}))}/>
+              Регион Населенный пункт Пол
             </div>
           </div>
         </form>
