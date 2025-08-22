@@ -11,5 +11,5 @@ export const formStyles = {
   loginLink:
     "mb-10 mx-auto h-[32px] text-[var(--color-primary)] hover:text-white active:text-white border border-[var(--color-primary)] bg-white hover:bg-[var(--color-primary)] active:shadow-[var(--shadow-button-default)] w-[120px] rounded flex items-center justify-center duration-300",
   radioLabel: "px-4 py-2 border rounded-lg cursor-pointer transition-colors",
-  radioLabelActive: "bg-blue-500 text-white border-blue-500",
+  radioLabelActive: " bg-blue-500 text-white border-blue-500 p-0.5 rounded ",
 };

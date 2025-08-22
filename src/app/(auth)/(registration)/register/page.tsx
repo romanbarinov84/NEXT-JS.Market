@@ -6,7 +6,8 @@ import Image from "next/image";
 import PhoneInput from "../PhoneInput";
 import PersonInput from "../PersonInput";
 import PasswordInput from "../PasswordInput";
-import DataInput from "./DataInput";
+import DataInput from "../DataInput";
+import SelectRegion from "../SelectRegion";
 
 const initialFormData = {
   phone: "+380",
@@ -57,12 +58,7 @@ const RegisterPage = () => {
             className="bg-[#f3f2f1] rounded duration-300 cursor-pointer mb-8"
             aria-label="Закрыть"
           >
-            <Image
-              src="/X_SVG.svg"
-              width={24}
-              height={24}
-              alt="Закрыть"
-            />
+            <Image src="/X_SVG.svg" width={24} height={24} alt="Закрыть" />
           </button>
         </div>
         <h1 className="text-2xl font-bold text-center mb-10">Регистрация</h1>
@@ -114,14 +110,19 @@ const RegisterPage = () => {
                 }
                 compareWidth={formData.password}
               />
-              
             </div>
             <div className="flex flex-col gap-y-4 items-start">
-              <DataInput 
-              id="birthdayDate"
-              value={formData.birthdayDate} 
-              onChangeAction={(value) => setFormData((prev) => ({...prev,birthdayDate:value}))}/>
-              Регион Населенный пункт Пол
+              <DataInput
+                id="birthdayDate"
+                value={formData.birthdayDate}
+                onChangeAction={(value) =>
+                  setFormData((prev) => ({ ...prev, birthdayDate: value }))
+                }
+              />
+              <SelectRegion  
+               value={formData.region}
+                onChangeAction={handleChange}/>
+             
             </div>
           </div>
         </form>

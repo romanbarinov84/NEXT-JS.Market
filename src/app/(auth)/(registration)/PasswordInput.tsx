@@ -78,6 +78,22 @@ const PasswordInput = ({
         </button>
       </div>
       {shouldShowToolTip() && <Tooltip text={getToolTipText()} />}
+      {showRequirements && value.length > 0 && (
+  <ul className="text-sm mt-2 space-y-1">
+    <li className={/^(?=.*[a-z])/.test(value) ? "text-green-500" : "text-red-400"}>
+      • Минимум одна строчная буква
+    </li>
+    <li className={/^(?=.*[A-Z])/.test(value) ? "text-green-500" : "text-red-400"}>
+      • Минимум одна заглавная буква
+    </li>
+    <li className={/^(?=.*\d)/.test(value) ? "text-green-500" : "text-red-400"}>
+      • Минимум одна цифра
+    </li>
+    <li className={value.length >= 8 ? "text-green-500" : "text-red-400"}>
+      • Минимум 8 символов
+    </li>
+  </ul>
+)}
     </div>
   );
 };
