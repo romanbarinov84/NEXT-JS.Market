@@ -8,6 +8,8 @@ import PersonInput from "../PersonInput";
 import PasswordInput from "../PasswordInput";
 import DataInput from "../DataInput";
 import SelectRegion from "../SelectRegion";
+import SelectCity from "../SelectCity";
+import GenderSelect from "../GenderSelect";
 
 const initialFormData = {
   phone: "+380",
@@ -119,10 +121,20 @@ const RegisterPage = () => {
                   setFormData((prev) => ({ ...prev, birthdayDate: value }))
                 }
               />
-              <SelectRegion  
-               value={formData.region}
-                onChangeAction={handleChange}/>
-             
+              <SelectRegion
+                value={formData.region}
+                onChangeAction={handleChange}
+              />
+              <SelectCity
+                value={formData.region}
+                onChangeAction={handleChange}
+              />
+              <GenderSelect
+                value={formData.gender}
+                onChangeAction={(gender) =>
+                  setFormData((prev) => ({ ...prev, gender }))
+                }
+              />
             </div>
           </div>
         </form>
