@@ -10,6 +10,13 @@ import DataInput from "../DataInput";
 import SelectRegion from "../SelectRegion";
 import SelectCity from "../SelectCity";
 import GenderSelect from "../GenderSelect";
+import CardInput from "../CardInput";
+import CheckBoxCard from "../CheckBoxCard";
+import EmailInput from "../EmailInput";
+import RegFormFooter from "../RegFormFooter";
+import { validateRegisterForm } from "../../../../../utils/validatons/form";
+import Loader from "@/components/Loader";
+import ErrorComponent from "@/components/errorComponent/ErrorComponent";
 
 const initialFormData = {
   phone: "+380",
@@ -22,6 +29,7 @@ const initialFormData = {
   location: "",
   gender: "",
   card: "",
+  email: "",
   hasCard: false,
 };
 
@@ -33,6 +41,7 @@ const RegisterPage = () => {
   } | null>(null);
   const [formData, setFormData] = useState(initialFormData);
   const [showPassword, setShowPassword] = useState(false);
+  const [invalidFormMessage, setInvalidFormMessage] = useState("");
   const router = useRouter();
 
   const handleClose = () => {
@@ -43,14 +52,42 @@ const RegisterPage = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { id, value } = e.target;
+    const { id, type } = e.target;
+    const value = type === "checkbox" ? e.target.checked : e.target.value;
+
+    if (invalidFormMessage) {
+      setInvalidFormMessage("");
+    }
+
+    if (id === "hasCard" && value === true) {
+      setFormData((prev) => ({
+        ...prev,
+        hasCard: true,
+        card: "",
+      }));
+      return;
+    }
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = () => {
-    //
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    setInvalidFormMessage("");
 
+    const validation = validateRegisterForm(formData);
+    if (!validation.isValid) {
+      setInvalidFormMessage(
+        validation.errorMessage || "Заполните поля коректно"
+      );
+      setIsLoading(false);
+      return;
+    }
+  };
+  //
+   if(isLoading) return <Loader/>
+   if(error) return <ErrorComponent error={error.error} userMessage={error.userMessage} />
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center bg-[#fcd5bacc] min-h-screen text-[#414141]">
       <div className="bg-white rounded shadow-(--shadow-auth-form) w-full max-w-[687px] max-h-[100vh] overflow-y-auto">
@@ -137,6 +174,27 @@ const RegisterPage = () => {
               />
             </div>
           </div>
+          <h2 className="text-lg font-bold text-center mb-6 mt-10">
+            Необовязкові поля
+          </h2>
+          <div className="w-full flex flex-row  flex-wrap gap-x-8 gap-y-4">
+            <div className="flex flex-col w-65 gap-y-4">
+              <CardInput
+                value={formData.card}
+                onChangeAction={handleChange}
+                disabled={formData.hasCard}
+              />
+              <CheckBoxCard
+                checked={formData.hasCard}
+                onChangeAction={handleChange}
+              />
+            </div>
+            <EmailInput value={formData.email} onChangeAction={handleChange} />
+          </div>
+          {invalidFormMessage && (
+            <div className="text-red-500 text-center font-bold">{invalidFormMessage}</div>
+          )}
+          <RegFormFooter isFormValid={validateRegisterForm(formData).isValid} />
         </form>
       </div>
     </div>
