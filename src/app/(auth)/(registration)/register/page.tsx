@@ -17,6 +17,7 @@ import RegFormFooter from "../RegFormFooter";
 import { validateRegisterForm } from "../../../../../utils/validatons/form";
 import Loader from "@/components/Loader";
 import ErrorComponent from "@/components/errorComponent/ErrorComponent";
+import SuccessModal from "../SuccessModal";
 
 const initialFormData = {
   phone: "+380",
@@ -42,6 +43,7 @@ const RegisterPage = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [showPassword, setShowPassword] = useState(false);
   const [invalidFormMessage, setInvalidFormMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
   const router = useRouter();
 
   const handleClose = () => {
@@ -84,10 +86,45 @@ const RegisterPage = () => {
       setIsLoading(false);
       return;
     }
+    setIsSuccess(true);
+    try {
+      const [day, month, year] = formData.birthdayDate.split(".");
+      const formattedBirthdayDate = new Date(`${year}:${month}:${day}`);
+      const userData = {
+        ...formData,
+        phone: formData.phone.replace(/\D/g, ""),
+        birthdayDate:formattedBirthdayDate,
+      };
+
+      const res = await fetch("api/register", {
+        method: "POST",
+        headers: { "Content-Type": "aplication/json" },
+        body: JSON.stringify(userData),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Ошибка регистрации");
+      }
+    } catch (error) {
+      setError({
+        error: error instanceof Error ? error : new Error("Неизвестная ошибка"),
+        userMessage: "Ошибка регистрации попробуйте снова",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
   //
-   if(isLoading) return <Loader/>
-   if(error) return <ErrorComponent error={error.error} userMessage={error.userMessage} />
+  if (isLoading) return <Loader />;
+  if (error)
+    return (
+      <ErrorComponent error={error.error} userMessage={error.userMessage} />
+    );
+
+  if (isSuccess) {
+    return <SuccessModal />;
+  }
+
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center bg-[#fcd5bacc] min-h-screen text-[#414141]">
       <div className="bg-white rounded shadow-(--shadow-auth-form) w-full max-w-[687px] max-h-[100vh] overflow-y-auto">
@@ -192,9 +229,11 @@ const RegisterPage = () => {
             <EmailInput value={formData.email} onChangeAction={handleChange} />
           </div>
           {invalidFormMessage && (
-            <div className="text-red-500 text-center font-bold">{invalidFormMessage}</div>
+            <div className="text-red-500 text-center font-bold">
+              {invalidFormMessage}
+            </div>
           )}
-          <RegFormFooter isFormValid={validateRegisterForm(formData).isValid} />
+          <RegFormFooter isFormValid={validateRegisterForm(formData).isValid} isLoading={isLoading} />
         </form>
       </div>
     </div>
