@@ -1,9 +1,11 @@
 "use client";
 
 import { ChangeEvent } from "react";
-import { formStyles } from "../styles";
+
 import IconVision from "@/components/IconVision";
-import Tooltip from "./ToolTip";
+import Tooltip from "./(registration)/ToolTip";
+import { formStyles } from "./styles";
+
 
 interface PasswordInputProps {
   id: string;

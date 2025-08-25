@@ -3,9 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
-import PhoneInput from "../PhoneInput";
+
 import PersonInput from "../PersonInput";
-import PasswordInput from "../PasswordInput";
+
 import DataInput from "../DataInput";
 import SelectRegion from "../SelectRegion";
 import SelectCity from "../SelectCity";
@@ -18,9 +18,11 @@ import { validateRegisterForm } from "../../../../../utils/validatons/form";
 import Loader from "@/components/Loader";
 import ErrorComponent from "@/components/errorComponent/ErrorComponent";
 import SuccessModal from "../SuccessModal";
+import PhoneInput from "../../PhoneInput";
+import PasswordInput from "../../PasswordInput";
 
 const initialFormData = {
-  phone: "+380",
+  phone: "+3",
   surname: "",
   firstName: "",
   password: "",
@@ -93,10 +95,10 @@ const RegisterPage = () => {
       const userData = {
         ...formData,
         phone: formData.phone.replace(/\D/g, ""),
-        birthdayDate:formattedBirthdayDate,
+        birthdayDate: formattedBirthdayDate,
       };
 
-      const res = await fetch("api/register", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "aplication/json" },
         body: JSON.stringify(userData),
@@ -233,7 +235,10 @@ const RegisterPage = () => {
               {invalidFormMessage}
             </div>
           )}
-          <RegFormFooter isFormValid={validateRegisterForm(formData).isValid} isLoading={isLoading} />
+          <RegFormFooter
+            isFormValid={validateRegisterForm(formData).isValid}
+            isLoading={isLoading}
+          />
         </form>
       </div>
     </div>

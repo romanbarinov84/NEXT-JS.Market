@@ -17,10 +17,10 @@ export function validateRegisterForm(formData: {
 }): { isValid: boolean; errorMessage?: string } {
     
   // Проверка телефона
-  if (!formData.phone || formData.phone.replace(/\D/g, "").length !== 11) {
+  if (!formData.phone || formData.phone.replace(/\D/g, "").length !== 12) {
     return {
       isValid: false,
-      errorMessage: "Введите корректный номер телефона (11 цифр)",
+      errorMessage: "Введите корректный номер телефона (10 цифр)",
     };
   }
 
@@ -84,7 +84,7 @@ export function validateRegisterForm(formData: {
   }
 
   // Проверка города
-  if (!formData.location) {
+  if (formData.location) {
     return {
       isValid: false,
       errorMessage: "Выберите город",

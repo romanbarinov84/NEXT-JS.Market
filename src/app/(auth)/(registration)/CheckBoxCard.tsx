@@ -32,7 +32,7 @@ const CheckBoxCard = ({ checked, onChangeAction }: CheckBoxProps) => {
               className="text-white bg-(--color-primary) border border-black"/>
             )}
         </span>
-        <span className="ml-2 text-[#f8f8f8]">{"В мене немає карти лояльності"}</span>
+        <span className="ml-2 text-[#bab5b5]">{"В мене немає карти лояльності"}</span>
       </label>
     </div>
   );
