@@ -3,9 +3,8 @@
 import { ChangeEvent } from "react";
 
 import IconVision from "@/components/IconVision";
-import Tooltip from "./(registration)/ToolTip";
+import Tooltip from "./(registration)/_components/ToolTip";
 import { formStyles } from "./styles";
-
 
 interface PasswordInputProps {
   id: string;
@@ -70,7 +69,7 @@ const PasswordInput = ({
           readOnly
           onFocus={(e) => e.target.removeAttribute("readOnly")}
         />
-        
+
         <button
           type="button"
           onClick={togglePasswordVisibilityAction}
@@ -81,21 +80,33 @@ const PasswordInput = ({
       </div>
       {shouldShowToolTip() && <Tooltip text={getToolTipText()} />}
       {showRequirements && value.length > 0 && (
-  <ul className="text-sm mt-2 space-y-1">
-    <li className={/^(?=.*[a-z])/.test(value) ? "text-green-500" : "text-red-400"}>
-      • Минимум одна строчная буква
-    </li>
-    <li className={/^(?=.*[A-Z])/.test(value) ? "text-green-500" : "text-red-400"}>
-      • Минимум одна заглавная буква
-    </li>
-    <li className={/^(?=.*\d)/.test(value) ? "text-green-500" : "text-red-400"}>
-      • Минимум одна цифра
-    </li>
-    <li className={value.length >= 8 ? "text-green-500" : "text-red-400"}>
-      • Минимум 8 символов
-    </li>
-  </ul>
-)}
+        <ul className="text-sm mt-2 space-y-1">
+          <li
+            className={
+              /^(?=.*[a-z])/.test(value) ? "text-green-500" : "text-red-400"
+            }
+          >
+            • Минимум одна строчная буква
+          </li>
+          <li
+            className={
+              /^(?=.*[A-Z])/.test(value) ? "text-green-500" : "text-red-400"
+            }
+          >
+            • Минимум одна заглавная буква
+          </li>
+          <li
+            className={
+              /^(?=.*\d)/.test(value) ? "text-green-500" : "text-red-400"
+            }
+          >
+            • Минимум одна цифра
+          </li>
+          <li className={value.length >= 8 ? "text-green-500" : "text-red-400"}>
+            • Минимум 8 символов
+          </li>
+        </ul>
+      )}
     </div>
   );
 };

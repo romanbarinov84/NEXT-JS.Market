@@ -4,37 +4,23 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 
-import PersonInput from "../PersonInput";
+import PersonInput from "../_components/PersonInput";
 
-import DataInput from "../DataInput";
-import SelectRegion from "../SelectRegion";
-import SelectCity from "../SelectCity";
-import GenderSelect from "../GenderSelect";
-import CardInput from "../CardInput";
-import CheckBoxCard from "../CheckBoxCard";
-import EmailInput from "../EmailInput";
-import RegFormFooter from "../RegFormFooter";
+import DataInput from "../_components/DataInput";
+import SelectRegion from "../_components/SelectRegion";
+import SelectCity from "../_components/SelectCity";
+import GenderSelect from "../_components/GenderSelect";
+import CardInput from "../_components/CardInput";
+import CheckBoxCard from "../_components/CheckBoxCard";
+import EmailInput from "../_components/EmailInput";
+import RegFormFooter from "../_components/RegFormFooter";
 import { validateRegisterForm } from "../../../../../utils/validatons/form";
 import Loader from "@/components/Loader";
 import ErrorComponent from "@/components/errorComponent/ErrorComponent";
-import SuccessModal from "../SuccessModal";
+import SuccessModal from "../_components/SuccessModal";
 import PhoneInput from "../../PhoneInput";
 import PasswordInput from "../../PasswordInput";
-
-const initialFormData = {
-  phone: "+3",
-  surname: "",
-  firstName: "",
-  password: "",
-  confirmPassword: "",
-  birthdayDate: "",
-  region: "",
-  location: "",
-  gender: "",
-  card: "",
-  email: "",
-  hasCard: false,
-};
+import { initialRegFormData } from "@/constance/RegFormData";
 
 const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,14 +28,14 @@ const RegisterPage = () => {
     error: Error;
     userMessage: string;
   } | null>(null);
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState(initialRegFormData);
   const [showPassword, setShowPassword] = useState(false);
   const [invalidFormMessage, setInvalidFormMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const router = useRouter();
 
   const handleClose = () => {
-    setFormData(initialFormData);
+    setFormData(initialRegFormData);
     router.back();
   };
 

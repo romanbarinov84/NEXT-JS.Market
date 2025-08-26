@@ -2,7 +2,7 @@
 
 import { InputMask } from "@react-input/mask";
 import { ChangeEvent } from "react";
-import { formStyles } from "../styles";
+import { formStyles } from "../../styles";
 
 interface CardInputProps {
   value: string;
@@ -21,7 +21,7 @@ const CardInput = ({ value, onChangeAction, disabled }: CardInputProps) => {
         value={value}
         onChange={onChangeAction}
         disabled={disabled}
-        placeholder={ disabled ? "" : "0000 0000 0000 0000"}
+        placeholder={disabled ? "" : "0000 0000 0000 0000"}
         className={`${formStyles.input} ${
           disabled ? "bg-[#f3f2f8] cursor-not-allowed" : ""
         }`}

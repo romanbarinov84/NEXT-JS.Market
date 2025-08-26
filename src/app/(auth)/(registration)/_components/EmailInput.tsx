@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent } from "react";
-import { formStyles } from "../styles";
+import { formStyles } from "../../styles";
 
 interface EmailInputProps {
   value: string;
@@ -21,8 +21,6 @@ const EmailInput = ({ value, onChangeAction }: EmailInputProps) => {
         onChange={onChangeAction}
         className={formStyles.input}
       />
-
-      
     </div>
   );
 };
