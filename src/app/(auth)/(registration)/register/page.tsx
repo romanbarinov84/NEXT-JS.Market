@@ -109,7 +109,7 @@ const RegisterPage = () => {
   }
 
   return (
-    <AuthFormLayout>
+    <AuthFormLayout variant="register">
       <h1 className="text-2xl font-bold text-center mb-10">Регистрация</h1>
       <h2 className="text-lg font-bold text-center mb-6">Обязательные поля</h2>
       <form

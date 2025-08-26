@@ -4,11 +4,11 @@ import ErrorComponent from "@/components/errorComponent/ErrorComponent";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Image from "next/image";
 import PhoneInput from "../../PhoneInput";
 import PasswordInput from "../../PasswordInput";
 import { buttonStyles, formStyles } from "../../styles";
 import Link from "next/link";
+import AuthFormLayout from "../../_components/AuthFormLayout";
 
 const initialFormData = {
   phone: "+3",
@@ -25,10 +25,7 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  const handleClose = () => {
-    setFormData(initialFormData);
-    router.back();
-  };
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -77,17 +74,11 @@ const LoginPage = () => {
     );
 
   return (
-    <div className="fixed inset-0 z-100 flex items-center justify-center bg-[#fcd5bacc] min-h-screen text-[#414141]">
-      <div className="bg-white rounded shadow-(--shadow-auth-form) w-full max-w-[420px] max-h-[100vh] overflow-y-auto">
-        <div className="flex justify-end">
-          <button
-            onClick={handleClose}
-            className="bg-[#f3f2f1] rounded duration-300 cursor-pointer mb-8"
-            aria-label="Закрыть"
-          >
-            <Image src="/X_SVG.svg" width={24} height={24} alt="Закрыть" />
-          </button>
-        </div>
+    <AuthFormLayout variant="register">
+      <>
+       
+          
+        
         <h1 className="text-2xl font-bold text-center mb-10">
           Особистий кабінет
         </h1>
@@ -137,8 +128,8 @@ const LoginPage = () => {
             </Link>
           </div>
         </form>
-      </div>
-    </div>
+      </>
+    </AuthFormLayout>
   );
 };
 
