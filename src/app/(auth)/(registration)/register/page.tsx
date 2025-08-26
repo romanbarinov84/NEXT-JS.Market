@@ -1,11 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Image from "next/image";
-
 import PersonInput from "../_components/PersonInput";
-
 import DataInput from "../_components/DataInput";
 import SelectRegion from "../_components/SelectRegion";
 import SelectCity from "../_components/SelectCity";
@@ -21,6 +17,10 @@ import SuccessModal from "../_components/SuccessModal";
 import PhoneInput from "../../PhoneInput";
 import PasswordInput from "../../PasswordInput";
 import { initialRegFormData } from "@/constance/RegFormData";
+import { RegFormDataProps } from "@/types/regFormData";
+import AuthFormLayout from "../../_components/AuthFormLayout";
+
+
 
 const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,16 +28,11 @@ const RegisterPage = () => {
     error: Error;
     userMessage: string;
   } | null>(null);
-  const [formData, setFormData] = useState(initialRegFormData);
+  const [registerForm, setRegisterForm] =
+    useState<RegFormDataProps>(initialRegFormData);
   const [showPassword, setShowPassword] = useState(false);
   const [invalidFormMessage, setInvalidFormMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
-  const router = useRouter();
-
-  const handleClose = () => {
-    setFormData(initialRegFormData);
-    router.back();
-  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -50,14 +45,14 @@ const RegisterPage = () => {
     }
 
     if (id === "hasCard" && value === true) {
-      setFormData((prev) => ({
+      setRegisterForm((prev) => ({
         ...prev,
         hasCard: true,
         card: "",
       }));
       return;
     }
-    setFormData((prev) => ({ ...prev, [id]: value }));
+    setRegisterForm((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -66,7 +61,7 @@ const RegisterPage = () => {
     setError(null);
     setInvalidFormMessage("");
 
-    const validation = validateRegisterForm(formData);
+    const validation = validateRegisterForm(registerForm);
     if (!validation.isValid) {
       setInvalidFormMessage(
         validation.errorMessage || "Заполните поля коректно"
@@ -76,11 +71,11 @@ const RegisterPage = () => {
     }
     setIsSuccess(true);
     try {
-      const [day, month, year] = formData.birthdayDate.split(".");
+      const [day, month, year] = registerForm.birthdayDate.split(".");
       const formattedBirthdayDate = new Date(`${year}:${month}:${day}`);
       const userData = {
-        ...formData,
-        phone: formData.phone.replace(/\D/g, ""),
+        ...registerForm,
+        phone: registerForm.phone.replace(/\D/g, ""),
         birthdayDate: formattedBirthdayDate,
       };
 
@@ -114,120 +109,110 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className="fixed inset-0 z-100 flex items-center justify-center bg-[#fcd5bacc] min-h-screen text-[#414141]">
-      <div className="bg-white rounded shadow-(--shadow-auth-form) w-full max-w-[687px] max-h-[100vh] overflow-y-auto">
-        <div className="flex justify-end">
-          <button
-            onClick={handleClose}
-            className="bg-[#f3f2f1] rounded duration-300 cursor-pointer mb-8"
-            aria-label="Закрыть"
-          >
-            <Image src="/X_SVG.svg" width={24} height={24} alt="Закрыть" />
-          </button>
+    <AuthFormLayout>
+      <h1 className="text-2xl font-bold text-center mb-10">Регистрация</h1>
+      <h2 className="text-lg font-bold text-center mb-6">Обязательные поля</h2>
+      <form
+        onSubmit={handleSubmit}
+        autoComplete="off"
+        className="w-full max-w-[552px] mx-auto max-h-100vh flex flex-col justify-center overflow-y-auto"
+      >
+        <div className="w-full flex flex-row flex-wrap justify-center gap-x-8 gap-y-4">
+          <div className="flex flex-col gap-y-4 items-start">
+            <PhoneInput
+              value={registerForm.phone}
+              onChangeAction={handleChange}
+            />
+            <PersonInput
+              id="surname"
+              label="Фамилия"
+              value={registerForm.surname}
+              onChange={handleChange}
+            />
+            <PersonInput
+              id="firstName"
+              label="Имя"
+              value={registerForm.firstName}
+              onChange={handleChange}
+            />
+            <PasswordInput
+              id="password"
+              label="Пароль"
+              value={registerForm.password}
+              onChangeAction={handleChange}
+              showPassword={showPassword}
+              togglePasswordVisibilityAction={() =>
+                setShowPassword(!showPassword)
+              }
+              showRequirements={true}
+            />
+            <PasswordInput
+              id="confirmPassword"
+              label="Подтвердите пароль"
+              value={registerForm.confirmPassword}
+              onChangeAction={handleChange}
+              showPassword={showPassword}
+              togglePasswordVisibilityAction={() =>
+                setShowPassword(!showPassword)
+              }
+              compareWidth={registerForm.password}
+            />
+          </div>
+          <div className="flex flex-col gap-y-4 items-start">
+            <DataInput
+              id="birthdayDate"
+              value={registerForm.birthdayDate}
+              onChangeAction={(value) =>
+                setRegisterForm((prev) => ({ ...prev, birthdayDate: value }))
+              }
+            />
+            <SelectRegion
+              value={registerForm.region}
+              onChangeAction={handleChange}
+            />
+            <SelectCity
+              value={registerForm.region}
+              onChangeAction={handleChange}
+            />
+            <GenderSelect
+              value={registerForm.gender}
+              onChangeAction={(gender) =>
+                setRegisterForm((prev) => ({ ...prev, gender }))
+              }
+            />
+          </div>
         </div>
-        <h1 className="text-2xl font-bold text-center mb-10">Регистрация</h1>
-        <h2 className="text-lg font-bold text-center mb-6">
-          Обязательные поля
+        <h2 className="text-lg font-bold text-center mb-6 mt-10">
+          Необовязкові поля
         </h2>
-        <form
-          onSubmit={handleSubmit}
-          autoComplete="off"
-          className="w-full max-w-[552px] mx-auto max-h-100vh flex flex-col justify-center overflow-y-auto"
-        >
-          <div className="w-full flex flex-row flex-wrap justify-center gap-x-8 gap-y-4">
-            <div className="flex flex-col gap-y-4 items-start">
-              <PhoneInput
-                value={formData.phone}
-                onChangeAction={handleChange}
-              />
-              <PersonInput
-                id="surname"
-                label="Фамилия"
-                value={formData.surname}
-                onChange={handleChange}
-              />
-              <PersonInput
-                id="firstName"
-                label="Имя"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-              <PasswordInput
-                id="password"
-                label="Пароль"
-                value={formData.password}
-                onChangeAction={handleChange}
-                showPassword={showPassword}
-                togglePasswordVisibilityAction={() =>
-                  setShowPassword(!showPassword)
-                }
-                showRequirements={true}
-              />
-              <PasswordInput
-                id="confirmPassword"
-                label="Подтвердите пароль"
-                value={formData.confirmPassword}
-                onChangeAction={handleChange}
-                showPassword={showPassword}
-                togglePasswordVisibilityAction={() =>
-                  setShowPassword(!showPassword)
-                }
-                compareWidth={formData.password}
-              />
-            </div>
-            <div className="flex flex-col gap-y-4 items-start">
-              <DataInput
-                id="birthdayDate"
-                value={formData.birthdayDate}
-                onChangeAction={(value) =>
-                  setFormData((prev) => ({ ...prev, birthdayDate: value }))
-                }
-              />
-              <SelectRegion
-                value={formData.region}
-                onChangeAction={handleChange}
-              />
-              <SelectCity
-                value={formData.region}
-                onChangeAction={handleChange}
-              />
-              <GenderSelect
-                value={formData.gender}
-                onChangeAction={(gender) =>
-                  setFormData((prev) => ({ ...prev, gender }))
-                }
-              />
-            </div>
+        <div className="w-full flex flex-row  flex-wrap gap-x-8 gap-y-4">
+          <div className="flex flex-col w-65 gap-y-4">
+            <CardInput
+              value={registerForm.card}
+              onChangeAction={handleChange}
+              disabled={!!registerForm.hasCard}
+            />
+            <CheckBoxCard
+              checked={registerForm.hasCard}
+              onChangeAction={handleChange}
+            />
           </div>
-          <h2 className="text-lg font-bold text-center mb-6 mt-10">
-            Необовязкові поля
-          </h2>
-          <div className="w-full flex flex-row  flex-wrap gap-x-8 gap-y-4">
-            <div className="flex flex-col w-65 gap-y-4">
-              <CardInput
-                value={formData.card}
-                onChangeAction={handleChange}
-                disabled={formData.hasCard}
-              />
-              <CheckBoxCard
-                checked={formData.hasCard}
-                onChangeAction={handleChange}
-              />
-            </div>
-            <EmailInput value={formData.email} onChangeAction={handleChange} />
-          </div>
-          {invalidFormMessage && (
-            <div className="text-red-500 text-center font-bold">
-              {invalidFormMessage}
-            </div>
-          )}
-          <RegFormFooter
-            isFormValid={validateRegisterForm(formData).isValid}
-            isLoading={isLoading}
+          <EmailInput
+            value={registerForm.email}
+            onChangeAction={handleChange}
           />
-        </form>
-      </div>
-    </div>
+        </div>
+        {invalidFormMessage && (
+          <div className="text-red-500 text-center font-bold">
+            {invalidFormMessage}
+          </div>
+        )}
+        <RegFormFooter
+          isFormValid={validateRegisterForm(registerForm).isValid}
+          isLoading={isLoading}
+        />
+      </form>
+    </AuthFormLayout>
   );
 };
 

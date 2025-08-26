@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header/Header";
-
 import BreadCrumbs from "@/components/BreadCrumbs";
 import Footer from "@/components/footer/Footer";
+import { RegFormProvider } from "./contexts/RegFormContext";
+
 
 const rubik = Rubik({
   variable: "--font-font-rubik",
-  subsets: ["latin","cyrillic"],
+  subsets: ["latin", "cyrillic"],
 });
-
 
 export const metadata: Metadata = {
   title: "Galya Baluvana",
@@ -24,13 +24,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable} ${rubik.variable}font-sans`} >
-        <Header/>
-        <BreadCrumbs/>
-        {children}
-
-        <Footer/>
+      <body className={`${rubik.variable} ${rubik.variable}font-sans`}>
+        <RegFormProvider>
+          <Header />
+          <BreadCrumbs />
+          {children}
+          <Footer />
+        </RegFormProvider>
       </body>
     </html>
   );
 }
+

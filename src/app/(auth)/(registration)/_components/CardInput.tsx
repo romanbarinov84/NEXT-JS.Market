@@ -5,7 +5,7 @@ import { ChangeEvent } from "react";
 import { formStyles } from "../../styles";
 
 interface CardInputProps {
-  value: string;
+  value: string | undefined;
   onChangeAction: (e: ChangeEvent<HTMLInputElement>) => void;
   disabled: boolean;
 }
