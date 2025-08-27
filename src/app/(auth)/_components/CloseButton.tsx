@@ -10,15 +10,16 @@ function CloseButton() {
     router.replace("/");
   }
   return (
-    <div>
+    
       <button
         onClick={handleClose}
-        className="bg-[#f3f2f1] rounded duration-300 cursor-pointer mb-8 absolute top-0 right-0"
+        className="bg-[#f3f3f3] rounded duration-300 cursor-pointer mb-8 absolute 
+        top-0 right-10"
         aria-label="Закрыть"
       >
-        <Image src="/X_SVG.svg" width={24} height={24} alt="Закрыть" />
+        <Image src="/X_SVG.svg" width={34} height={34} alt="Закрыть" />
       </button>
-    </div>
+    
   );
 }
 

@@ -5,9 +5,9 @@ import bcrypt from "bcrypt";
 export async function POST(request: Request) {
   try {
     const {
-      phone,
-      surname,
-      firstName,
+      phoneNumber,
+      surName,
+      name,
       password,
       birthdayDate,
       region,
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     const db = await getDB();
 
     const existingUser = await db.collection("users").findOne({
-        phone,
+        phoneNumber,
     });
 
     if(existingUser){
@@ -33,9 +33,9 @@ export async function POST(request: Request) {
     const hashPassword = await bcrypt.hash(password, 10);
 
     const result = await db.collection("users").insertOne({
-      phone,
-      surname,
-      firstName,
+      phoneNumber,
+      surName,
+      name,
       password: hashPassword,
       birthdayDate,
       region,
@@ -53,9 +53,9 @@ export async function POST(request: Request) {
         success: true,
         userId: result.insertedId,
         user: {
-          phone,
-          surname,
-          firstName,
+          phoneNumber,
+          surName,
+          name,
           email,
         },
       },

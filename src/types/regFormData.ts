@@ -1,7 +1,7 @@
 export interface RegFormDataProps {
-  phone:  string;
-  surname: string;
-  firstName: string;
+  phoneNumber:  string;
+  surName: string;
+  name: string;
   password: string;
   confirmPassword: string;
   birthdayDate: string;

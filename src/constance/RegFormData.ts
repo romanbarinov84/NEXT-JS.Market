@@ -1,9 +1,9 @@
 
 
  export  const initialRegFormData = {
-  phone: "+3",
-  surname: "",
-  firstName: "",
+  phoneNumber: "+3",
+  surName: "",
+  name: "",
   password: "",
   confirmPassword: "",
   birthdayDate: "",

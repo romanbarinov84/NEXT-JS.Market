@@ -5,7 +5,7 @@
             "name":"Andrey",
             "lastName":"Ivanov",
             "email":"andreIvanov@ukr.net",
-            "phone": "+380568743523",
+            "phoneNumber": "+380568743523",
             "purchases": [
                 {"id":11, "data":"2023-05-15"},
                 {"id":10, "data":"2024-03-10"},

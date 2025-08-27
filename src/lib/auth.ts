@@ -1,3 +1,4 @@
+import VerifyEmail from "@/app/(auth)/(registration)/_components/VerifyEmail";
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { MongoClient } from "mongodb";
@@ -14,12 +15,12 @@ export const auth = betterAuth({
     requireEmailVerification: true,
   },
   emailVerification: {
-    sendVerificationEmail: async ({ user, url, token }, request) => {
-      await Resend.emails.send({
+    sendVerificationEmail: async ({ user, url},) => {
+      await resend.emails.send({
         from: "Галя Балуванна <onboarding@resend.dev>",
         to: user.email,
         subject: "Подтвердите email",
-        react: "<strong>It works!</strong>",
+        react: VerifyEmail({username:user.name,verifyUrl:url}),
       });
     },
     autoSignInAfterVerification: false,
