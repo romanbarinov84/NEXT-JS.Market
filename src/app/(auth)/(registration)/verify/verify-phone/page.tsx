@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { ErrorContent } from "../../_components/ErrorContent";
 import AuthFormLayout from "@/app/(auth)/_components/AuthFormLayout";
 import { LoadingContent } from "../../_components/LoadingContant";
+import { EnterCode } from "@/app/(auth)/_components/EnterCode";
 
 
 export default function VerifyPhonePage() {
@@ -102,7 +103,7 @@ export default function VerifyPhonePage() {
           }}
         />
       ) : verificationSent ? (
-        <EnterCod phoneNumber={phoneNumber} />
+        <EnterCode phoneNumber={phoneNumber} />
       ) : null}
     </AuthFormLayout>
   );
