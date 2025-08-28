@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getDB } from "../../../../../../utils/APIRotes";
+import { getDB } from "../../../../../utils/APIRotes";
 
 
 export async function POST(request: Request) {

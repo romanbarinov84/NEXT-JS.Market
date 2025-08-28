@@ -1,5 +1,5 @@
 import VerifyEmail from "@/app/(auth)/(registration)/_components/VerifyEmail";
-import { betterAuth} from "better-auth";
+import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { phoneNumber } from "better-auth/plugins";
 import { MongoClient } from "mongodb";
@@ -30,19 +30,26 @@ export const auth = betterAuth({
 
   plugins: [
     phoneNumber({
-       sendOTP: async ({ phoneNumber, code }) => {
-        console.log(`[DEBUG] Отправка OTP: ${code} для ${phoneNumber}`)
-       },
-     /* sendOTP: async ({ phoneNumber, code }) => {
+      // sendOTP: async ({ phoneNumber, code }) => {
+      //console.log(`[DEBUG] Отправка OTP: ${code} для ${phoneNumber}`)
+      //},
+     sendOTP: async ({ phoneNumber, code }) => {
         try {
           const token = process.env.SMS_API_KEY;
+          const srcAddr = process.env.SMS_SENDER;
+
+          if (!token) throw new Error("Не указан SMS_API_KEY");
+          if (!srcAddr) throw new Error("Не указано src_addr для SMS");
+
           const url = "https://im.smsclub.mobi/sms/send";
 
           const data = {
-            phone: [phoneNumber], // номер получателя
-            message: `Ваш код подтверждения: ${code}`, // OTP
-            src_addr: "Галя Балувана", // имя отправителя
+            phone: [phoneNumber],
+            message: `Ваш код подтверждения: ${code}`,
+            src_addr: srcAddr,
           };
+
+          console.log("[DEBUG] Данные для SMS:", data);
 
           const response = await fetch(url, {
             method: "POST",
@@ -53,29 +60,41 @@ export const auth = betterAuth({
             body: JSON.stringify(data),
           });
 
-          const result = await response.json();
-          if(result.status !== "OK"){
-            throw new Error(result.status || "Ошибка отправки SMS")
+          // Если сервер вернул ошибку HTTP
+          if (!response.ok) {
+            const text = await response.text();
+            console.error("[DEBUG] Сервер ответил при ошибке сети:", text);
+            throw new Error(`Ошибка сети: ${response.status}`);
           }
-          
+
+          const result = await response.json();
+          console.log("[DEBUG] Ответ SMS API:", result);
+
+          // Проверка, что SMS отправлено успешно
+          if (!result.success_request) {
+            throw new Error(result.error?.message || "Ошибка отправки SMS");
+          }
+
+          // Всё ок — ничего не возвращаем
+          return;
         } catch (error) {
           console.error("Ошибка отправки SMS:", error);
           throw new Error("Не удалось отправить OTP");
         }
-      },*/
-      /*signUpOnVerification: {
-                getTempEmail: (phoneNumber) => {
-                    return `${phoneNumber}@deliveryShop.ua`
-                },
-               
-                getTempName: (phoneNumber) => {
-                    return phoneNumber 
-                }
-            },*/
-            allowedAttempts: 3,
-             otpLength: 4,
-            expiresIn: 300,
-            requireVerification:true,
+      },
+      signUpOnVerification: {
+        getTempEmail: (phoneNumber) => {
+          return `${phoneNumber}@deliveryShop.ua`;
+        },
+
+        getTempName: (phoneNumber) => {
+          return phoneNumber;
+        },
+      },
+      allowedAttempts: 3,
+      otpLength: 4,
+      expiresIn: 300,
+      requireVerification: true,
     }),
   ],
   user: {
