@@ -30,10 +30,10 @@ export const auth = betterAuth({
 
   plugins: [
     phoneNumber({
-      // sendOTP: async ({ phoneNumber, code }) => {
-      //console.log(`[DEBUG] Отправка OTP: ${code} для ${phoneNumber}`)
-      //},
-     sendOTP: async ({ phoneNumber, code }) => {
+       sendOTP: async ({ phoneNumber, code }) => {
+      console.log(`[DEBUG] Отправка OTP: ${code} для ${phoneNumber}`)
+      },
+     /*sendOTP: async ({ phoneNumber, code }) => {
         try {
           const token = process.env.SMS_API_KEY;
           const srcAddr = process.env.SMS_SENDER;
@@ -81,7 +81,7 @@ export const auth = betterAuth({
           console.error("Ошибка отправки SMS:", error);
           throw new Error("Не удалось отправить OTP");
         }
-      },
+      },*/
       signUpOnVerification: {
         getTempEmail: (phoneNumber) => {
           return `${phoneNumber}@deliveryShop.ua`;
