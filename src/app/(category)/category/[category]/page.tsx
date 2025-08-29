@@ -1,15 +1,17 @@
 import GenericListPage from "@/app/(products)/GenericListPage";
-import Loader from "@/components/Loader";
-import { Suspense } from "react";
-import { PATH_TRANSLATIONS } from "../../../../../utils/pathTranslations";
-import fetchCategory from "../fetchCategory";
-import FilterButtons from "../FilterButtons";
 
+import { Suspense } from "react";
+
+
+import FilterButtons from "../FilterButtons";
 import FilterControls from "../FilterControls";
 import PriceFilter from "../PriceFilter";
 import DropFilter from "../DropFilter";
+import { PATH_TRANSLATIONS } from "../../../../../utils/pathTranslations";
+import Loader from "@/components/Loader";
+import fetchCategory from "../fetchCategory";
 
-export async function generateMetaData({
+export async function generateMetadata({
   params,
 }: {
   params: Promise<{ category: string }>;
@@ -17,26 +19,26 @@ export async function generateMetaData({
   const { category } = await params;
   return {
     title: PATH_TRANSLATIONS[category] || category,
-    description: `Описание категории продукта ${
+    description: `Описание категории товаров "${
       PATH_TRANSLATIONS[category] || category
-    } `,
+    }" магазина "Северяночка"`,
   };
 }
 
-export default async function CategoryPage({
+const CategoryPage = async ({
   searchParams,
   params,
 }: {
   searchParams: Promise<{
     page?: string;
-    perPage?: string;
+    itemsPerPage?: string;
     filter?: string | string[];
-    priceFrom?:string;
-    priceTo?:string;
-    inStock?:string;
+    priceFrom?: string;
+    priceTo?: string;
+    inStock?: string;
   }>;
   params: Promise<{ category: string }>;
-}) {
+}) => {
   const { category } = await params;
   const resolvedSearchParams = await searchParams;
   const activeFilter = resolvedSearchParams.filter;
@@ -45,60 +47,50 @@ export default async function CategoryPage({
   const inStock = resolvedSearchParams.inStock === "true";
 
   return (
-    <div className="flex flex-col mx-auto  px-[max(12px,calc((100%-1208px)/2))] flex flex-col gap-y-5 md:mb-25 xl:mb-10  ">
-      <h1 className=" ml-3 xl:ml-0 mb-3 md:mb-5 xl:mb-10  mb-4 md:mb-3 text-shadow-lg font-bold xl:mb-3 flex flex-row text-4xl md:text-5xl xl:text-[40px] text-[#333] md:max-w-max leading-[150%] ">
+    <div className="px-[max(12px,calc((100%-1208px)/2))] flex flex-col mx-auto">
+      <h1 className="ml-3 xl:ml-0 text-4xl md:text-5xl text-left font-bold text-[#414141] mb-8 md:mb-10 xl:mb-15 max-w-[336px] md:max-w-max leading-[150%]">
         {PATH_TRANSLATIONS[category] || category}
       </h1>
-       <DropFilter basePath={`/category/${category}`} category={category}/>
-       <div className=" hidden xl:flex flex-wrap gap-4 mb-6 items-center">
-          <FilterButtons basePath={`/category/${category}`} />
-       </div>
-     
-      <div className="flex flex-row gap-x-5 justify-between">
-        <div className="hidden xl:flex flex-col w-[272px] gap-y-6 ">
-          <div className="h-11 bg-white rounded text-base font-bold text-[#333] flex items-center p-2.5">
-            FILTER
+      <DropFilter basePath={`/category/${category}`} category={category} />
+      <div className="hidden xl:flex">
+        <FilterButtons basePath={`/category/${category}`} />
+      </div>
+      <div className="flex flex-row gap-x-10 justify-between">
+        <div className="hidden xl:flex flex-col w-[272px] gap-y-10">
+          <div className="h-11 bg-[#f3f2f1] rounded text-base font-bold text-[#414141] flex items-center p-2.5">
+            Фильтр
           </div>
-          <div className="bg-white p-2 rounded ">
-            <PriceFilter
+          <PriceFilter basePath={`/category/${category}`} category={category} />
+        </div>
+        <div className="flex flex-col">
+          <div className="hidden xl:flex">
+            <FilterControls
               basePath={`/category/${category}`}
-              category={category}
             />
           </div>
-        </div>
 
-        <div className="flex flex-col">
-          <div className="hidden xl:flex   <ul
-            className={`grid ${gridClasses} gap-4 md:gap-6 xl:gap-10 justify-items-center`}
-          >">
-         
-            <FilterControls
-            basePath={`/category/${category}`}
-            
-          />
-          </div>
-          
+          <Suspense fallback={<Loader />}>
+  <GenericListPage
+    searchParams={searchParams}
+    props={{
+      fetchData: ({ pagination: { startIdx, perPage } }) =>
+        fetchCategory(category, {
+          pagination: { startIdx, perPage },
+          filter: activeFilter,
+          priceFrom,
+          priceTo,
+          inStock,
+        }),
+      basePath: `/category/${category}`,
+      contentType: "category",
+      errorMessage: "Ошибка: не удалось загрузить категорию продукта", // 👈 ОБЯЗАТЕЛЬНО
+    }}
+  />
+</Suspense>
         </div>
       </div>
-      <Suspense fallback={<Loader />}>
-        <GenericListPage
-          searchParams={Promise.resolve(resolvedSearchParams)}
-          props={{
-            fetchData: ({ pagination: { startIdx, perPage } }) =>
-              fetchCategory(category, {
-                pagination: { startIdx, perPage },
-                filter: activeFilter,
-                priceFrom,
-                priceTo,
-                inStock,
-              }),
-
-            basePath: `/category/${category}`,
-            errorMessage: "Ошибка: не удалось загрузить категорию продукта",
-            contentType: "category",
-          }}
-        />
-      </Suspense>
     </div>
   );
-}
+};
+
+export default CategoryPage;

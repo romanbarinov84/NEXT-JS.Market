@@ -3,17 +3,17 @@
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
-
-
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-
 import { buttonStyles } from "../../styles";
 import AuthFormLayout from "../../_components/AuthFormLayout";
 import { LoadingContent } from "../../(registration)/_components/LoadingContant";
 import PasswordInput from "../../PasswordInput";
 import Tooltip from "../../(registration)/_components/ToolTip";
 import { useAuthStore } from "../../../../../store/authStore";
+
+
+
 
 const EnterPasswordPage = () => {
   return (

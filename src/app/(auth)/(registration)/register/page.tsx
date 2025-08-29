@@ -157,7 +157,7 @@ const RegisterPage = () => {
               togglePasswordVisibilityAction={() =>
                 setShowPassword(!showPassword)
               }
-              compareWidth={registerForm.password}
+              compareWith={registerForm.password}
             />
           </div>
           <div className="flex flex-col gap-y-4 items-start">

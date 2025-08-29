@@ -3,25 +3,25 @@ import fetchPurchases from "../fetchPurchases";
 import { Suspense } from "react";
 import Loader from "@/components/Loader";
 
-const AllPurchases = async ({
+const AllPurchases = ({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; itemsPerPage?: string }>
+  searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
 }) => {
   return (
-    <Suspense fallback={<Loader/>}>
-
-       <GenericListPage
-      searchParams={searchParams}
-      props={{
-        fetchData: ({ pagination: { startIdx, perPage } }) => fetchPurchases({ pagination: { startIdx, perPage } }),
-        pageTitle: " Все покупки",
-        basePath: "/purchases",
-        errorMessage: "Ошибка: не удалось загрузить покупки",
-      }}
-    />
+    <Suspense fallback={<Loader />}>
+      <GenericListPage
+        searchParams={searchParams}
+        props={{
+          fetchData: ({ pagination: { startIdx, perPage } }) =>
+            fetchPurchases({ pagination: { startIdx, perPage } }),
+          basePath: "/purchases",
+          contentType: "purchases", // 👈 если у тебя в GenericListPage ожидается
+          pageTitle: "Все покупки",  // 👈 если прописан в типах
+          errorMessage: "Ошибка: не удалось загрузить покупки",
+        }}
+      />
     </Suspense>
-   
   );
 };
 
