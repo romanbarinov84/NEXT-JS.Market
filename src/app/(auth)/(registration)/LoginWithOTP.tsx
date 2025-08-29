@@ -1,9 +1,7 @@
 "use client";
 
 import Image from "next/image";
-
 import { buttonStyles } from "@/app/(auth)/styles";
-
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,8 +11,6 @@ import useTimer from "../../../../hooks/useTimer";
 import AuthFormLayout from "../_components/AuthFormLayout";
 import { LoadingContent } from "./_components/LoadingContant";
 import OTPResendCode from "./_components/OTPResendButton";
-
-
 
 const MAX_ATTEMPTS = 3;
 const TIMEOUT_PERIOD = 180;
@@ -113,7 +109,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
   }
 
   return (
-    <AuthFormLayout>
+    <AuthFormLayout variant="register">
       <div className="flex flex-col gap-y-8">
         <h1 className="text-2xl font-bold text-[#414141] text-center">Вход</h1>
         <div>
@@ -162,7 +158,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
           className="h-8 text-xs text-[#414141] hover:text-black w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer"
         >
           <Image
-            src="/icons-auth/icon-arrow-left.svg"
+            src="/iconsAuth/iconsArrow-left.svg"
             width={24}
             height={24}
             alt="Вернуться"
