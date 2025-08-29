@@ -1,10 +1,10 @@
 "use client";
 
 import { ChangeEvent } from "react";
-
-import IconVision from "@/components/IconVision";
-import Tooltip from "./(registration)/_components/ToolTip";
 import { formStyles } from "./styles";
+import Tooltip from "./(registration)/_components/ToolTip";
+import IconVision from "@/components/IconVision";
+
 
 interface PasswordInputProps {
   id: string;
@@ -14,7 +14,8 @@ interface PasswordInputProps {
   showPassword: boolean;
   togglePasswordVisibilityAction: () => void;
   showRequirements?: boolean;
-  compareWidth?: string;
+  compareWith?: string;
+  inputClass?: string;
 }
 
 const PasswordInput = ({
@@ -22,35 +23,35 @@ const PasswordInput = ({
   label,
   value,
   onChangeAction,
-  showPassword,
   togglePasswordVisibilityAction,
+  showPassword,
   showRequirements,
-  compareWidth,
+  compareWith,
+  inputClass = "",
 }: PasswordInputProps) => {
   const isPasswordValid = () => {
-    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)\S{8,}$/.test(value);
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(value);
   };
 
-  //Функция для подсказки подходит ли пароль
-
-  const shouldShowToolTip = () => {
+  const shouldShowTooltip = () => {
     if (showRequirements) {
       return value.length > 0 && !isPasswordValid();
     }
-    if (compareWidth) {
+
+    if (compareWith) {
       return (
-        value.length > 0 && compareWidth.length > 0 && value !== compareWidth
+        value.length > 0 && compareWith.length > 0 && value !== compareWith
       );
     }
-
     return false;
   };
 
-  const getToolTipText = () => {
+  const getTooltipText = () => {
     if (showRequirements) {
-      return "Пароль: больше 8 символов, 1 строчная, 1 заглавная, 1 цифра";
+      return "Пароль должен содержать: 6+ символов на латинице и цифры";
     }
-    return "Пароли не совпадают";
+
+    return "Пароли пока не совпадают";
   };
 
   return (
@@ -60,53 +61,24 @@ const PasswordInput = ({
       </label>
       <div className="relative">
         <input
-          type={showPassword ? "text" : "password"}
           id={id}
+          type={showPassword ? "text" : "password"}
           value={value}
           onChange={onChangeAction}
-          className={formStyles.input}
+          className={`${formStyles.input} ${inputClass}`}
           autoComplete="off"
           readOnly
-          onFocus={(e) => e.target.removeAttribute("readOnly")}
+          onFocus={(e) => e.target.removeAttribute("readonly")}
         />
-
         <button
           type="button"
           onClick={togglePasswordVisibilityAction}
-          className="absolute right-3 top-5 transform -translate-y-1/2"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2"
         >
           <IconVision showPassword={showPassword} />
         </button>
       </div>
-      {shouldShowToolTip() && <Tooltip text={getToolTipText()} />}
-      {showRequirements && value.length > 0 && (
-        <ul className="text-sm mt-2 space-y-1">
-          <li
-            className={
-              /^(?=.*[a-z])/.test(value) ? "text-green-500" : "text-red-400"
-            }
-          >
-            • Минимум одна строчная буква
-          </li>
-          <li
-            className={
-              /^(?=.*[A-Z])/.test(value) ? "text-green-500" : "text-red-400"
-            }
-          >
-            • Минимум одна заглавная буква
-          </li>
-          <li
-            className={
-              /^(?=.*\d)/.test(value) ? "text-green-500" : "text-red-400"
-            }
-          >
-            • Минимум одна цифра
-          </li>
-          <li className={value.length >= 8 ? "text-green-500" : "text-red-400"}>
-            • Минимум 8 символов
-          </li>
-        </ul>
-      )}
+      {shouldShowTooltip() && <Tooltip text={getTooltipText()} />}
     </div>
   );
 };

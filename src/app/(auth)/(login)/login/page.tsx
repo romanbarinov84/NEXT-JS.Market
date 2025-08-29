@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-
 import { buttonStyles, formStyles } from "../../styles";
 import { InputMask } from "@react-input/mask";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 import { MailWarning, PhoneOff } from "lucide-react";
 import AuthFormLayout from "../../_components/AuthFormLayout";
 import { LoadingContent } from "../../(registration)/_components/LoadingContant";
@@ -178,10 +176,10 @@ const EnterLoginPage = () => {
 
               {loginType === "phone" ? (
                 <InputMask
-                  mask="+7 (___) ___-__-__"
+                  mask="+3 (____) ___-__-__"
                   replacement={{ _: /\d/ }}
                   value={login}
-                  placeholder="+7 (___) ___-__-__"
+                  placeholder="+3 (____) ___-__-__"
                   onChange={handleLoginChange}
                   className={formStyles.input}
                   required
