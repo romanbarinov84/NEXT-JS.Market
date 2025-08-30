@@ -31,6 +31,16 @@ const EnterLoginPage = () => {
     setLoginType("phone");
   };
 
+  const handleForgotPassword = () => {
+    if(loginType === "phone"){
+      router.replace(
+        `/phone-pass-reset`
+      );
+    }else{
+      router.replace("/forgot-password");
+    }
+  }
+
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setLogin(value);
@@ -245,12 +255,12 @@ const EnterLoginPage = () => {
           >
             Регистрация
           </Link>
-          <Link
-            href="/forgot-password"
-            className="h-8 text-[#414141] hover:text-black w-30 flex items-center justify-center duration-300"
+           <button
+            onClick={handleForgotPassword}
+            className="h-8 text-[#414141] hover:text-black w-30 flex items-center justify-center duration-300 cursor-pointer"
           >
             Забыли пароль?
-          </Link>
+          </button>
         </div>
       </form>
     </AuthFormLayout>
