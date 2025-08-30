@@ -1,9 +1,12 @@
 "use client";
 
+
 import { ChangeEvent } from "react";
-import { formStyles } from "./styles";
 import Tooltip from "./(registration)/_components/ToolTip";
 import IconVision from "@/components/IconVision";
+import { formStyles } from "./styles";
+import { isPasswordValid } from "../../../utils/validatons/passwordValid";
+
 
 
 interface PasswordInputProps {
@@ -29,13 +32,10 @@ const PasswordInput = ({
   compareWith,
   inputClass = "",
 }: PasswordInputProps) => {
-  const isPasswordValid = () => {
-    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(value);
-  };
 
   const shouldShowTooltip = () => {
     if (showRequirements) {
-      return value.length > 0 && !isPasswordValid();
+      return value.length > 0 && !isPasswordValid(value);
     }
 
     if (compareWith) {
