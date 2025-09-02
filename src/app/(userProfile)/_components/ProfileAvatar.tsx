@@ -4,21 +4,21 @@ import { useRef, useState } from "react";
 import IconAvatarChange from "@/components/IconAvatarChange";
 import { useAuthStore } from "../../../../store/authStore";
 import ConfirmAvatarModal from "./ConfirmAvatarModal";
+import useAvatar from "../../../../hooks/useAvatar";
 
 const ProfileAvatar = ({ gender }: { gender: string }) => {
-  const { user, fetchUserData } = useAuthStore();
-  const [currentAvatar, setCurrentAvatar] = useState<string>("");
+  const { user } = useAuthStore();
   const [pendingFile, setPendingFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>("");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const userId = user?.id;
 
-  const getDisplayAvatar = () => {
-    return currentAvatar || getAvatarByGender(gender);
-  };
+  const {displayAvatar,isLoading:isUploading,uploadAvatar} = useAvatar({userId: user?.id,gender})
+
+
+
+
 
   const handleImageError = (
     e: React.SyntheticEvent<HTMLImageElement, Event>
@@ -43,75 +43,9 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
     reader.readAsDataURL(file);
   };
 
-  const loadAvatar = async () => {
-    if (!userId) {
-      setCurrentAvatar(getAvatarByGender(gender));
-      return;
-    }
+ 
 
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `/api/auth/avatar/${userId}?t=${Date.now()}`
-      );
-      if (response.ok) {
-        const blob = await response.blob();
-        if (blob.size > 0) {
-          const avatarUrl = URL.createObjectURL(blob);
-          setCurrentAvatar(avatarUrl);
-          return;
-        }
-      }
-
-      setCurrentAvatar(getAvatarByGender(gender));
-    } catch (error) {
-      console.error("Error loading Avatar", error);
-      setCurrentAvatar(getAvatarByGender(gender));
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const uploadAvatar = async (file: File) => {
-    if (!userId) {
-      throw new Error("Нужен идентификатор пользователя");
-    }
-    if (!file.type.startsWith("image/")) {
-      throw new Error("Пожалуйста выберите изображение");
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      throw new Error("Размер файла не должен превышать 5MB");
-    }
-
-    setIsLoading(true);
-
-    try {
-      const formData = new FormData();
-      formData.append("avatar", file);
-      formData.append("userId", userId);
-
-      const response = await fetch("/api/auth/upload-avatar", {
-        method: "POST",
-        body: formData,
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Ошибка загрузки");
-      }
-
-      await loadAvatar();
-
-      await fetchUserData();
-
-      return true;
-    } catch (error) {
-      console.error("Error uploading avatar", error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  
 
   const handleAvatarConfirm = async () => {
     if (pendingFile) {
@@ -152,7 +86,7 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
     <div className="flex flex-col items-center mb-8">
       <div className="relative">
         <Image
-          src={getDisplayAvatar()}
+          src={displayAvatar}
           width={128}
           height={128}
           alt="avatar-Profile"
@@ -160,6 +94,11 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
           onError={handleImageError}
           priority
         />
+        {isUploading && (
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+          </div>
+        )}
         <label className="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full cursor-pointer shadow-md hover:bg-green-600 duration-300">
           <input
             ref={fileInputRef}
@@ -174,7 +113,7 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
           <ConfirmAvatarModal
             isOpen={showConfirmModal}
             previewUrl={previewUrl}
-            isUploading={isLoading}
+            isUploading={isUploading}
             onConfirm={handleAvatarConfirm}
             onCancel={handleAvatarCancel}
           />
