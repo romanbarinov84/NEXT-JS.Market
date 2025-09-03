@@ -1,25 +1,24 @@
-"use client"
+"use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getAvatarByGender } from "../utils/getAvatarByGender";
 import { useAuthStore } from "../store/authStore";
 
-interface UseAvatarProps{
-    userId?:string;
-    gender:string;
+interface UseAvatarProps {
+  userId?: string;
+  gender: string;
 }
 
-export default function useAvatar({userId,gender="male"}:UseAvatarProps) {
-    const [currentAvatar, setCurrentAvatar] = useState<string>("");
-    const [isLoading, setIsLoading] = useState(false);
-    const {  fetchUserData } = useAuthStore();
+export default function useAvatar({ userId, gender = "male" }: UseAvatarProps) {
+  const [currentAvatar, setCurrentAvatar] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { fetchUserData } = useAuthStore();
 
-
-      const getDisplayAvatar = () => {
+  const getDisplayAvatar = useCallback(() => {
     return currentAvatar || getAvatarByGender(gender);
-  };
+  },[currentAvatar,gender]);
 
-   const loadAvatar = async () => {
+  const loadAvatar = useCallback(async () => {
     if (!userId) {
       setCurrentAvatar(getAvatarByGender(gender));
       return;
@@ -46,9 +45,21 @@ export default function useAvatar({userId,gender="male"}:UseAvatarProps) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [gender, userId]);
 
-   const uploadAvatar = async (file: File) => {
+  useEffect(() => {
+    loadAvatar();
+  }, [loadAvatar]);
+
+  useEffect(() => {
+    return () => {
+      if(currentAvatar && currentAvatar.startsWith("blob:")){
+        URL.revokeObjectURL(currentAvatar);
+      }
+    }
+  },[currentAvatar])
+
+  const uploadAvatar = useCallback(async (file: File) => {
     if (!userId) {
       throw new Error("Нужен идентификатор пользователя");
     }
@@ -87,12 +98,14 @@ export default function useAvatar({userId,gender="male"}:UseAvatarProps) {
     } finally {
       setIsLoading(false);
     }
+  },[fetchUserData,loadAvatar,userId]);
+
+  return {
+    avatar:currentAvatar,
+    displayAvatar: getDisplayAvatar(),
+    isLoading,
+    loadAvatar,
+    uploadAvatar,
+    getDisplayAvatar,
   };
-
-
-
-
-  return {displayAvatar:getDisplayAvatar(),isLoading,loadAvatar,uploadAvatar,getDisplayAvatar};
-    
-
 }

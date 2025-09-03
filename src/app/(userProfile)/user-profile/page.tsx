@@ -12,6 +12,7 @@ import Loader from "@/components/Loader";
 import { ErrorContent } from "@/app/(auth)/(registration)/_components/ErrorContent";
 import SecuritySection from "../_components/SecuritySection";
 import ProfileAvatar from "../_components/ProfileAvatar";
+import "../user-profile/style.css"
 
 const ProfilePage = () => {
   const { user, isAuth, checkAuth } = useAuthStore();
