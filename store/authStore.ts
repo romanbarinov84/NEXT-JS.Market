@@ -70,18 +70,18 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         throw new Error("Unauthorized");
       }
 
-        if (!response.ok) {
+      if (!response.ok) {
         throw new Error("Ошибка получения данных");
       }
 
       const userData = await response.json();
-
+      
       set({ user: userData, isLoading: false });
     } catch (error) {
       console.error("Ошибка загрузки данных пользователя:", error);
       set({ user: null, isLoading: false });
 
-      if (error instanceof Error && error.message === "Unauthorized") {
+      if (error === "Unauthorized") {
         set({ isAuth: false });
       }
     }

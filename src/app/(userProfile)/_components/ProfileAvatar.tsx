@@ -7,8 +7,8 @@ import ConfirmAvatarModal from "./ConfirmAvatarModal";
 import CameraModal from "./CameraModal";
 import { optimizeCameraPhoto } from "../../../../utils/optimizeImages/optimizeCameraPhoto";
 import { optimizeImage } from "../../../../utils/optimizeImages/optimizeImage";
-import IconAvatarChange from "@/components/IconAvatarChange";
 import { useAuthStore } from "../../../../store/authStore";
+import IconAvatarChange from "@/components/IconAvatarChange";
 import useAvatar from "../../../../hooks/useAvatar";
 
 const ProfileAvatar = ({ gender }: { gender: string }) => {
