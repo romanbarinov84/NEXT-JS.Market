@@ -1,40 +1,56 @@
 "use client";
 
 import { ChangeEvent } from "react";
+import Image from "next/image";
 import { formStyles } from "../../styles";
 import { regions } from "../../../../../data/regions";
-import Image from "next/image";
+
 
 interface SelectRegionProps {
   value: string;
   onChangeAction: (e: ChangeEvent<HTMLSelectElement>) => void;
+  className?: string;
+  disabled?: boolean;
 }
 
-const SelectRegion = ({ value, onChangeAction }: SelectRegionProps) => {
+const SelectRegion = ({
+  value,
+  onChangeAction,
+  className,
+  disabled,
+}: SelectRegionProps) => {
   return (
     <div>
       <label htmlFor="region" className={formStyles.label}>
-        Локація
+        Регион
       </label>
       <div className="relative">
         <select
           id="region"
+          name="region"
           value={value}
+          disabled={disabled}
           onChange={onChangeAction}
-          className={`${formStyles.input} appearance-none pr-8 cursor-pointer mt-4 `}
+          className={`${formStyles.input} ${className} appearance-none pr-8 cursor-pointer disabled:cursor-not-allowed disabled:bg-[#f3f2f1]`}
         >
           {regions.map((region) => (
-            <option key={region.value}>{region.label}</option>
+            <option key={region.value} value={region.label}>
+              {region.label}
+            </option>
           ))}
         </select>
-        <div className="absolute right-2 top-1/2 transform -transform-y-1/3 pointer-events-none">
-          <Image
-            src="/iconsAuth/arrow-Down.svg"
-            alt="Продивитись"
-            width={20}
-            height={20}
-          />
-        </div>
+
+        {!disabled && (
+          <div className="absolute right-2 top-2 transform -transform-y-1/2 pointer-events-none">
+            <Image
+              src="/icons-products/icon-arrow-right.svg"
+              alt="Выберите регион"
+              width={24}
+              height={24}
+              className="rotate-90"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
