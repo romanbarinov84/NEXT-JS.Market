@@ -3,13 +3,13 @@ import { formStyles, profileStyles } from "@/app/(auth)/styles";
 import { Mail, Edit } from "lucide-react";
 import { ChangeEvent, useEffect, useState } from "react";
 import { CONFIG } from "../../../../config/config";
-
-
 import { authClient } from "@/lib/auth-client";
 import AlertMessage from "./AlertMessage";
 import { SuccessChangeEmail } from "./SuccessChangeEmail";
 import AuthFormLayout from "@/app/(auth)/_components/AuthFormLayout";
 import { useAuthStore } from "../../../../store/authStore";
+
+
 
 const ProfileEmail = () => {
   const [isEditing, setIsEditing] = useState(false);

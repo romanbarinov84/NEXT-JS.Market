@@ -80,11 +80,11 @@ export const PhonePasswordResetRequest = ({
             </label>
 
             <InputMask
-              mask="+7 (___) ___-__-__"
+              mask="+3 (___) ___-__-__"
               replacement={{ _: /\d/ }}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              placeholder="+7 (___) ___-__-__"
+              placeholder="+3 (___) ___-__-__"
               className={formStyles.input}
               required
             />

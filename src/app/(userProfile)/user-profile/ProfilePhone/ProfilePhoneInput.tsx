@@ -13,54 +13,48 @@ const PhoneInput = ({ value, onChange, disabled }: ProfilePhoneInputProps) => {
   const maskedValue = useMemo(() => {
     if (!value) return "";
 
-    const cleanPhone = value.replace(/\D/g, "");
+    const cleanPhone = value.replace(/\D/g, ""); // только цифры
+    let formatted = "+3";
 
-    let formatted = "+7";
-
+    // код в скобках (4 цифры)
     if (cleanPhone.length > 1) {
-      formatted += ` (${cleanPhone.slice(1, 4)}`;
+      formatted += `(${cleanPhone.slice(1, 5)})`;
     }
 
-    if (cleanPhone.length > 4) {
-      formatted += `) ${cleanPhone.slice(4, 7)}`;
+    // дальше формат: XXX XX XX
+    if (cleanPhone.length > 5) {
+      formatted += ` ${cleanPhone.slice(5, 8)}`;
     }
-
-    if (cleanPhone.length > 7) {
-      formatted += `-${cleanPhone.slice(7, 9)}`;
+    if (cleanPhone.length > 8) {
+      formatted += ` ${cleanPhone.slice(8, 10)}`;
     }
-
-    if (cleanPhone.length > 9) {
-      formatted += `-${cleanPhone.slice(9, 11)}`;
+    if (cleanPhone.length > 10) {
+      formatted += ` ${cleanPhone.slice(10, 12)}`;
     }
 
     return formatted;
   }, [value]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const maskedValue = e.target.value;
+    let clean = e.target.value.replace(/\D/g, "");
 
-    const clean = maskedValue.replace(/\D/g, "");
-    let cleanedValue = clean;
-
-    if (clean.startsWith("8")) {
-      cleanedValue = "7" + clean.slice(1);
-    } else if (clean.startsWith("7")) {
-      cleanedValue = clean;
-    } else if (clean.length > 0) {
-      cleanedValue = "7" + clean;
+    // добавляем "3" только один раз
+    if (clean.length > 0 && !clean.startsWith("3")) {
+      clean = "3" + clean;
     }
 
-    if (cleanedValue.length <= 11) {
-      onChange(cleanedValue);
+    // ограничиваем длину до 12 цифр
+    if (clean.length <= 12) {
+      onChange(clean);
     }
   };
 
   return (
     <div className={profileStyles.inputContainer}>
       <InputMask
-        mask="+7 (___) ___-__-__"
+        mask="+3(____) ___ __ __"
         replacement={{ _: /\d/ }}
-        placeholder="+7 (___) ___-__-__"
+        placeholder="+3(____) ___ __ __"
         value={maskedValue}
         onChange={handleChange}
         className={`${formStyles.input} [&&]:w-full disabled:cursor-not-allowed [&&]:disabled:bg-[#f3f2f1]`}
