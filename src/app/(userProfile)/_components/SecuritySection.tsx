@@ -1,15 +1,13 @@
 "use client";
 
+
 import { buttonStyles } from "@/app/(auth)/styles";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useAuthStore } from "../../../../store/authStore";
-import { LoadingContent } from "@/app/(auth)/(registration)/_components/LoadingContant";
 import DeleteAccountModal from "./DeleteAccountModal";
-
+import { useAuthStore } from "../../../../store/authStore";
 
 const SecuritySection: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const { user, logout } = useAuthStore();
@@ -32,34 +30,10 @@ const SecuritySection: React.FC = () => {
   const handleDeleteAccount = async () => {
     if (!user) return;
 
-    try {
-      setIsLoading(true);
-      setError(null);
-
-      const response = await fetch("/api/auth/delete-account", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: user.id }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Не удалось удалить аккаунт");
-      }
-
-      logout(); // Это очистит Zustand store
-      router.replace("/goodbye"); // Редирект на страницу прощания
-    } catch (error) {
-      console.error("Ошибка при удалении аккаунта:", error);
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Не удалось удалить аккаунт. Попробуйте позже."
-      );
-    } finally {
-      setIsLoading(false);
-      setShowDeleteConfirm(false);
+    if (user.phoneNumberVerified === true) {
+      router.push("/verify-delete-phone");
+    } else {
+      router.push("/verify-delete-email");
     }
   };
 
@@ -73,16 +47,12 @@ const SecuritySection: React.FC = () => {
     setShowDeleteConfirm(false);
   };
 
-  if (isLoading) {
-    return <LoadingContent title="Аккаунт удаляется " />;
-  }
-
   return (
-    <div className="mb-10">
-      <div className="border-t pt-8 mb-10">
+    <>
+      <div className="border-t pt-8">
         <h2 className="text-2xl font-bold text-[#414141] mb-6">Безопасность</h2>
         {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-300 text-[#d80000] rounded">
+          <div className="mb-4 p-3 bg-[#ffc7c7] border border-red-300 text-[#d80000] rounded">
             {error}
           </div>
         )}
@@ -113,7 +83,7 @@ const SecuritySection: React.FC = () => {
         onConfirm={handleDeleteAccount}
         error={error}
       />
-    </div>
+    </>
   );
 };
 

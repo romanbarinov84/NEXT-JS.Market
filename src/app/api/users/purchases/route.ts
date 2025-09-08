@@ -1,7 +1,7 @@
+import { CONFIG } from "../../../../../config/config";
+
 import { NextResponse } from "next/server";
 import { getDB } from "../../../../../utils/APIRotes";
-import { CONFIG } from "../../../../../config/config";
-export const revalidate = 3600;
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {

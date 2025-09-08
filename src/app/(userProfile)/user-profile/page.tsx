@@ -16,6 +16,7 @@ import { ErrorContent } from "@/app/(auth)/(registration)/_components/ErrorConte
 import ProfilePhoneSetting from "./ProfilePhone/ProfilePhoneSettings";
 import { useAuthStore } from "../../../../store/authStore";
 import ProfilePassword from "../_components/ProfilePassword";
+import ProfileCard from "@/app/(auth)/(registration)/_components/ProfileCard";
 
 
 
@@ -99,6 +100,7 @@ const ProfilePage = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ProfilePassword/>
+            <ProfileCard/>
           </div>
           <SecuritySection />
         </div>
