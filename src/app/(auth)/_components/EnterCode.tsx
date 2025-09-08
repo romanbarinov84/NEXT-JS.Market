@@ -1,14 +1,15 @@
-
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
 import { useRegFormContext } from "@/app/contexts/RegFormContext";
 import { useEffect, useState } from "react";
-import { buttonStyles } from "../styles";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import useTimer from "../../../../hooks/useTimer";
+import useTimer from "@/hooks/useTimer";
+import { LoadingContent } from "../(registration)/_components/LoadingContant";
+import OTPResendCode from "../(registration)/_components/OTPResendButton";
+import { buttonStyles } from "../styles";
 
 
 const MAX_ATTEMPTS = 3;
@@ -16,6 +17,7 @@ const TIMEOUT_PERIOD = 180;
 
 export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
   const [code, setCode] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
   const { regFormData } = useRegFormContext();
@@ -30,6 +32,8 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (code.length !== 4) return;
+
+    setIsLoading(true);
 
     try {
       const { data: verifyData, error: verifyError } =
@@ -74,6 +78,8 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
       } else {
         setError(`Неверный код. Осталось попыток: ${attemptsLeft - 1}`);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -98,6 +104,15 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
       setError("Ошибка при отправке кода");
     }
   };
+
+  if (isLoading) {
+    return (
+   
+        <LoadingContent title={"Проверяем код..."} />
+     
+    );
+  }
+
   return (
     <>
       <div className="flex flex-col gap-y-8">
@@ -126,7 +141,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
               required
             />
             {error && (
-              <div className="text-red-500 text-center mt-2 text-sm">
+              <div className="text-[#d80000] text-center mt-2 text-sm">
                 {error}
               </div>
             )}
@@ -140,28 +155,18 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
           </form>
         </div>
 
-        {!canResend ? (
-          <p className="text-[#414141] text-xs text-center">
-            Запросить код повторно можно через{" "}
-            <span className="font-bold">{timeLeft} секунд</span>
-          </p>
-        ) : (
-          <button
-            onClick={handleResend}
-            disabled={!canResend}
-            className={`text-xs underline cursor-pointer text-center ${
-              canResend ? "text-[#ff6633]" : "text-gray-400 cursor-not-allowed"
-            }`}
-          >
-            Отправить еще раз
-          </button>
-        )}
+        <OTPResendCode
+          canResend={canResend}
+          timeLeft={timeLeft}
+          onResendAction={handleResend}
+        />
+
         <Link
           href="/register"
           className="h-8 text-xs text-[#414141] hover:text-black w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer"
         >
           <Image
-            src="/iconsAuth/iconsArrow-left.svg"
+            src="/icons-auth/icon-arrow-left.svg"
             width={24}
             height={24}
             alt="Вернуться"

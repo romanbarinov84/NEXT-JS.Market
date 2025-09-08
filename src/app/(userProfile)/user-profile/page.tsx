@@ -15,6 +15,7 @@ import ProfileEmail from "../_components/ProfileEmail";
 import { ErrorContent } from "@/app/(auth)/(registration)/_components/ErrorContent";
 import ProfilePhoneSetting from "./ProfilePhone/ProfilePhoneSettings";
 import { useAuthStore } from "../../../../store/authStore";
+import ProfilePassword from "../_components/ProfilePassword";
 
 
 
@@ -95,6 +96,9 @@ const ProfilePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ProfileEmail />
             <ProfilePhoneSetting/>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <ProfilePassword/>
           </div>
           <SecuritySection />
         </div>

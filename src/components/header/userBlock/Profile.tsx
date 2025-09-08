@@ -4,8 +4,10 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAuthStore } from "../../../../store/authStore";
+import { checkAvatarExists } from "../../../../utils/avatarUtils";
 import { getAvatarByGender } from "../../../../utils/getAvatarByGender";
+import { useAuthStore } from "../../../../store/authStore";
+
 
 
 const Profile = () => {
@@ -23,11 +25,25 @@ const Profile = () => {
   }, [user]);
 
   useEffect(() => {
-    if (user?.id) {
-      setAvatarSrc(`/api/auth/avatar/${user.id}?t=${lastUpdate}`);
-    } else if (user?.gender) {
-      setAvatarSrc(getAvatarByGender(user.gender));
-    }
+    const checkAvatar = async () => {
+      if (user?.id) {
+        try {
+          const exists = await checkAvatarExists(user.id);
+
+          if (exists) {
+            setAvatarSrc(`/api/auth/avatar/${user.id}?t=${lastUpdate}`);
+          } else {
+            setAvatarSrc(getAvatarByGender(user.gender));
+          }
+        } catch {
+          setAvatarSrc(getAvatarByGender(user.gender));
+        }
+      } else if (user?.gender) {
+        setAvatarSrc(getAvatarByGender(user.gender));
+      }
+    };
+
+    checkAvatar();
   }, [user, lastUpdate]);
 
   useEffect(() => {
@@ -57,7 +73,6 @@ const Profile = () => {
     setIsLoggingOut(true);
     try {
       await logout();
-
       router.replace("/");
     } catch (error) {
       console.error("Не удалось выйти:", error);
@@ -89,7 +104,7 @@ const Profile = () => {
           <p>Войти</p>
         </div>
         <Image
-          src="/EnterImgButton.svg"
+          src="/icons-header/icon-entry.svg"
           alt="Войти"
           width={24}
           height={24}
@@ -117,7 +132,7 @@ const Profile = () => {
         </p>
         <div className="hidden xl:block">
           <Image
-            src="/EnterImgButton.svg"
+            src="/userBlock/ShevronArrowDown.svg"
             alt="Меню профиля"
             width={24}
             height={24}
