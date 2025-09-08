@@ -13,12 +13,11 @@ import { useAuthStore } from "../../../../../store/authStore";
 
 
 
-
 const EnterPasswordPage = () => {
   return (
     <Suspense
       fallback={
-        <AuthFormLayout variant="register">
+        <AuthFormLayout>
           <LoadingContent title={"Сейчас запросим пароль"} />
         </AuthFormLayout>
       }
@@ -56,14 +55,12 @@ const EnterPasswordContent = () => {
   };
 
   const handleForgotPassword = () => {
-    if(loginType === "phone"){
-      router.replace(
-        `/phone-pass-reset`
-      );
-    }else{
+    if (loginType === "phone") {
+      router.replace(`/phone-pass-reset`);
+    } else {
       router.replace("/forgot-password");
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,9 +84,7 @@ const EnterPasswordContent = () => {
           throw new Error(data.message || "Ошибка при входе");
         }
 
-        const userName = data.user?.name;
-
-        login(userName);
+        login();
 
         router.replace("/");
       } else {
@@ -99,18 +94,19 @@ const EnterPasswordContent = () => {
             password,
           },
           {
-            onSuccess: (ctx) => {
-              const userName = ctx.data?.user.name || "Пользователь";
-              login(userName);
+            onSuccess: () => {
+              login();
               router.replace("/");
             },
             onError: (ctx) => {
-              setError(ctx.error?.message || "Ошибка при входе");
+              if (ctx.error?.message.includes("Invalid email or password")) {
+                setError("Неверный пароль");
+              } else {
+                setError(ctx.error?.message || "Ошибка при входе");
+              }
             },
           }
         );
-
-        router.replace("/");
       }
     } catch (error) {
       const errorMessage = getErrorMessage(error);
