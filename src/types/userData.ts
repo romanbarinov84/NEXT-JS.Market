@@ -8,7 +8,8 @@ export type UserData = {
   phoneNumberVerified: boolean;
   gender: string;
   birthdayDate?: string;
-  location?: string;
+  city?: string;
   region?: string;
+  role: string;
   card?: string
 } | null;

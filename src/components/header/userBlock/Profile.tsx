@@ -104,7 +104,7 @@ const Profile = () => {
           <p>Войти</p>
         </div>
         <Image
-          src="/icons-header/icon-entry.svg"
+          src="/EnterImgButton.svg"
           alt="Войти"
           width={24}
           height={24}

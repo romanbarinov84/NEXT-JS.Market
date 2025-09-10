@@ -8,7 +8,7 @@
   confirmPassword: "",
   birthdayDate: "",
   region: "",
-  location: "",
+  city: "",
   gender: "",
   card: "",
   email: "",

@@ -7,21 +7,19 @@ import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import useTimer from "@/hooks/useTimer";
-import { LoadingContent } from "../(registration)/_components/LoadingContant";
 import OTPResendCode from "../(registration)/_components/OTPResendButton";
 import { buttonStyles } from "../styles";
+import { CONFIG } from "../../../../config/config";
+import { LoadingContent } from "../(registration)/_components/LoadingContant";
 
-
-const MAX_ATTEMPTS = 3;
-const TIMEOUT_PERIOD = 180;
 
 export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
+  const [attemptsLeft, setAttemptsLeft] = useState(CONFIG.MAX_ATTEMPTS);
   const { regFormData } = useRegFormContext();
-  const { timeLeft, canResend, startTimer } = useTimer(TIMEOUT_PERIOD);
+  const { timeLeft, canResend, startTimer } = useTimer(CONFIG.TIMEOUT_PERIOD);
   const router = useRouter();
 
   useEffect(() => {
@@ -45,7 +43,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 
       if (verifyError) throw verifyError;
 
-      setAttemptsLeft(MAX_ATTEMPTS);
+      setAttemptsLeft(CONFIG.MAX_ATTEMPTS);
 
       const passwordResponse = await fetch("/api/auth/set-password", {
         method: "POST",
@@ -92,7 +90,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
           onSuccess: () => {
             startTimer();
             setError("");
-            setAttemptsLeft(MAX_ATTEMPTS);
+            setAttemptsLeft(CONFIG.MAX_ATTEMPTS);
           },
           onError: (ctx) => {
             setError(ctx.error?.message || "Ошибка при отправке SMS");
@@ -106,11 +104,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
   };
 
   if (isLoading) {
-    return (
-   
-        <LoadingContent title={"Проверяем код..."} />
-     
-    );
+    return <LoadingContent title={"Проверяем код..."} />;
   }
 
   return (
@@ -141,7 +135,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
               required
             />
             {error && (
-              <div className="text-[#d80000] text-center mt-2 text-sm">
+              <div className="text-red-500 text-center mt-2 text-sm">
                 {error}
               </div>
             )}

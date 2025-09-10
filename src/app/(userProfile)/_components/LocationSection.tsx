@@ -1,7 +1,5 @@
-
 import { profileStyles } from "@/app/(auth)/styles";
 import { ChangeEvent, useEffect, useState } from "react";
-
 import { Edit } from "lucide-react";
 import SelectCity from "@/app/(auth)/(registration)/_components/SelectCity";
 import SelectRegion from "@/app/(auth)/(registration)/_components/SelectRegion";
@@ -9,7 +7,7 @@ import { useAuthStore } from "../../../../store/authStore";
 
 interface ProfileFormData {
   region: string;
-  location: string;
+  city: string;
 }
 
 const LocationSection = () => {
@@ -18,14 +16,14 @@ const LocationSection = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [formData, setFormData] = useState<ProfileFormData>({
     region: "",
-    location: "",
+    city: "",
   });
 
   useEffect(() => {
     if (user) {
       setFormData({
         region: user.region || "",
-        location: user.location || "",
+        city: user.city || "",
       });
     }
   }, [user]);
@@ -36,39 +34,38 @@ const LocationSection = () => {
   };
 
   const handleCityChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFormData((prev) => ({ ...prev, location: e.target.value }));
+    setFormData((prev) => ({ ...prev, city: e.target.value }));
     setIsEditing(true);
   };
 
   const handleCancel = () => {
     setFormData({
       region: user?.region || "",
-      location: user?.location || "",
+      city: user?.city || "",
     });
     setIsEditing(false);
   };
 
   const handleSave = async () => {
     if (!user?.id) return;
+    if (!formData.region || !formData.city) {
+      alert("Выберите регион и город");
+      return;
+    }
 
     setIsSaving(true);
-
     try {
-      const response = await fetch("/api/auth/location", {
+      const response = await fetch("/api/auth/city", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userId: user.id,
           region: formData.region,
-          location: formData.location,
+          city: formData.city,
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Ошибка сохранения");
-      }
+      if (!response.ok) throw new Error("Ошибка сохранения");
 
       await fetchUserData();
       setIsEditing(false);
@@ -94,14 +91,11 @@ const LocationSection = () => {
           </button>
         ) : (
           <div className="flex gap-2 w-full md:w-auto">
-            <button
-              onClick={handleCancel}
-              className={profileStyles.cancelButton}
-            >
+            <button onClick={handleCancel} className={profileStyles.cancelButton}>
               Отмена
             </button>
             <button onClick={handleSave} className={profileStyles.saveButton}>
-              {isSaving ? "Сохранение..." : " Сохранить"}
+              {isSaving ? "Сохранение..." : "Сохранить"}
             </button>
           </div>
         )}
@@ -115,7 +109,7 @@ const LocationSection = () => {
           disabled={!isEditing}
         />
         <SelectCity
-          value={formData.location}
+          value={formData.city}
           onChangeAction={handleCityChange}
           className="w-full"
           disabled={!isEditing}

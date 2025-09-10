@@ -173,7 +173,7 @@ const RegisterPage = () => {
               onChangeAction={handleChange}
             />
             <SelectCity
-              value={registerForm.region}
+              value={registerForm.city}
               onChangeAction={handleChange}
             />
             <GenderSelect

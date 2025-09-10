@@ -6,9 +6,9 @@ export interface RegFormDataProps {
   confirmPassword: string;
   birthdayDate: string;
   region: string;
-  location: string;
   gender: string;
   card?: string;
   email?: string;
   hasCard?: boolean;
+  city: string;
 }

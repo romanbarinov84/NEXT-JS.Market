@@ -9,7 +9,7 @@ export function validateRegisterForm(formData: {
   confirmPassword: string;
   birthdayDate: string;
   region: string;
-  location: string;
+  city: string;
   gender: string;
   card?: string;
   email?: string;
@@ -84,7 +84,7 @@ export function validateRegisterForm(formData: {
   }
 
   // Проверка города
-  if (formData.location) {
+  if (!formData.city) {
     return {
       isValid: false,
       errorMessage: "Выберите город",

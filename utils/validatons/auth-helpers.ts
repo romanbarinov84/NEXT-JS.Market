@@ -47,7 +47,7 @@ export async function getUserById(userId: string) {
     phoneNumberVerified: user.phoneNumberVerified,
     gender: user.gender,
     birthdayDate: user.birthdayDate,
-    location: user.location,
+    city: user.city,
     region: user.region,
     card:user.card,
   };

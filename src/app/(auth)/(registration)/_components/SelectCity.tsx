@@ -5,7 +5,6 @@ import Image from "next/image";
 import { formStyles } from "../../styles";
 import { cities } from "../../../../../data/cities";
 
-
 interface SelectCityProps {
   value: string;
   onChangeAction: (e: ChangeEvent<HTMLSelectElement>) => void;
@@ -21,20 +20,20 @@ const SelectCity = ({
 }: SelectCityProps) => {
   return (
     <div>
-      <label htmlFor="location" className={formStyles.label}>
+      <label htmlFor="city" className={formStyles.label}>
         Населенный пункт
       </label>
       <div className="relative">
         <select
-          id="location"
-          name="location"
+          id="city"
+          name="city"
           value={value}
           disabled={disabled}
           onChange={onChangeAction}
           className={`${formStyles.input} ${className} appearance-none pr-8 cursor-pointer disabled:cursor-not-allowed disabled:bg-[#f3f2f1]`}
         >
           {cities.map((city) => (
-            <option key={city.value} value={city.label}>
+            <option key={city.value} value={city.value}>
               {city.label}
             </option>
           ))}
