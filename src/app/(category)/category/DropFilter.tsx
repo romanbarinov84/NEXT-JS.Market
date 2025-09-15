@@ -24,7 +24,7 @@ export default function DropFilter({
         Фильтр
       </button>
       <div
-        className={`xl:hidden flex flex-col gap-y-10 fixed top-0 left-0 h-screen w-full max-w-90 bg-white z-50 p-4 overflow-y-auto shadow-(--shadow-button-default) text-[#414141] transform-origin-left transition-all duration-300 ease-in-out ${
+        className={`xl:hidden flex flex-col gap-y-10 fixed top-0 left-0 h-screen w-full max-w-90 bg-white z-50 p-4 overflow-y-auto shadow-(--shadow-button-default) text-[text-main-text] transform-origin-left transition-all duration-300 ease-in-out ${
           isFilterOpen ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
         }`}
       >
@@ -37,9 +37,13 @@ export default function DropFilter({
             <Image src="/X_SVG.svg" alt="iconX" width={24} height={24} />
           </button>
         </div>
-        <FilterButtons basePath={basePath}/>
-        <FilterControls basePath={basePath}/>
-        <PriceFilter basePath={basePath} category={category} setIsFilterOpenAction={setIsFilterOpen}/>
+        <FilterButtons basePath={basePath} />
+        <FilterControls basePath={basePath} />
+        <PriceFilter
+          basePath={basePath}
+          category={category}
+          setIsFilterOpenAction={setIsFilterOpen}
+        />
       </div>
     </div>
   );

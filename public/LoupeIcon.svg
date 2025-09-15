@@ -3,5 +3,5 @@
 			Created with Pixso.
 	</desc>
 	<defs/>
-	<path id="Oval (Stroke)" d="M0 8C0 3.58 3.58 0 8 0C12.41 0 16 3.58 16 8C16 12.41 12.41 16 8 16C3.58 16 0 12.41 0 8ZM8 1C4.13 1 1 4.13 1 8C1 11.86 4.13 15 8 15C11.86 15 15 11.86 15 8C15 4.13 11.86 1 8 1Z" fill="#414141" fill-opacity="1.000000" fill-rule="evenodd"/>
+	<path id="Oval (Stroke)" d="M0 8C0 3.58 3.58 0 8 0C12.41 0 16 3.58 16 8C16 12.41 12.41 16 8 16C3.58 16 0 12.41 0 8ZM8 1C4.13 1 1 4.13 1 8C1 11.86 4.13 15 8 15C11.86 15 15 11.86 15 8C15 4.13 11.86 1 8 1Z" fill="text-main-text" fill-opacity="1.000000" fill-rule="evenodd"/>
 </svg>

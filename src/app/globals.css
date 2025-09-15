@@ -8,6 +8,7 @@
 @theme inline {
   --font-sans: var(--font-rubik);
   --color-primary: #70c05b;
+  --color-main-text: text-main-text;
   --shadow-default: 2px 4px 8px 0px rgba(0, 0, 0, 0.1);
   --shadow-button-default: 4px 8px 16px 0px rgba(112, 192, 91, 0.2);
   --shadow-button-secondary: 4px 8px 16px 0px rgba(0, 0, 0, 0.1);
@@ -16,7 +17,7 @@
   --shadow-card-shop: 0px 8px 16px 0px rgba(202, 147, 96, 0.5);
   --shadow-category-block: 1px 2px 4px 0px rgba(112, 192, 91, 0.2);
   --shadow-catalog-menu: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
-  --shadow-auth-form: 0px 58px 158px 10px rgba(10,20,30,0.4);
+  --shadow-auth-form: 0px 58px 158px 10px rgba(10, 20, 30, 0.4);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -69,10 +70,10 @@ li:hover {
 }
 
 @keyframes progress {
-  0%{
+  0% {
     width: 0%;
   }
-  100%{
+  100% {
     width: 100%;
   }
 }

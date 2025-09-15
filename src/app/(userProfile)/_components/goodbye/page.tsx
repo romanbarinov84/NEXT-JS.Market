@@ -1,15 +1,14 @@
 import AuthFormLayout from "@/app/(auth)/_components/AuthFormLayout";
 import Link from "next/link";
 
-
 export default function GoodbyePage() {
   return (
     <AuthFormLayout variant="register">
       <div className="bg-white flex flex-col justify-center items-center">
-        <h1 className="text-2xl font-bold text-[#414141] mb-4">
+        <h1 className="text-2xl font-bold text-[text-main-text] mb-4">
           Ваш аккаунт был удален
         </h1>
-        <p className="text-[#414141] mb-6">
+        <p className="text-[text-main-text] mb-6">
           Спасибо, что были с нами. Все ваши данные были успешно удалены.
         </p>
         <Link

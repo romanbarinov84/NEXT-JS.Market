@@ -32,14 +32,12 @@ const EnterLoginPage = () => {
   };
 
   const handleForgotPassword = () => {
-    if(loginType === "phone"){
-      router.replace(
-        `/phone-pass-reset`
-      );
-    }else{
+    if (loginType === "phone") {
+      router.replace(`/phone-pass-reset`);
+    } else {
       router.replace("/forgot-password");
     }
-  }
+  };
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -169,7 +167,7 @@ const EnterLoginPage = () => {
 
   return (
     <AuthFormLayout>
-      <h1 className="text-2xl font-bold text-[#414141] text-center mb-8">
+      <h1 className="text-2xl font-bold text-[text-main-text] text-center mb-8">
         Вход
       </h1>
       <form
@@ -255,9 +253,9 @@ const EnterLoginPage = () => {
           >
             Регистрация
           </Link>
-           <button
+          <button
             onClick={handleForgotPassword}
-            className="h-8 text-[#414141] hover:text-black w-30 flex items-center justify-center duration-300 cursor-pointer"
+            className="h-8 text-[text-main-text] hover:text-black w-30 flex items-center justify-center duration-300 cursor-pointer"
           >
             Забыли пароль?
           </button>

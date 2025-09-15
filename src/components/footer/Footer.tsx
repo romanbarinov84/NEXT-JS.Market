@@ -5,8 +5,7 @@ export default function Footer() {
   return (
     <footer>
       <div className="bg-[#f2ecd7c1] mb-0 md:mb-0  px-[max(12px,calc((100%-1208px)/2))] w-full ">
-        <div className="px-7 py-10 flex  justify-between  gap-10 text-[#414141] items-start">
-          
+        <div className="px-7 py-10 flex  justify-between  gap-10 text-[text-main-text] items-start">
           {/* Логотип */}
           <div className="logo">
             <Link href="/" className="relative w-43 h-26 md:w-16 md:h-11 block">
@@ -20,7 +19,7 @@ export default function Footer() {
             </Link>
           </div>
 
-           <nav className="nav">
+          <nav className="nav">
             <ul className="flex flex-wrap gap-x-8 text-xs gap-4 xl:gap-y-2 md:gap-x-10">
               <li className="hover:text-black cursor-pointer">
                 <Link href="#">Про нас</Link>
@@ -82,8 +81,6 @@ export default function Footer() {
           </div>
 
           {/* Навигация */}
-         
-          
         </div>
       </div>
     </footer>

@@ -12,7 +12,6 @@ import { buttonStyles } from "../styles";
 import { CONFIG } from "../../../../config/config";
 import { LoadingContent } from "../(registration)/_components/LoadingContant";
 
-
 export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -60,17 +59,16 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
         throw new Error(errorData.error || "Ошибка установки пароля");
       }
 
-      let userDataToUpdate = {...regFormData};
+      let userDataToUpdate = { ...regFormData };
 
-      if(verifyData.user.phoneNumberVerified){
+      if (verifyData.user.phoneNumberVerified) {
         //eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const {email,...rest} = userDataToUpdate;
+        const { email, ...rest } = userDataToUpdate;
         userDataToUpdate = rest as typeof regFormData;
       }
 
-      const {error: updateError} = 
-      await authClient.updateUser(userDataToUpdate);
-
+      const { error: updateError } =
+        await authClient.updateUser(userDataToUpdate);
 
       if (updateError) throw updateError;
 
@@ -120,7 +118,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
   return (
     <>
       <div className="flex flex-col gap-y-8">
-        <h1 className="text-2xl font-bold text-[#414141] text-center">
+        <h1 className="text-2xl font-bold text-[text-main-text] text-center">
           Регистрация
         </h1>
         <div>
@@ -167,7 +165,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 
         <Link
           href="/register"
-          className="h-8 text-xs text-[#414141] hover:text-black w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer"
+          className="h-8 text-xs text-[text-main-text] hover:text-black w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer"
         >
           <Image
             src="/iconsAuth/iconsArrow-left.svg"

@@ -1,6 +1,5 @@
 "use client";
 
-
 import { buttonStyles } from "@/app/(auth)/styles";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -50,7 +49,9 @@ const SecuritySection: React.FC = () => {
   return (
     <>
       <div className="border-t pt-8">
-        <h2 className="text-2xl font-bold text-[#414141] mb-6">Безопасность</h2>
+        <h2 className="text-2xl font-bold text-[text-main-text] mb-6">
+          Безопасность
+        </h2>
         {error && (
           <div className="mb-4 p-3 bg-[#ffc7c7] border border-red-300 text-[#d80000] rounded">
             {error}

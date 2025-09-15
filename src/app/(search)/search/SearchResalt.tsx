@@ -38,7 +38,7 @@ export default function SearchRes() {
   }
   return (
     <>
-      <div className="px-4 sm:px-6 lg:px-8 xl:px-[max(12px,calc((100%-1208px)/2))] text-[#414141] ">
+      <div className="px-4 sm:px-6 lg:px-8 xl:px-[max(12px,calc((100%-1208px)/2))] text-[text-main-text] ">
         <h1 className="text-2xl xl:text-4xl text-left font-bold text-shadow-lg mb-6">
           Список товарів
         </h1>
@@ -48,7 +48,11 @@ export default function SearchRes() {
         {products.length === 0 ? (
           <p>Нічого не знайденно</p>
         ) : (
-          <ProductSection title={""} products={products} applyIndexStyles={false}/>
+          <ProductSection
+            title={""}
+            products={products}
+            applyIndexStyles={false}
+          />
         )}
       </div>
     </>

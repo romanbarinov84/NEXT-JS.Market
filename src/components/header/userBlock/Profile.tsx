@@ -122,12 +122,7 @@ const Profile = () => {
         <div className="w-[109px] justify-center hidden xl:flex">
           <p>Войти</p>
         </div>
-        <Image
-          src="/EnterImgButton.svg"
-          alt="Войти"
-          width={24}
-          height={24}
-        />
+        <Image src="/EnterImgButton.svg" alt="Войти" width={24} height={24} />
       </Link>
     );
   }
@@ -175,14 +170,14 @@ const Profile = () => {
       >
         <Link
           href="/user-profile"
-          className="block px-4 py-3 text-[#414141] hover:text-[#ff6633] duration-300"
+          className="block px-4 py-3 text-[text-main-text] hover:text-[#ff6633] duration-300"
           onClick={() => setIsMenuOpen(false)}
         >
           Профиль
         </Link>
         <Link
           href="/"
-          className="block px-4 py-3 text-[#414141] hover:text-[#ff6633] duration-300"
+          className="block px-4 py-3 text-[text-main-text] hover:text-[#ff6633] duration-300"
           onClick={() => setIsMenuOpen(false)}
         >
           Главная
@@ -190,7 +185,7 @@ const Profile = () => {
         {isManagerOrAdmin() && (
           <Link
             href="/administrator"
-            className="block px-4 py-3 text-[#414141] hover:text-[#ff6633] duration-300"
+            className="block px-4 py-3 text-[text-main-text] hover:text-[#ff6633] duration-300"
             onClick={() => setIsMenuOpen(false)}
           >
             Панель управления
@@ -199,7 +194,7 @@ const Profile = () => {
         <button
           onClick={handleLogout}
           disabled={isLoggingOut}
-          className="w-full text-left px-4 py-3 text-[#414141] hover:text-[#ff6633] duration-300 border-t border-gray-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full text-left px-4 py-3 text-[text-main-text] hover:text-[#ff6633] duration-300 border-t border-gray-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoggingOut ? "Выход..." : "Выйти"}
         </button>

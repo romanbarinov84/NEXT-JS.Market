@@ -2,7 +2,6 @@ import GenericListPage from "@/app/(products)/GenericListPage";
 
 import { Suspense } from "react";
 
-
 import FilterButtons from "../FilterButtons";
 import FilterControls from "../FilterControls";
 import PriceFilter from "../PriceFilter";
@@ -48,7 +47,7 @@ const CategoryPage = async ({
 
   return (
     <div className="px-[max(12px,calc((100%-1208px)/2))] flex flex-col mx-auto">
-      <h1 className="ml-3 xl:ml-0 text-4xl md:text-5xl text-left font-bold text-[#414141] mb-8 md:mb-10 xl:mb-15 max-w-[336px] md:max-w-max leading-[150%]">
+      <h1 className="ml-3 xl:ml-0 text-4xl md:text-5xl text-left font-bold text-[text-main-text] mb-8 md:mb-10 xl:mb-15 max-w-[336px] md:max-w-max leading-[150%]">
         {PATH_TRANSLATIONS[category] || category}
       </h1>
       <DropFilter basePath={`/category/${category}`} category={category} />
@@ -57,36 +56,34 @@ const CategoryPage = async ({
       </div>
       <div className="flex flex-row gap-x-10 justify-between">
         <div className="hidden xl:flex flex-col w-[272px] gap-y-10">
-          <div className="h-11 bg-[#f3f2f1] rounded text-base font-bold text-[#414141] flex items-center p-2.5">
+          <div className="h-11 bg-[#f3f2f1] rounded text-base font-bold text-[text-main-text] flex items-center p-2.5">
             Фильтр
           </div>
           <PriceFilter basePath={`/category/${category}`} category={category} />
         </div>
         <div className="flex flex-col">
           <div className="hidden xl:flex">
-            <FilterControls
-              basePath={`/category/${category}`}
-            />
+            <FilterControls basePath={`/category/${category}`} />
           </div>
 
           <Suspense fallback={<Loader />}>
-  <GenericListPage
-    searchParams={searchParams}
-    props={{
-      fetchData: ({ pagination: { startIdx, perPage } }) =>
-        fetchCategory(category, {
-          pagination: { startIdx, perPage },
-          filter: activeFilter,
-          priceFrom,
-          priceTo,
-          inStock,
-        }),
-      basePath: `/category/${category}`,
-      contentType: "category",
-      errorMessage: "Ошибка: не удалось загрузить категорию продукта", // 👈 ОБЯЗАТЕЛЬНО
-    }}
-  />
-</Suspense>
+            <GenericListPage
+              searchParams={searchParams}
+              props={{
+                fetchData: ({ pagination: { startIdx, perPage } }) =>
+                  fetchCategory(category, {
+                    pagination: { startIdx, perPage },
+                    filter: activeFilter,
+                    priceFrom,
+                    priceTo,
+                    inStock,
+                  }),
+                basePath: `/category/${category}`,
+                contentType: "category",
+                errorMessage: "Ошибка: не удалось загрузить категорию продукта", // 👈 ОБЯЗАТЕЛЬНО
+              }}
+            />
+          </Suspense>
         </div>
       </div>
     </div>
