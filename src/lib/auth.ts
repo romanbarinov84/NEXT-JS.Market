@@ -14,7 +14,7 @@ import { deleteUserAvatarFromGridFS } from "../../utils/deleteUserAvatar";
 
 
 const client = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!);
-const db = client.db("delivery-shop");
+const db = client.db("deliveryShop");
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const auth = betterAuth({
@@ -156,7 +156,7 @@ export const auth = betterAuth({
 // import nodemailer from "nodemailer"
 
 // const client = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!);
-// const db = client.db("delivery-shop");
+// const db = client.db("deliveryShop");
 
 // // Локальный SMTP транспорт для разработки
 // const localTransporter = nodemailer.createTransport({

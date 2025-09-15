@@ -60,7 +60,17 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
         throw new Error(errorData.error || "Ошибка установки пароля");
       }
 
-      const { error: updateError } = await authClient.updateUser(regFormData);
+      let userDataToUpdate = {...regFormData};
+
+      if(verifyData.user.phoneNumberVerified){
+        //eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const {email,...rest} = userDataToUpdate;
+        userDataToUpdate = rest as typeof regFormData;
+      }
+
+      const {error: updateError} = 
+      await authClient.updateUser(userDataToUpdate);
+
 
       if (updateError) throw updateError;
 
@@ -160,7 +170,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
           className="h-8 text-xs text-[#414141] hover:text-black w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer"
         >
           <Image
-            src="/icons-auth/icon-arrow-left.svg"
+            src="/iconsAuth/iconsArrow-left.svg"
             width={24}
             height={24}
             alt="Вернуться"

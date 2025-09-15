@@ -2,6 +2,7 @@ import { authClient } from "@/lib/auth-client";
 import { UserData } from "@/types/userData";
 import { create } from "zustand";
 
+
 type AuthState = {
   isAuth: boolean;
   user: UserData;
@@ -62,7 +63,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       }
 
       const userData = await response.json();
-      
+
       set({ user: userData, isLoading: false });
     } catch (error) {
       console.error("Ошибка загрузки данных пользователя:", error);

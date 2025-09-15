@@ -1,15 +1,12 @@
 interface LoaderProps {
-    text?:string;
-    className?:string;
+  text?: string;
+  className?: string;
 }
 
-
-export default function Loader({text="",className=""}:LoaderProps){
-
-    return(
-        <>
-         <div
-      className={`flex flex-col items-center justify-center gap-3  min-h-20${className}`}
+export default function Loader({ text = "", className = "" }: LoaderProps) {
+  return (
+    <div
+      className={`flex flex-col items-center justify-center gap-3 min-h-20 ${className}`}
       role="status"
       aria-live="polite"
     >
@@ -18,6 +15,5 @@ export default function Loader({text="",className=""}:LoaderProps){
         <p className="text-[var(--color-primary)]">Загрузка {text}...</p>
       )}
     </div>
-        </>
-    )
+  );
 }

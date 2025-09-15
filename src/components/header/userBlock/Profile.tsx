@@ -4,11 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { checkAvatarExists } from "../../../../utils/avatarUtils";
-import { getAvatarByGender } from "../../../../utils/getAvatarByGender";
 import { useAuthStore } from "../../../../store/authStore";
-
-
+import { getAvatarByGender } from "../../../../utils/getAvatarByGender";
+import { checkAvatarExists } from "../../../../utils/avatarUtils";
 
 const Profile = () => {
   const { isAuth, user, logout, checkAuth, isLoading } = useAuthStore();
@@ -19,6 +17,22 @@ const Profile = () => {
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  const getDisplayName = () => {
+    if (!user?.name) return;
+
+    if (user.role === "manager") {
+      return "Менеджер";
+    } else if (user.role === "admin") {
+      return "Администратор";
+    }
+
+    return user.name;
+  };
+
+  const isManagerOrAdmin = () => {
+    return user?.role === "manager" || user?.role === "admin";
+  };
 
   useEffect(() => {
     setLastUpdate(Date.now());
@@ -51,6 +65,10 @@ const Profile = () => {
   }, [checkAuth]);
 
   useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -73,6 +91,7 @@ const Profile = () => {
     setIsLoggingOut(true);
     try {
       await logout();
+
       router.replace("/");
     } catch (error) {
       console.error("Не удалось выйти:", error);
@@ -128,11 +147,11 @@ const Profile = () => {
           className="min-w-10 min-h-10 md:block xl:block rounded-full object-cover"
         />
         <p className="hidden xl:block cursor-pointer p-2.5">
-          {isLoading ? "Загрузка..." : user?.name}
+          {getDisplayName()}
         </p>
         <div className="hidden xl:block">
           <Image
-            src="/userBlock/ShevronArrowDown.svg"
+            src="/iconsAuth/arrow-Down.svg"
             alt="Меню профиля"
             width={24}
             height={24}
@@ -168,6 +187,15 @@ const Profile = () => {
         >
           Главная
         </Link>
+        {isManagerOrAdmin() && (
+          <Link
+            href="/administrator"
+            className="block px-4 py-3 text-[#414141] hover:text-[#ff6633] duration-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Панель управления
+          </Link>
+        )}
         <button
           onClick={handleLogout}
           disabled={isLoggingOut}
