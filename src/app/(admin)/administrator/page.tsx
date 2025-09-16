@@ -1,5 +1,7 @@
+"use client";
+
 import { buttonStyles } from "@/app/(auth)/styles";
-import { Link } from "lucide-react";
+import Link from "next/link";
 
 const AdminPanel = () => {
   return <>
