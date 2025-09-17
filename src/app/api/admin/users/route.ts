@@ -24,6 +24,11 @@ export async function GET(request: NextRequest) {
     const sortBy = searchParams.get("sortBy") || "createdAt";
     const sortDirection = searchParams.get("sortDirection") || "desc";
 
+
+    if (role === "admin") {
+      console.log("Вы админ");
+}
+
     const db = await getDB();
 
     const filter: UserFilter = {};
