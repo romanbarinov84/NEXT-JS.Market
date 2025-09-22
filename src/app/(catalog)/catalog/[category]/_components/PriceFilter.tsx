@@ -3,11 +3,11 @@
 import "rc-slider/assets/index.css";
 import { useSearchParams, useRouter } from "next/navigation";
 import { FormEvent, useCallback, useEffect, useState } from "react";
-import { CONFIG } from "../../../../config/config";
 import { PriceRange, PriceFilterProps } from "@/types/priceTypes";
 import PriceEnterHeader from "./PriceEnterHeader";
 import PriceInputs from "./PriceInputs";
 import PriceRangeSlider from "./PriceRangeSlider";
+import { CONFIG } from "../../../../../../config/config";
 
 export default function PriceFilter({ category,setIsFilterOpenAction }: PriceFilterProps) {
   const searchParams = useSearchParams();

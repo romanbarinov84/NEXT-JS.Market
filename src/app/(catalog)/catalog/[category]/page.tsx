@@ -1,14 +1,13 @@
 import GenericListPage from "@/app/(products)/GenericListPage";
-
 import { Suspense } from "react";
-
-import FilterButtons from "../../../(category)/category/FilterButtons";
-import FilterControls from "../../../(category)/category/FilterControls";
-import PriceFilter from "../../../(category)/category/PriceFilter";
-import DropFilter from "../../../(category)/category/DropFilter";
 import { PATH_TRANSLATIONS } from "../../../../../utils/pathTranslations";
 import Loader from "@/components/Loader";
-import fetchCategory from "../../../(category)/category/fetchCategory";
+import FilterButtons from "./_components/FilterButtons";
+import DropFilter from "./_components/DropFilter";
+import PriceFilter from "./_components/PriceFilter";
+import FilterControls from "./_components/FilterControls";
+import fetchCategory from "./_components/fetchCategory";
+
 
 export async function generateMetadata({
   params,
@@ -78,7 +77,7 @@ const CategoryPage = async ({
                     priceTo,
                     inStock,
                   }),
-                basePath: `/category/${category}`,
+                basePath: `/catalog/${category}`,
                 contentType: "category",
                 errorMessage: "Ошибка: не удалось загрузить категорию продукта", // 👈 ОБЯЗАТЕЛЬНО
               }}

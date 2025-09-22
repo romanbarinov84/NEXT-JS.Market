@@ -17,7 +17,7 @@ export default function SearchResults({query,groupedProducts,isLoading,resetSear
                 {groupedProducts.map((group) => (
                   <div key={group.category} className="flex flex-col gap-3">
                     <Link
-                      href={`/category/${encodeURIComponent(group.category)}`}
+                      href={`/catalog/${encodeURIComponent(group.category)}`}
                       className="flex items-start justify-between gap-x-4 bg-[#ff6633] text-white rounded p-1 
               cursor-pointer hover:text-white"
                       onClick={resetSearch}
@@ -46,7 +46,8 @@ export default function SearchResults({query,groupedProducts,isLoading,resetSear
                           className="p-1 hover:bg-gray-200 hover:text-white"
                         >
                           <Link
-                            href={`/product/${product.id}`}
+                            href={`/catalog/${encodeURIComponent(group.category)}/${product.id}?
+                              desc=${encodeURIComponent(product.title.substring(0,50))}`}
                             className="cursor-pointer"
                           >
                             <HighLightText
