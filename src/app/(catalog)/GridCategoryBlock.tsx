@@ -9,7 +9,7 @@ export default function GridCategoryBlock({slug,title,img}:GridCategoryBlockProp
 
     return(
          <Link
-              href={`category/${slug}`}
+              href={`/catalog/${slug}`}
               className="relative block h-full overflow-hidden group min-w-40 md:min-w-[224px] xl:min-w-[274px]"
             >
               <Image

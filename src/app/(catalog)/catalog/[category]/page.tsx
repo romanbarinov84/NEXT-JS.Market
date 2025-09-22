@@ -2,13 +2,13 @@ import GenericListPage from "@/app/(products)/GenericListPage";
 
 import { Suspense } from "react";
 
-import FilterButtons from "../FilterButtons";
-import FilterControls from "../FilterControls";
-import PriceFilter from "../PriceFilter";
-import DropFilter from "../DropFilter";
+import FilterButtons from "../../../(category)/category/FilterButtons";
+import FilterControls from "../../../(category)/category/FilterControls";
+import PriceFilter from "../../../(category)/category/PriceFilter";
+import DropFilter from "../../../(category)/category/DropFilter";
 import { PATH_TRANSLATIONS } from "../../../../../utils/pathTranslations";
 import Loader from "@/components/Loader";
-import fetchCategory from "../fetchCategory";
+import fetchCategory from "../../../(category)/category/fetchCategory";
 
 export async function generateMetadata({
   params,

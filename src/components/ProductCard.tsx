@@ -7,7 +7,7 @@ import Link from "next/link";
 const cardDiscountPercent = 6;
 
 export default function ProductCard({
-  _id,
+  id,
   img,
   description,
   basePrice,
@@ -33,13 +33,19 @@ export default function ProductCard({
     ? basePrice
     : calculatePriceByCard(finalPrice, cardDiscountPercent);
 
+   const productId = id;
+  const mainCategory = categories?.[0]?? "default-category";
+
+  const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}?desc=${encodeURIComponent(description.substring(0, 50))}`;
+
+
   return (
     <div
       className="flex flex-col justify-between  w-40 rounded overflow-hidden bg-white 
          md:w-[224px] xl:w-[272px] h-[349px] align-top p-0 hover:shadow-(--shadow-article)"
     >
       <div className=" relative w-40 h-40 md:-[224px] xl:w-[272px]">
-        <Link href={`/product/${_id}`} className="relative w-40 h-40">
+        <Link href={productUrl} className="relative w-40 h-40">
         <div className="relative aspect-square w-40 h-40 md:w-[224px] xl:w-[272px]">
           <Image
             src={img}
@@ -75,7 +81,7 @@ export default function ProductCard({
       </div>
 
       <div className="flex flex-col justify-between p-2 gap-y-2">
-        <Link href={`/product/${_id}`}>
+        <Link href={productUrl} >
           <div className="flex flex-row justify-between items-end">
             <div className="flex flex-col gap-x-1">
               <div className="flex flex-row  text-sm md:text-lg font-bold">
