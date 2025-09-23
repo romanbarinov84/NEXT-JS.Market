@@ -2,26 +2,21 @@ import Image from "next/image";
 import { ProductCardProps } from "@/types/product";
 import { CONFIG } from "../../../../../../../config/config";
 import StarRating from "@/components/starReiting/StarRating";
-import CartButton from "../../_components/CartButton";
-import ProductOffer from "../../_components/ProductOffer";
-import ImagesBlock from "../../_components/ImagesBlock";
-import Bonuses from "../../_components/Bonuses";
-import ShareButton from "../../_components/ShareButton";
+import CartButton from "./_components/CartButton";
+import ProductOffer from "./_components/ProductOffer";
+import ImagesBlock from "./_components/ImagesBlock";
+import Bonuses from "./_components/Bonuses";
+import ShareButton from "./_components/ShareButton";
 
 interface ProductPageContentProps {
   product: ProductCardProps;
   productId: string;
 }
 
-const ProductPageContent = ({
-  product,
-  
-}: ProductPageContentProps) => {
+const ProductPageContent = ({ product }: ProductPageContentProps) => {
   const discountedPrice = product.discountPercent
     ? product.basePrice * (1 - product.discountPercent / 100)
     : product.basePrice;
-
-    
 
   const cardPrice = discountedPrice * (1 - CONFIG.CARD_DISCOUNT_PERCENT / 100);
   const bonusesAmount = cardPrice * 0.05;
@@ -34,12 +29,11 @@ const ProductPageContent = ({
           <div className="text-xs">арт. {product.article}</div>
           <div className="flex flex-row flex-wrap gap-2 items-center">
             <StarRating rating={product.rating || 5} />
-            
           </div>
           <ShareButton title={product.title} />
           <button className="flex flex-row flex-wrap gap-2 items-center cursor-pointer">
             <Image
-              src="/iconHeartCard.svg"
+              src="/shareButton.png"
               alt="Избранное"
               width={24}
               height={24}

@@ -1,43 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDB } from "../../../../../utils/APIRotes";
 
-
 export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = await params;
+    const { id } = params;
+
+    if (!id || isNaN(parseInt(id))) {
+      return NextResponse.json({ message: "Неверный id" }, { status: 400 });
+    }
+
     const db = await getDB();
 
     const product = await db.collection("products").findOne({
       id: parseInt(id),
     });
- 
+
     if (!product) {
-      return NextResponse.json(
-        { message: "Продукт не найден" },
-        { status: 404 }
-      );
+      return NextResponse.json({ message: "Продукт не найден" }, { status: 404 });
     }
 
     const reviewsCount = await db.collection("reviews").countDocuments({
-      productId: id,
+      productId: parseInt(id),
     });
 
-    const updatedProduct = { ...product };
-    if (updatedProduct.rating) {
-      updatedProduct.rating.count = reviewsCount;
-    }
+    const updatedProduct = {
+      ...product,
+      rating: product.rating ? { ...product.rating, count: reviewsCount } : undefined,
+    };
 
     return NextResponse.json(updatedProduct);
   } catch (error) {
     console.error("Ошибка при получении продукта:", error);
-    return NextResponse.json(
-      { message: "Ошибка сервера при получении продукта" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: "Ошибка сервера" }, { status: 500 });
   }
 }

@@ -7,9 +7,12 @@ import { PriceRange, PriceFilterProps } from "@/types/priceTypes";
 import PriceEnterHeader from "./PriceEnterHeader";
 import PriceInputs from "./PriceInputs";
 import PriceRangeSlider from "./PriceRangeSlider";
-import { CONFIG } from "../../../../../../config/config";
+import { CONFIG } from "../../../../../../../../config/config";
 
-export default function PriceFilter({ category,setIsFilterOpenAction }: PriceFilterProps) {
+export default function PriceFilter({
+  category,
+  setIsFilterOpenAction,
+}: PriceFilterProps) {
   const searchParams = useSearchParams();
   const urlPriceFrom = searchParams.get("priceFrom") || "";
   const urlPriceTo = searchParams.get("priceTo") || "";
@@ -75,10 +78,9 @@ export default function PriceFilter({ category,setIsFilterOpenAction }: PriceFil
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     applyPriceFilter();
-    if(setIsFilterOpenAction){
+    if (setIsFilterOpenAction) {
       setIsFilterOpenAction(false);
     }
-    
   };
 
   const applyPriceFilter = useCallback(() => {
@@ -145,9 +147,17 @@ export default function PriceFilter({ category,setIsFilterOpenAction }: PriceFil
       onSubmit={handleSubmit}
       className="flex flex-col gap-y-10 text-[#333] mt-10 xl:mt-0"
     >
-      <PriceEnterHeader resetPriceFilter={resetPriceFilter}/>
-      <PriceInputs inputValues={inputValues} priceRange={priceRange} handleInputChange={handleInputChange}/>
-      <PriceRangeSlider priceRange={priceRange} sliderValues={sliderValues} handleSliderChange={handleSliderChange}/>
+      <PriceEnterHeader resetPriceFilter={resetPriceFilter} />
+      <PriceInputs
+        inputValues={inputValues}
+        priceRange={priceRange}
+        handleInputChange={handleInputChange}
+      />
+      <PriceRangeSlider
+        priceRange={priceRange}
+        sliderValues={sliderValues}
+        handleSliderChange={handleSliderChange}
+      />
 
       <div className="flex items-center gap-2">
         <label className="relative inline-flex items-center cursor-pointer">

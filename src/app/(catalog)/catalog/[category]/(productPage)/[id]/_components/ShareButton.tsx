@@ -39,7 +39,7 @@ const ShareButton = ({ title, className = "" }: ShareButtonProps) => {
         }}
       >
         <Image
-          src="/icons-products/icon-share.svg"
+          src="/shareButton.png"
           alt="Поделиться"
           width={24}
           height={24}

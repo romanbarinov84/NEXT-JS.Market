@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ProductCardProps } from "@/types/product";
 import ProductPageContent from "./ProductPageContent";
-import { getProduct } from "../getProduct.ts/getProducts";
+import { getProduct } from "../getProducts";
 import ErrorComponent from "@/components/errorComponent/ErrorComponent";
 
 interface PageProps {

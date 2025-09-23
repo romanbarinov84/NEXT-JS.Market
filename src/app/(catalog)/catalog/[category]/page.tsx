@@ -2,12 +2,11 @@ import GenericListPage from "@/app/(products)/GenericListPage";
 import { Suspense } from "react";
 import { PATH_TRANSLATIONS } from "../../../../../utils/pathTranslations";
 import Loader from "@/components/Loader";
-import FilterButtons from "./_components/FilterButtons";
-import DropFilter from "./_components/DropFilter";
-import PriceFilter from "./_components/PriceFilter";
-import FilterControls from "./_components/FilterControls";
-import fetchCategory from "./_components/fetchCategory";
-
+import FilterButtons from "./(productPage)/[id]/_components/FilterButtons";
+import DropFilter from "./(productPage)/[id]/_components/DropFilter";
+import PriceFilter from "./(productPage)/[id]/_components/PriceFilter";
+import FilterControls from "./(productPage)/[id]/_components/FilterControls";
+import fetchCategory from "./(productPage)/[id]/_components/fetchCategory";
 
 export async function generateMetadata({
   params,
@@ -19,7 +18,7 @@ export async function generateMetadata({
     title: PATH_TRANSLATIONS[category] || category,
     description: `Описание категории товаров "${
       PATH_TRANSLATIONS[category] || category
-    }" магазина "Северяночка"`,
+    }" магазина ""`,
   };
 }
 

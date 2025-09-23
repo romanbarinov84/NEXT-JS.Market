@@ -36,7 +36,8 @@ export default function ProductCard({
    const productId = id;
   const mainCategory = categories?.[0]?? "default-category";
 
-  const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}?desc=${encodeURIComponent(description.substring(0, 50))}`;
+    const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}?desc=${encodeURIComponent(description.substring(0, 50))}`;
+
 
 
   return (

@@ -70,7 +70,7 @@ const FilterControls = ({ basePath }: FilterControlsProps) => {
             href={buildClearPriceFilterLink()}
             className="flex items-center gap-x-2"
           >
-            Цена {minPrice !== undefined ? `от ${minPrice}` : ""}{" "}
+            Ціна {minPrice !== undefined ? `от ${minPrice}` : ""}{" "}
             {maxPrice !== undefined ? `до ${maxPrice}` : ""}
             <Image
               src="/X_SVG.svg"
