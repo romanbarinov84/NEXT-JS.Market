@@ -6,14 +6,16 @@ import CartButton from "./_components/CartButton";
 import ProductOffer from "./_components/ProductOffer";
 import ImagesBlock from "./_components/ImagesBlock";
 import Bonuses from "./_components/Bonuses";
+import DiscountMessage from "./_components/DiscountMessage";
 import ShareButton from "./_components/ShareButton";
+
 
 interface ProductPageContentProps {
   product: ProductCardProps;
   productId: string;
 }
 
-const ProductPageContent = ({ product }: ProductPageContentProps) => {
+const ProductPageContent = ({ product, productId }: ProductPageContentProps) => {
   const discountedPrice = product.discountPercent
     ? product.basePrice * (1 - product.discountPercent / 100)
     : product.basePrice;
@@ -28,7 +30,7 @@ const ProductPageContent = ({ product }: ProductPageContentProps) => {
         <div className="flex flex-row flex-wrap items-center gap-6 mb-4 md:mb-6">
           <div className="text-xs">арт. {product.article}</div>
           <div className="flex flex-row flex-wrap gap-2 items-center">
-            <StarRating rating={product.rating || 5} />
+            <StarRating rating={  5} />
           </div>
           <ShareButton title={product.title} />
           <button className="flex flex-row flex-wrap gap-2 items-center cursor-pointer">
@@ -51,6 +53,11 @@ const ProductPageContent = ({ product }: ProductPageContentProps) => {
             />
             <CartButton />
             <Bonuses bonus={bonusesAmount} />
+            <DiscountMessage
+              productId={productId.toString()}
+              productTitle={product.title}
+              currentPrice={discountedPrice.toString()}
+            />
           </div>
         </div>
         <div>
