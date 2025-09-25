@@ -8,6 +8,7 @@ import ImagesBlock from "./_components/ImagesBlock";
 import Bonuses from "./_components/Bonuses";
 import DiscountMessage from "./_components/DiscountMessage";
 import ShareButton from "./_components/ShareButton";
+import AdditionalInfo from "./_components/AdditionalInfo";
 
 
 interface ProductPageContentProps {
@@ -57,6 +58,12 @@ const ProductPageContent = ({ product, productId }: ProductPageContentProps) => 
               productId={productId.toString()}
               productTitle={product.title}
               currentPrice={discountedPrice.toString()}
+            />
+
+              <AdditionalInfo
+              brand={product.title}
+              manufacturer={product.description}
+              weight={product.weight}
             />
           </div>
         </div>
