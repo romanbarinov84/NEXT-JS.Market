@@ -47,29 +47,29 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
     return (
       <div className="mx-auto flex flex-col items-center">
         <div className="w-full max-w-[328px] md:max-w-[688px] xl:max-w-[168px]">
-          <h3 className="text-sm md:text-lg font-semibold mb-2 text-[#606060] text-left">
-            Похожие
+          <h3 className="text-sm md:text-lg font-semibold mb-2 text-[#333] text-left xl:text-2xl xl:text-left">
+            Хіт продажів
           </h3>
         </div>
 
-        <div className="flex flex-row xl:flex-col gap-2 md:gap-4 justify-center xl:justify-start">
+        <div className="flex flex-row xl: gap-6 md:gap-4 justify-center xl:justify-start">
           {similarProducts.map((product) => (
             <Link
               key={product.id}
               href={`/catalog/product/${product.id}`}
-              className="text-main-text text-sm md:text-lg flex flex-col w-[78px] h-[62px] md:w-[172px] md:h-[158px] xl:w-[168px] xl:h-[104px] rounded bg-white shadow-image-block duration-300 hover:shadow-lg"
+              className="text-main-text text-sm md:text-lg flex flex-col w-[78px] h-[62px] md:w-[172px] md:h-[158px] xl:w-[238px] xl:h-[144px] rounded bg-white shadow-image-block duration-300 hover:shadow-lg"
             >
-              <div className="relative w-full h-[25px] md:h-[111px] xl:h-[57px] flex-shrink-0">
+              <div className="relative w-full h-[25px] md:h-[111px] xl:h-[100px] flex-shrink-0">
                 <Image
                   src={product.img}
                   alt={product.title}
                   fill
                   className="object-contain rounded"
-                  sizes="(max-width: 768px) 78px, (max-width: 1280px) 172px, 168px"
+                  sizes="(max-width: 768px) 178px, (max-width: 1280px) 272px, 200px"
                 />
               </div>
               <div className="flex items-center font-bold p-2 md:p-2.5">
-                {calculatePrice(product)} ₽
+                {calculatePrice(product)} uah
               </div>
             </Link>
           ))}
