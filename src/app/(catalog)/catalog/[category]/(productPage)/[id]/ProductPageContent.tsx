@@ -61,7 +61,7 @@ const ProductPageContent = ({ product, productId }: ProductPageContentProps) => 
             />
 
               <AdditionalInfo
-              brand={product.title}
+              brand="Галя Балувана"
               manufacturer={product.description}
               weight={product.weight}
             />

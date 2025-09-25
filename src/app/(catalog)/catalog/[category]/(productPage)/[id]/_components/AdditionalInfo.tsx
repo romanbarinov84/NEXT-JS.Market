@@ -20,11 +20,11 @@ const AdditionalInfo = ({
         <span>{brand}</span>
       </div>
       <div className="flex justify-between py-1 px-2">
-        <span className="font-medium">Страна производителя:</span>
+        <span className="font-medium">Назва страви:</span>
         <span>{manufacturer}</span>
       </div>
       <div className="flex justify-between bg-[#f3f2f1] py-1 px-2">
-        <span className="font-medium">Упаковка:</span>
+        <span className="font-medium">Вага:</span>
         <span>{weight ? formatWeight(weight) : "—"}</span>
       </div>
     </div>
