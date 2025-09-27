@@ -8,14 +8,11 @@ import ImagesBlock from "./_components/ImagesBlock";
 import Bonuses from "./_components/Bonuses";
 import DiscountMessage from "./_components/DiscountMessage";
 import ShareButton from "./_components/ShareButton";
-<<<<<<< Updated upstream
-=======
-import AdditionalInfo from "./_components/AdditionalInfo";
 import ReviewsWrapper from "./_components/ReviewsWrapper";
 import Actions from "@/app/(products)/Actions";
 
 
->>>>>>> Stashed changes
+
 
 
 interface ProductPageContentProps {
@@ -77,6 +74,7 @@ const ProductPageContent = ({ product, productId }: ProductPageContentProps) => 
                  <ReviewsWrapper productId={productId} />
           </div>
         </div>
+        
       </div>
     </div>
   );
