@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
+import { useState } from "react"
 import IconStar from "@/components/svg/IconStar";
 import { useAuthStore } from "../../../../../../../../store/authStore";
 

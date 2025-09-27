@@ -8,10 +8,13 @@ import ImagesBlock from "./_components/ImagesBlock";
 import Bonuses from "./_components/Bonuses";
 import DiscountMessage from "./_components/DiscountMessage";
 import ShareButton from "./_components/ShareButton";
-import AdditionalInfo from "./_components/AdditionalInfo";
+import ReviewsWrapper from "./_components/ReviewsWrapper";
+import Actions from "@/app/(products)/Actions";
 import SimilarProducts from "./_components/SimilarProducts";
 import SameBrandProducts from "./_components/SameBrandProducts";
-import ReviewsWrapper from "./_components/ReviewsWrapper";
+import AdditionalInfo from "./_components/AdditionalInfo";
+
+
 
 
 
@@ -80,10 +83,11 @@ const ProductPageContent = ({ product, productId }: ProductPageContentProps) => 
             Відгуки
           </h2>
           <div className="flex flex-col md:flex-row flex-wrap gap-4 md:gap-x-8 xl:gap-x-36">
-            
+                 <Actions />
+                 <ReviewsWrapper productId={productId} />
           </div>
-           <ReviewsWrapper productId={productId} />
         </div>
+        
       </div>
     </div>
   );

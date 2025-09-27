@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import ErrorComponent from "@/components/errorComponent/ErrorComponent";
+import StarRating from "@/components/starReiting/StarRating";
 
 
 interface Review {
@@ -103,7 +104,11 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
                 </div>
 
                 <div className="flex flex-row items-center gap-x-4 mb-2">
+
                   
+
+                  <StarRating rating={5} />
+
                   <span className="text-[#8f8f8f] text-xs">
                     {new Date(review.createdAt).toLocaleDateString("ru-RU")}
                   </span>
