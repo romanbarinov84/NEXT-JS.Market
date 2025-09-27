@@ -8,6 +8,14 @@ import ImagesBlock from "./_components/ImagesBlock";
 import Bonuses from "./_components/Bonuses";
 import DiscountMessage from "./_components/DiscountMessage";
 import ShareButton from "./_components/ShareButton";
+<<<<<<< Updated upstream
+=======
+import AdditionalInfo from "./_components/AdditionalInfo";
+import ReviewsWrapper from "./_components/ReviewsWrapper";
+import Actions from "@/app/(products)/Actions";
+
+
+>>>>>>> Stashed changes
 
 
 interface ProductPageContentProps {
@@ -64,7 +72,10 @@ const ProductPageContent = ({ product, productId }: ProductPageContentProps) => 
           <h2 className="text-2xl xl:text-4xl text-left font-bold text-main-text mb-4 md:mb-8 xl:mb-10">
             Отзывы
           </h2>
-          <div className="flex flex-col md:flex-row flex-wrap gap-4 md:gap-x-8 xl:gap-x-36"></div>
+          <div className="flex flex-col md:flex-row flex-wrap gap-4 md:gap-x-8 xl:gap-x-36">
+                 <Actions />
+                 <ReviewsWrapper productId={productId} />
+          </div>
         </div>
       </div>
     </div>
