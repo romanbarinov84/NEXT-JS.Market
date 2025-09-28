@@ -74,7 +74,7 @@ const AddReviewForm = ({ productId, onReviewAdded }: AddReviewFormProps) => {
     <div className="mt-10">
       <form onSubmit={handleSubmit}>
         <div className="mb-4.5 flex flex-row gap-x-4 items-center">
-          <label className="text-lg font-bold">Ваша оценка</label>
+          <label className="text-lg font-bold">Ваша оцінка</label>
           <div className="flex items-center">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
@@ -118,7 +118,7 @@ const AddReviewForm = ({ productId, onReviewAdded }: AddReviewFormProps) => {
           {/* Сообщение о необходимости заполнить все поля */}
           {showValidationError && (
             <div className="text-[#d80000] text-sm p-2 bg-[#ffc7c7] rounded mb-2">
-              Пожалуйста, поставьте оценку и напишите отзыв
+              Будь ласка поставте вашу оцінку!
             </div>
           )}
 

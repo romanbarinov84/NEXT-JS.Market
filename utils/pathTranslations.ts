@@ -15,5 +15,9 @@ export const PATH_TRANSLATIONS:Record<string , string> = {
     meat:"Страви з мяса",
     category:"Категорія",
     "user-profile":"Личный кабинет",
-    Price:"Ціна",
+    price:"Ціна",
+    "product":"продукт",
+    "products":"продукти",
+    "add-products":"додати товар",
+    "administrator":"адміністратор",
 }

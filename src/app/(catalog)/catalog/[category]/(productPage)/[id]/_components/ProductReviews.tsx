@@ -58,7 +58,7 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
   if (loading) {
     return (
       <div>
-        <h2 className="text-xl font-semibold mb-4">Отзывы</h2>
+        
         <div className="animate-pulse space-y-4">
           {[...Array(3)].map((_, i) => (
             <div key={i} className="p-4 bg-gray-100 rounded-lg">
@@ -81,10 +81,10 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Отзывы</h2>
+      
 
       {reviews.length === 0 ? (
-        <p className="text-main-text">Пока нет отзывов. Будьте первым!</p>
+        <p className="text-main-text">Поки що немае відгуків.</p>
       ) : (
         <div className="flex flex-col gap-y-10">
           {reviews.map((review) => {
