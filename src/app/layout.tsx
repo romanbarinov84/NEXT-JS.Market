@@ -6,7 +6,6 @@ import BreadCrumbs from "@/components/BreadCrumbs";
 import Footer from "@/components/footer/Footer";
 import { RegFormProvider } from "./contexts/RegFormContext";
 
-
 const rubik = Rubik({
   variable: "--font-font-rubik",
   subsets: ["latin", "cyrillic"],
@@ -17,14 +16,10 @@ export const metadata: Metadata = {
   description: "Магазин домашніх напів фабрикатів",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable} ${rubik.variable}font-sans`}>
+      <body className={`${rubik.variable} font-sans`}>
         <RegFormProvider>
           <Header />
           <BreadCrumbs />
@@ -35,4 +30,3 @@ export default function RootLayout({
     </html>
   );
 }
-

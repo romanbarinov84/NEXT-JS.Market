@@ -6,7 +6,6 @@ import { useAuthStore } from "../../../../store/authStore";
 import Loader from "@/components/Loader";
 
 
-
 export default function AdminLayout({
   children,
 }: {

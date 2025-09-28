@@ -71,7 +71,7 @@ export default function CatalogMenuRapper(){
   }
 
   return (
-    <div>
+    <div className="w-full ">
       <div className="bg-white w-full md:shadow-(--shadow-default) relative z-50 flex flex-col md:flex-row md:gap-y-5 xl:gap-y-7 md:gap-10  md:p-2 justify-center" onMouseLeave={() => setIsCatalogOpen(false)}
         onMouseMove={handleMouseMove}>
         <div className="flex w-full mt-2 flex-row gap-4 xl:gap-10 py-2 px-4 items-center md:shadow-(--shadow-default)">
