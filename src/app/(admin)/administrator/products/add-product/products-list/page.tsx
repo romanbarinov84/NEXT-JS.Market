@@ -1,12 +1,13 @@
 "use client";
 
+import { ProductCardProps } from "@/types/product";
 import { useCallback, useState } from "react";
 import SearchHeader from "./_components/SearchHeader";
-import SearchInput from "./_components/SearchInput";
-import { ProductCardProps } from "@/types/product";
+import SearchInput from "../../../../administrator/products/add-product/products-list/_components/SearchInput";
 import SearchStates from "./_components/SearchStates";
 import SearchProductResult from "./_components/SearchProductsResult";
 import { DeleteConfirmationModal } from "./_components/DeleteConfirmationModal";
+
 
 interface DeleteModalState {
   isOpen: boolean;
