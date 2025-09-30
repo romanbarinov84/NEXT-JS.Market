@@ -2,25 +2,23 @@
 
 import Image from "next/image";
 import { buttonStyles } from "@/app/(auth)/styles";
+import useTimer from "@/hooks/useTimer";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "../../../../store/authStore";
-import useTimer from "../../../../hooks/useTimer";
+import { CONFIG } from "../../../../config/config";
 import AuthFormLayout from "../_components/AuthFormLayout";
 import { LoadingContent } from "./_components/LoadingContant";
 import OTPResendCode from "./_components/OTPResendButton";
-
-const MAX_ATTEMPTS = 3;
-const TIMEOUT_PERIOD = 180;
 
 const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
-  const { timeLeft, canResend, startTimer } = useTimer(TIMEOUT_PERIOD);
+  const [attemptsLeft, setAttemptsLeft] = useState(CONFIG.MAX_ATTEMPTS);
+  const { timeLeft, canResend, startTimer } = useTimer(CONFIG.TIMEOUT_PERIOD);
   const router = useRouter();
   const { login } = useAuthStore();
 
@@ -44,7 +42,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 
       if (verifyError) throw verifyError;
 
-      setAttemptsLeft(MAX_ATTEMPTS);
+      setAttemptsLeft(CONFIG.MAX_ATTEMPTS);
 
       const response = await fetch("/api/auth/check-phone", {
         method: "POST",
@@ -57,9 +55,9 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
         throw new Error("Данные не получены");
       }
 
-      const userData = await response.json();
+      await response.json();
 
-      login(userData.userName);
+      login();
 
       router.replace("/");
     } catch (error) {
@@ -87,7 +85,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
           onSuccess: () => {
             startTimer();
             setError("");
-            setAttemptsLeft(MAX_ATTEMPTS);
+            setAttemptsLeft(CONFIG.MAX_ATTEMPTS);
           },
           onError: (ctx) => {
             setError(ctx.error?.message || "Ошибка при отправке SMS");
@@ -102,18 +100,16 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 
   if (isLoading) {
     return (
-      <AuthFormLayout variant="register">
+      <AuthFormLayout>
         <LoadingContent title={"Проверяем код..."} />
       </AuthFormLayout>
     );
   }
 
   return (
-    <AuthFormLayout variant="register">
+    <AuthFormLayout>
       <div className="flex flex-col gap-y-8">
-        <h1 className="text-2xl font-bold text-[text-main-text] text-center">
-          Вход
-        </h1>
+        <h1 className="text-2xl font-bold text-main-text text-center">Вход</h1>
         <div>
           <p className="text-center text-[#8f8f8f]">Код из SMS</p>
           <form
@@ -157,10 +153,10 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
         />
         <Link
           href="/register"
-          className="h-8 text-xs text-[text-main-text] hover:text-black w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer"
+          className="h-8 text-xs text-main-text hover:text-black w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer"
         >
           <Image
-            src="/iconsAuth/iconsArrow-left.svg"
+            src="/icons-auth/icon-arrow-left.svg"
             width={24}
             height={24}
             alt="Вернуться"

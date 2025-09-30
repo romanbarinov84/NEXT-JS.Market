@@ -1,3 +1,5 @@
+'use client';
+
 import GenericListPage from "@/app/(products)/GenericListPage";
 import fetchPurchases from "../fetchPurchases";
 import { Suspense } from "react";
