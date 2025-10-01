@@ -1,7 +1,6 @@
-import { PriceRangeSliderProps } from "@/types/priceRangeSliderProps";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-
+import { PriceRangeSliderProps } from "@/types/priceRangeSliderProps";
 
 const PriceRangeSlider = ({
   min,

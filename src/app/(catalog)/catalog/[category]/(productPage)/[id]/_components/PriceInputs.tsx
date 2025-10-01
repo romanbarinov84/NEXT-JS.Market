@@ -1,7 +1,5 @@
-
-import { PriceInputsProps } from "@/types/priceInputsProps";
 import Image from "next/image";
-
+import { PriceInputsProps } from "@/types/priceInputsProps";
 
 const PriceInputs = ({
   from,
@@ -24,10 +22,10 @@ const PriceInputs = ({
         className="w-[124px] h-10 border border-[#bfbfbf] rounded bg-white py-2 px-4"
       />
       <Image
-        src="/icons-products/icon-line.svg"
+        src="/ActionsShevronRight.svg"
         alt="до"
-        width={24}
-        height={24}
+        width={4}
+        height={4}
       />
       <input
         type="number"
