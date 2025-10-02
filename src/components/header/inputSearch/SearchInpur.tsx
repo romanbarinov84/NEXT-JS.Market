@@ -27,10 +27,10 @@ export default function SearchInput({query,setQuery,handleSearch,handleInputBlur
           </div>
           <button
             type="submit"
-            className="hidden md:block absolute top-2 right-2 cursor-pointer"
+            className="hidden md:block absolute top-2 right-2 cursor-pointer z-50"
           >
             <Image
-              src="/LoupeHeadInput.svg"
+              src="/LoupeSearch.png"
               alt="LoupeIcon"
               width={24}
               height={24}

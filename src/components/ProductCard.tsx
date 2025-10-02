@@ -3,6 +3,7 @@ import { ProductCardProps } from "@/types/product";
 import { formatPrice } from "../../utils/formatPrice";
 import StarRating from "./starReiting/StarRating";
 import Link from "next/link";
+import FavoriteButton from "./FavoriteButton";
 
 const cardDiscountPercent = 6;
 
@@ -45,7 +46,9 @@ export default function ProductCard({
       className="flex flex-col justify-between  w-40 rounded overflow-hidden bg-white 
          md:w-[224px] xl:w-[272px] h-[349px] align-top p-0 hover:shadow-(--shadow-article)"
     >
-      <div className=" relative w-40 h-40 md:-[224px] xl:w-[272px]">
+       
+      <div className=" relative w-30 h-30 md:-[224px] xl:w-[272px]"> 
+        <FavoriteButton productId={productId.toString()} />
         <Link href={productUrl} className="relative w-40 h-40">
         <div className="relative aspect-square w-40 h-40 md:w-[224px] xl:w-[272px]">
           <Image
@@ -65,19 +68,12 @@ export default function ProductCard({
         </Link>
 
         <button
-          className="w-8 h-8 bg-[rgb(243,242,241)] hover:bg-[#ff6633] absolute top-2 
+          className="w-8 h-8 bg-[rgb(243,242,241)] hover:bg-[#f34106] absolute top-2 
                right-2 opacity-40 rounded cursor-pointer duration-300 flex items-center justify-center"
         >
-          <div className="relative w-6 h-auto md:block">
-            <Image
-              src="/iconHeartCard.svg"
-              alt="icon-heart"
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="w-full h-auto"
-            />
-          </div>
+          
+          
+          
         </button>
       </div>
 
