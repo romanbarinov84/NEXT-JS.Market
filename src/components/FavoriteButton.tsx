@@ -38,7 +38,7 @@ const FavoriteButton = ({ productId }: { productId: string }) => {
       onClick={handleClick}
       disabled={disabled}
       className={`
-    w-8 h-8 p-2 bg-[#f3f2f1] hover:bg-[#f86e0c] absolute top-2 right-2 rounded duration-300 z-10
+    w-8 h-8 p-2 bg-[#f4ecec] hover:bg-[#f80c0c] absolute top-2 right-2 rounded duration-300 z-10
     flex items-center justify-center 
     ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:scale-110"}
   `}

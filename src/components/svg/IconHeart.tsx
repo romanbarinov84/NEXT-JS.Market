@@ -8,21 +8,21 @@ interface HeartIconProps {
 const IconHeart = ({ isActive, variant }: HeartIconProps) => {
   const getIconColor = () => {
     if (isActive) {
-      return variant === "orange" ? "#c66e22" : "#f81105";
+      return variant === "orange" ? "#5509ef" : "#f81105";
     }
-    return "#606060";
+    return "#0a0ef0";
   };
 
   const iconColor = getIconColor();
   return (
-    <svg viewBox="0 0 24 24" width="34.000000" height="34.000000" fill="none">
+    <svg viewBox="0 0 24 24" width="24.000000" height="24.000000" fill="none">
       <rect
         id="feather-icon / heart"
-        width="24.000000"
-        height="24.000000"
+        width="20.000000"
+        height="20.000000"
         x="0.000000"
         y="0.000000"
-        fill="rgb(255,255,255)"
+        fill="rgb(241, 233, 233)"
         fillOpacity="0"
       />
       <path

@@ -13,6 +13,7 @@ import Actions from "@/app/(products)/Actions";
 import SimilarProducts from "./_components/SimilarProducts";
 import SameBrandProducts from "./_components/SameBrandProducts";
 import AdditionalInfo from "./_components/AdditionalInfo";
+import { Link } from "lucide-react";
 
 
 
@@ -41,7 +42,7 @@ const ProductPageContent = ({ product, productId }: ProductPageContentProps) => 
             <StarRating rating={  5} />
           </div>
           <ShareButton title={product.title} />
-          <button className="flex flex-row flex-wrap gap-2 items-center cursor-pointer">
+          <Link href="/favorites" className="flex flex-row flex-wrap gap-2 items-center cursor-pointer">
             <Image
               src="/shareButton.png"
               alt="Избранное"
@@ -50,7 +51,7 @@ const ProductPageContent = ({ product, productId }: ProductPageContentProps) => 
               className="select-none"
             />
             <p className="text-sm">В избранное</p>
-          </button>
+          </Link>
         </div>
         <div className="flex flex-col md:flex-row md:flex-wrap gap-10 w-full justify-center">
           <ImagesBlock product={product} />
