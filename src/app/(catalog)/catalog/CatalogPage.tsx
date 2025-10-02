@@ -1,10 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { CatalogProps } from "@/types/catalog";
-
-import Loading from "./Loading";
+import { useEffect, useState } from "react";
 import CatalogGrid from "../CatalogGrid";
+import ErrorComponent from "@/components/errorComponent/ErrorComponent";
+import Loader from "@/components/Loader";
+import CatalogAdminsControl from "../CatalogAdminsControl";
+import { useAuthStore } from "../../../../store/authStore";
+
+
+export const metadata = {
+  title: 'Каталог товаров магазина "Северяночка"',
+  description: 'Каталог всех товаров магазина "Северяночка"',
+};
 
 const CatalogPage = () => {
   const [categories, setCategories] = useState<CatalogProps[]>([]);
@@ -12,15 +20,17 @@ const CatalogPage = () => {
   const [draggedCategory, setDraggedCategory] = useState<CatalogProps | null>(
     null
   );
+  const [hoveredCategoryId, setHoveredCategoryId] = useState<string | null>(
+    null
+  );
   const [error, setError] = useState<{
     error: Error;
     userMessage: string;
   } | null>(null);
-  const [hoveredCategoryId, setHoveredCategoryId] = useState<string | null>(
-    null
-  );
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const isAdmin = true;
+  const [isLoading, setIsLoading] = useState(true);
+  const { user } = useAuthStore();
+
+  const isAdmin = user?.role === "admin";
 
   const fetchCategories = async () => {
     try {
@@ -31,7 +41,6 @@ const CatalogPage = () => {
       const data: CatalogProps[] = await response.json();
       setCategories(data.sort((a, b) => a.order - b.order));
     } catch (error) {
-      console.error("Ошибка при изменении каталога категорий:", error);
       setError({
         error: error instanceof Error ? error : new Error("Неизвестная ошибка"),
         userMessage: "Не удалось загрузить каталог категорий",
@@ -51,7 +60,7 @@ const CatalogPage = () => {
       const response = await fetch("api/catalog", {
         method: "POST",
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(
           categories.map((category, index) => ({
@@ -65,18 +74,14 @@ const CatalogPage = () => {
           }))
         ),
       });
-      if (!response.ok) {
-        throw new Error("Ошибка при обновлении порядка каталога");
-      }
-      const result = await response.json();
-      if (result.success) {
-        console.log("Порядок успешно обновлен в MongoDB");
-      }
+
+      if (!response.ok) throw new Error("Ошибка при обновлении порядка");
+
+      await response.json();
     } catch (error) {
-      console.error("Ошибка при изменении каталога категорий:", error);
       setError({
         error: error instanceof Error ? error : new Error("Неизвестная ошибка"),
-        userMessage: "Не удалось изменить каталог категорий",
+        userMessage: "Не удалось изменить порядок категорий",
       });
     } finally {
       setIsLoading(false);
@@ -88,10 +93,6 @@ const CatalogPage = () => {
       await updateOrderInDB();
     }
     setIsEditing(!isEditing);
-  };
-
-  const resetLayout = () => {
-    fetchCategories();
   };
 
   const handleDragStart = (category: CatalogProps) => {
@@ -113,15 +114,18 @@ const CatalogPage = () => {
 
   const handleDrop = (e: React.DragEvent, targetCategoryId: string) => {
     e.preventDefault();
+
     if (!isEditing || !draggedCategory) return;
 
     setCategories((prevCategories) => {
       const draggedIndex = prevCategories.findIndex(
         (c) => c._id === draggedCategory._id
       );
+
       const targetIndex = prevCategories.findIndex(
         (c) => c._id === targetCategoryId
       );
+
       if (draggedIndex === -1 || targetIndex === -1) return prevCategories;
 
       const newCategories = [...prevCategories];
@@ -129,19 +133,27 @@ const CatalogPage = () => {
       const draggedItem = newCategories[draggedIndex];
       const targetItem = newCategories[targetIndex];
 
-      const draggedSizes = {
-        mobileColSpan: draggedItem.mobileColSpan,
-        tabletColSpan: draggedItem.tabletColSpan,
-        colSpan: draggedItem.colSpan,
-      };
       const targetSizes = {
         mobileColSpan: targetItem.mobileColSpan,
         tabletColSpan: targetItem.tabletColSpan,
         colSpan: targetItem.colSpan,
       };
 
-      newCategories[draggedIndex] = { ...targetItem, ...draggedSizes };
-      newCategories[targetIndex] = { ...draggedItem, ...targetSizes };
+      const draggedSizes = {
+        mobileColSpan: draggedItem.mobileColSpan,
+        tabletColSpan: draggedItem.tabletColSpan,
+        colSpan: draggedItem.colSpan,
+      };
+
+      newCategories[targetIndex] = {
+        ...draggedItem,
+        ...targetSizes,
+      };
+
+      newCategories[draggedIndex] = {
+        ...targetItem,
+        ...draggedSizes,
+      };
 
       return newCategories;
     });
@@ -150,42 +162,50 @@ const CatalogPage = () => {
     setHoveredCategoryId(null);
   };
 
+  const resetLayout = () => {
+    fetchCategories();
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   if (error) {
-    throw error;
+    return (
+      <ErrorComponent error={error.error} userMessage={error.userMessage} />
+    );
+  }
+
+  if (!categories.length) {
+    return (
+      <div className="text-center py-8 text-gray-500">
+        Категорий каталога не найдено
+      </div>
+    );
   }
 
   return (
-    <section className="px-4 sm:px-6 lg:px-8 xl:px-[max(12px,calc((100%-1208px)/2))] pb-20 ">
+    <section className="px-[max(12px,calc((100%-1208px)/2))] mx-auto">
       {isAdmin && (
-        <div className="flex justify-end ">
-          <button
-            onClick={handleToggleEditing}
-            className="border border-(--color-primary) hover:text-white hover:bg-[#ff6633] hover:border-transparent active:shadow-(--shadow-button-active) w-1/4 h-10 rounded p-2 justify-center items-center text-(--color-primary) transition-all duration-300 cursor-pointer select-none"
-          >
-            {isEditing ? "Закінчити редагування " : "Редагувати"}
-          </button>
-          {isEditing && (
-            <button
-              onClick={resetLayout}
-              className="ml-3 p-2 text-xs justify-center items-center active:shadow-(--shadow-button-active) border-none rounded cursor-pointer transition-colors duration-300 bg-[#f3f2f1] hover:shadow-(--shadow-button-default)"
-            >
-              Скинути
-            </button>
-          )}
-        </div>
+        <CatalogAdminsControl
+          isEditing={isEditing}
+          onToggleEditingAction={handleToggleEditing}
+          onResetLayoutAction={resetLayout}
+        />
       )}
-      <h1 className="mb-4 md:mb-8 font-bold xl:mb-10 flex flex-row text-4xl md:text-5xl xl:text-[60px] text-[#333] shadow-2xl">
+      <h1 className="mb-4 md:mb-8 xl:mb-10 flex flex-row text-4xl mb:text-5xl xl:text-[64px] text-main-text font-bold">
         Каталог
       </h1>
-
-      {isLoading && <Loading />}
-      {!isLoading && !error && categories.length === 0 && (
-        <div className="text-red-500 text-center">
-          Категории каталога не найдены
-        </div>
-      )}
-
-      <CatalogGrid  isEditing={isEditing} draggedCategory={draggedCategory} categories={categories} hoveredCategoryId={hoveredCategoryId} handleDragStart={handleDragStart} handleDragOver={handleDragOver} handleDragLeave={handleDragLeave} handleDrop={handleDrop}/>
+      <CatalogGrid
+        categories={categories}
+        isEditing={isEditing}
+        draggedCategory={draggedCategory}
+        hoveredCategoryId={hoveredCategoryId}
+        onDragStartAction={handleDragStart}
+        onDragOverAction={handleDragOver}
+        onDragLeaveAction={handleDragLeave}
+        onDropAction={handleDrop}
+      />
     </section>
   );
 };
