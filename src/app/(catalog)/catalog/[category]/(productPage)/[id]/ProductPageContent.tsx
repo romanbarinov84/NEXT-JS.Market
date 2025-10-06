@@ -82,7 +82,7 @@ const ProductPageContent = ({ product, productId }: ProductPageContentProps) => 
         <Actions />
         <div>
           
-          <h2 className="text-2xl xl:text-4xl text-left font-bold text-main-text mb-4 md:mb-8 xl:mb-10">
+          <h2 className="text-xl xl:text-4xl text-left font-bold text-main-text mb-4 md:mb-8 xl:mb-10">
             Відгуки
           </h2>
           <div className="flex flex-col md:flex-row flex-wrap gap-4 md:gap-x-8 xl:gap-x-36">

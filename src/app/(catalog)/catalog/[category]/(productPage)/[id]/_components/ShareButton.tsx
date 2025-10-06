@@ -44,7 +44,7 @@ const ShareButton = ({ title, className = "" }: ShareButtonProps) => {
           width={24}
           height={24}
         />
-        <p className="text-sm select-none">Поделиться</p>
+        <p className="text-sm select-none">Поділитися</p>
       </div>
 
       {showShareMenu && currentUrl && (

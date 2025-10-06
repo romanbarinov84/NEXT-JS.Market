@@ -4,6 +4,7 @@ import { formatPrice } from "../../utils/formatPrice";
 import StarRating from "./starReiting/StarRating";
 import Link from "next/link";
 import FavoriteButton from "./FavoriteButton";
+import { calculateFinalPrice, calculatePriceByCard } from "../../utils/calcPrices";
 
 const cardDiscountPercent = 6;
 
@@ -16,13 +17,11 @@ export default function ProductCard({
   rating,
   categories,
 }: ProductCardProps) {
-  const calculateFinalPrice = (price: number, discount: number): number => {
-    return discount > 0 ? price * (1 - discount / 100) : price;
-  };
 
-  const calculatePriceByCard = (price: number, discount: number): number => {
-    return calculateFinalPrice(price, discount);
-  };
+
+ 
+
+ 
 
   const isNewProduct = categories?.includes("new");
 
