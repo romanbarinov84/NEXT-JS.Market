@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuthStore } from "../../../../store/authStore";
 import IconMenuMob from "@/components/svg/IconMenuMob";
 import IconHeart from "@/components/svg/IconHeart";
 import IconBox from "@/components/svg/IconBox";
+import IconCart from "@/components/svg/IconCart";
 
 
 
@@ -14,6 +15,7 @@ const TopMenu = () => {
   const pathname = usePathname();
   const isCatalogPage = pathname === "/catalog";
   const isFavoritePage = pathname === "/favorites";
+  const isCartPage = pathname === "/cart";
   const { user } = useAuthStore();
 
   const isManagerOrAdmin = user?.role === "manager" || user?.role === "admin";
@@ -54,13 +56,8 @@ const TopMenu = () => {
       </li>
       {!isManagerOrAdmin && (
         <li className="flex flex-col items-center gap-2.5 w-11 cursor-pointer">
-          <Image
-            src="/userBlock/corzinaIcon.png"
-            alt="Корзина"
-            width={30}
-            height={30}
-            className="object-contain w-6 h-6"
-          />
+          <Link href="/cart" className="flex flex-col items-center gap-2.5 w-11"><IconCart isActive={isCartPage}/></Link>
+         
           <span className="text-main-text">Корзина</span>
         </li>
       )}
