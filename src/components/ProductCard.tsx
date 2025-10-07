@@ -4,7 +4,11 @@ import { formatPrice } from "../../utils/formatPrice";
 import StarRating from "./starReiting/StarRating";
 import Link from "next/link";
 import FavoriteButton from "./FavoriteButton";
-import { calculateFinalPrice, calculatePriceByCard } from "../../utils/calcPrices";
+import {
+  calculateFinalPrice,
+  calculatePriceByCard,
+} from "../../utils/calcPrices";
+import AddToCartButton from "./AddToCartButton";
 
 const cardDiscountPercent = 6;
 
@@ -17,12 +21,6 @@ export default function ProductCard({
   rating,
   categories,
 }: ProductCardProps) {
-
-
- 
-
- 
-
   const isNewProduct = categories?.includes("new");
 
   const finalPrice = isNewProduct
@@ -33,51 +31,44 @@ export default function ProductCard({
     ? basePrice
     : calculatePriceByCard(finalPrice, cardDiscountPercent);
 
-   const productId = id;
-  const mainCategory = categories?.[0]?? "default-category";
+  const productId = id;
+  const mainCategory = categories?.[0] ?? "default-category";
 
-    const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}?desc=${encodeURIComponent(description.substring(0, 50))}`;
-
-
+  const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}?desc=${encodeURIComponent(description.substring(0, 50))}`;
 
   return (
     <div
       className="flex flex-col justify-between  w-40 rounded overflow-hidden bg-white 
          md:w-[224px] xl:w-[272px] h-[349px] align-top p-0 hover:shadow-(--shadow-article)"
     >
-       
-      <div className=" relative w-30 h-30 md:-[224px] xl:w-[272px]"> 
+      <div className=" relative w-30 h-30 md:-[224px] xl:w-[272px]">
         <FavoriteButton productId={productId.toString()} />
         <Link href={productUrl} className="relative w-40 h-40">
-        <div className="relative aspect-square w-40 h-40 md:w-[224px] xl:w-[272px]">
-          <Image
-            src={img}
-            alt="productImg"
-            fill
-            className="object-cover "
-            sizes="(max-width:768px) 160px, (max-width:1200px) 224px, 272px"
-            priority
-          />
-          {discountPercent > 0 && (
-            <div className="absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2 left-2.5">
-              -{discountPercent}%
-            </div>
-          )}
+          <div className="relative aspect-square w-40 h-40 md:w-[224px] xl:w-[272px]">
+            <Image
+              src={img}
+              alt="productImg"
+              fill
+              className="object-cover "
+              sizes="(max-width:768px) 160px, (max-width:1200px) 224px, 272px"
+              priority
+            />
+            {discountPercent > 0 && (
+              <div className="absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2 left-2.5">
+                -{discountPercent}%
+              </div>
+            )}
           </div>
         </Link>
 
         <button
           className="w-8 h-8 bg-[rgb(243,242,241)] hover:bg-[#f34106] absolute top-2 
                right-2 opacity-40 rounded cursor-pointer duration-300 flex items-center justify-center"
-        >
-          
-          
-          
-        </button>
+        ></button>
       </div>
 
       <div className="flex flex-col justify-between p-2 gap-y-2">
-        <Link href={productUrl} >
+        <Link href={productUrl}>
           <div className="flex flex-row justify-between items-end">
             <div className="flex flex-col gap-x-1">
               <div className="flex flex-row  text-sm md:text-lg font-bold">
@@ -115,14 +106,9 @@ export default function ProductCard({
           {description}
         </div>
         {rating > 0 && <StarRating rating={rating} />}
-        <button
-          className="border border-(--color-primary) hover:text-white hover:bg-[#ff6633]
-                  hover:border-transparent active:shadow-(--shadow-button-active) w-full h-10 rounded p-2 justify-center items-center text-(--color-primary) transition-all duration-300 
-                   cursor-pointer select-none"
-        >
-          До кошика
-        </button>
+        
       </div>
+      <AddToCartButton productId={productId.toString()}/>
     </div>
   );
 }

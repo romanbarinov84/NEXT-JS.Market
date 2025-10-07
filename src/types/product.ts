@@ -12,5 +12,5 @@ export interface ProductCardProps {
     article: string;
     categories?:string[];
     volume?:string;
-
+    quantity: number;
 }

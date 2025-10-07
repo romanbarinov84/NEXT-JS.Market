@@ -21,4 +21,5 @@ export const PATH_TRANSLATIONS:Record<string , string> = {
     "add-products":"додати товар",
     "administrator":"адміністратор",
     "favorites":"Обранне",
+    "cart":"козина",
 }
